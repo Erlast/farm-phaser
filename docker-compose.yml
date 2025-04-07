@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  frontend:
+    build: .
+    ports:
+      - "5173:5173"  # Проброс порта Vite
+    volumes:
+      - .:/app       # Для hot reload
+      - /app/node_modules  # Исключить node_modules из volume хоста
+    environment:
+      - NODE_ENV=development

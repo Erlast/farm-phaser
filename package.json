@@ -1,0 +1,19 @@
+{
+  "name": "farmer-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "vite --host"
+  },
+  "dependencies": {
+    "phaser": "^3.88.2",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "typescript": "^5.5.3"
+  },
+  "private": true
+}
