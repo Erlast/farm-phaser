@@ -1,11 +1,15 @@
 import {createApp} from 'vue'
 import App from './App.vue'
+import router from './router/main'
+import './style.css'
 
 import Phaser from 'phaser'
 import LoadingScene from "./scenes/LoadingScene";
+import {BackgroundScene} from "./scenes/BackgroundScene";
 import MainScene from "./scenes/MainScene";
+import AuthScene from "./scenes/AuthScene";
 
-createApp(App).mount('#app')
+createApp(App).use(router).mount('#app')
 
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
@@ -13,7 +17,12 @@ const config: Phaser.Types.Core.GameConfig = {
     width: window.innerWidth,
     height: window.innerHeight,
     backgroundColor: '#000000',
-    scene: [LoadingScene, MainScene],
+    scene: [
+        LoadingScene,
+        BackgroundScene,
+        AuthScene,
+        MainScene
+    ],
     scale: {
         mode: Phaser.Scale.RESIZE, // автоматически адаптируется под окно
         autoCenter: Phaser.Scale.CENTER_BOTH,

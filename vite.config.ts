@@ -1,13 +1,21 @@
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import path from 'path'
+import tailwindcss from '@tailwindcss/vite'
+import checker from 'vite-plugin-checker'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue()],
+    plugins: [
+        // checker({
+        //     // e.g. use TypeScript check
+        //     typescript: true
+        // }),
+        tailwindcss(),
+        vue()],
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './src'),
+            '@': path.resolve(__dirname, './client/src'),
         },
     },
     server: {
@@ -17,5 +25,5 @@ export default defineConfig({
         watch: {
             usePolling: true, // критично для WSL2 чтобы работал hot reload
         },
-    },
+    }
 })

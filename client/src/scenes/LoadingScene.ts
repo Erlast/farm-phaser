@@ -15,8 +15,9 @@ export default class LoadingScene extends Phaser.Scene {
             color: '#ffffff',
         }).setOrigin(0.5)
 
-        // Пример загрузки ассетов (пока заглушки)
-        this.load.image('plant', '/assets/soil_sprite.png') // добавим позже
+        // Пример загрузки ассетов
+        this.load.image('background', 'assets/background.png')
+        this.load.image('plot', 'assets/plot.png')
     }
 
     create() {
@@ -27,9 +28,8 @@ export default class LoadingScene extends Phaser.Scene {
 
         logo.setDisplaySize(200, 200)
 
-        this.time.delayedCall(5000, () => {
-            // После 5 секунд переключаемся на основную сцену
-            this.scene.start('MainScene')
-        })
+        this.scene.start('BackgroundScene')
+        this.scene.start('AuthScene')
+
     }
 }

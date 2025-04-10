@@ -1,20 +1,15 @@
-# Базовый образ с node
 FROM node:20-alpine
 
-# Рабочая директория внутри контейнера
 WORKDIR /app
 
-# Копируем зависимости
+RUN ls
+
 COPY package*.json ./
 
-# Устанавливаем зависимости
 RUN npm install
 
-# Копируем весь проект
-COPY . .
+# Тут мы НЕ копируем исходники (они монтируются через volume)
 
-# Открываем порт для Vite dev server
 EXPOSE 5173
 
-# Запуск dev-сервера
 CMD ["npm", "run", "dev", "--", "--host"]

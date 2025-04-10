@@ -1,12 +1,29 @@
 version: "3.8"
 
 services:
-  frontend:
-    build: .
+  postgres:
+    image: postgres:15
+    restart: always
+    environment:
+      POSTGRES_USER: game_user
+      POSTGRES_PASSWORD: game_password
+      POSTGRES_DB: game_db
     ports:
-      - "5173:5173"  # Проброс порта Vite
+      - "5432:5432"
     volumes:
-      - .:/app       # Для hot reload
-      - /app/node_modules  # Исключить node_modules из volume хоста
+      - postgres_data:/var/lib/postgresql/data
+
+  frontend:
+    build:
+      context: .
+    ports:
+      - "5173:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules
     environment:
       - NODE_ENV=development
+    command: npm run dev -- --host
+
+volumes:
+  postgres_data: { }
