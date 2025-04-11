@@ -1,7 +1,71 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
+import {reactive, ref} from "vue";
+import {helpers, required, sameAs} from "@vuelidate/validators";
+import {useVuelidate} from "@vuelidate/core";
+import authService from "@/api/AuthService";
 
 const router = useRouter();
+const login = ref('')
+const password = ref('')
+const repeatPassword = ref('')
+const $externalResults = ref<{ [key: string]: string[] }>({})
+
+const initialState = {
+  login: login,
+  password: password,
+  repeatPassword: repeatPassword,
+}
+
+const state = reactive({
+  ...initialState
+})
+
+const rules = {
+  login: {
+    required: helpers.withMessage(
+        'Поле обязательно к заполнению',
+        required
+    ),
+    $autoDirty: true
+  },
+  password: {
+    required: helpers.withMessage(
+        'Поле обязательно к заполнению',
+        required
+    ),
+    $autoDirty: true
+  },
+  repeatPassword: {
+    required: helpers.withMessage(
+        'Поле обязательно к заполнению',
+        required
+    ),
+    sameAs: helpers.withMessage('Пароли не совпадают', sameAs(password)),
+    $autoDirty: true
+  }
+}
+
+const v$ = useVuelidate(rules, state, {$externalResults})
+
+const registerHandler = async () => {
+  try {
+    v$.value.$touch()
+
+    if (!v$.value.$invalid) {
+      const credential: ICredentialModel = {
+        username: login.value,
+        password: password.value
+      }
+      await authService.register(credential)
+
+      // emit('login')
+    }
+  } catch (error: any) {
+    console.error(error)
+  }
+}
+
 const backToLoginHandler = () => {
   router.push("/auth");
 }

@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import {useRouter} from 'vue-router'
+import router from '@/router/main'
 
 export default class AuthScene extends Phaser.Scene {
     constructor() {
@@ -7,11 +7,6 @@ export default class AuthScene extends Phaser.Scene {
     }
 
     create() {
-        const router =useRouter()
-        //router.push('/auth')
-        // setTimeout(() => {
-        //     const event = new CustomEvent('show-auth-form')
-        //     window.dispatchEvent(event)
-        // }, 100)
+        router.push('/auth')
     }
 }

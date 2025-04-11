@@ -4,13 +4,17 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc",
-    "dev": "vite --host"
+    "build": "node_modules/.bin/tsc",
+    "dev": "node_modules/.bin/vite --host"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.3",
+    "axios": "^1.8.4",
+    "jwt-decode": "^4.0.0",
     "phaser": "^3.88.2",
+    "pinia": "^3.0.2",
+    "pinia-plugin-persistedstate": "^4.2.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

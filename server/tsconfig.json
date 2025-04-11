@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "module": "commonjs",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "baseUrl": "./src",
+//    "paths": {
+//      "@routes/*": [
+//        "routes/*"
+//      ],
+//      "@controllers/*": [
+//        "controllers/*"
+//      ],
+//      "@services/*": [
+//        "services/*"
+//      ]
+//    }
+  }
+}

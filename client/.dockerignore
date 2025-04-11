@@ -1,8 +1,9 @@
 node_modules
-.git
-*.log
-*.env
+npm-debug.log
 Dockerfile
 docker-compose.yml
+.env
+.git
+.gitignore
 .vscode
 .idea

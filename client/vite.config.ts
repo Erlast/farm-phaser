@@ -15,7 +15,7 @@ export default defineConfig({
         vue()],
     resolve: {
         alias: {
-            '@': path.resolve(__dirname, './client/src'),
+            '@': path.resolve(__dirname, './src')
         },
     },
     server: {

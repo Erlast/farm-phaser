@@ -1,8 +1,37 @@
 version: "3.8"
 
 services:
+  frontend:
+    build:
+      context: ./client
+    container_name: game-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: npm run dev -- --host
+
+  backend:
+    build:
+      context: ./server
+    container_name: game-backend
+    ports:
+      - "4000:4000"
+    environment:
+      - DATABASE_URL=postgresql://game_user:game_password@postgres:5432/game_db?schema=public
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      - postgres
+    command: npm run dev
+
   postgres:
     image: postgres:15
+    container_name: game-postgres
     restart: always
     environment:
       POSTGRES_USER: game_user
@@ -13,17 +42,5 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  frontend:
-    build:
-      context: .
-    ports:
-      - "5173:5173"
-    volumes:
-      - .:/app
-      - /app/node_modules
-    environment:
-      - NODE_ENV=development
-    command: npm run dev -- --host
-
 volumes:
-  postgres_data: { }
+  postgres_data: {}
