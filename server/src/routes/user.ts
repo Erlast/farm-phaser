@@ -1,20 +1,9 @@
 import {Router} from 'express'
 import {authMiddleware} from '../middleware/authMiddleware'
-import {prisma} from '../prisma/client'
+import {me} from "../controllers/accountController";
 
 const router = Router()
 
-router.get('/me', authMiddleware, async (req: any, res: any) => {
-    const user = await prisma.user.findUnique({
-        where: {id: req.userId},
-        select: {username: true}
-    })
-
-    if (!user) {
-        return res.status(404).json({message: 'Пользователь не найден'})
-    }
-
-    return res.json(user)
-})
+router.get('/me', authMiddleware, me)
 
 export default router

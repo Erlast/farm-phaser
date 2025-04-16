@@ -1,5 +1,6 @@
-import axios, { AxiosError } from 'axios'
+import axios, {AxiosError} from 'axios'
 import router from '@/router/main'
+import {useAuthStore} from "../stores/authStore.ts";
 
 const httpCommunicator = axios.create({
     baseURL: 'http://localhost:4000/api', // URL API
@@ -13,13 +14,13 @@ const httpCommunicator = axios.create({
 // Перехватчик запросов для добавления токена авторизации
 httpCommunicator.interceptors.request.use(
     config => {
-        // if (config.url !== '/auth/refresh') {
-        //     const authStore = useAuthStore() // Получаем доступ к хранилищу Pinia
-        //     const token = authStore.token // Извлекаем токен
-        //     if (token) {
-        //         config.headers.Authorization = `Bearer ${token}`
-        //     }
-
+        if (config.url !== '/auth/refresh') {
+            const authStore = useAuthStore() // Получаем доступ к хранилищу Pinia
+            const token = authStore.token // Извлекаем токен
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`
+            }
+        }
         return config
     },
     error => {
@@ -40,8 +41,8 @@ httpCommunicator.interceptors.response.use(
             window.location.href = '/auth'
         }
         if (error.response && error.response.status === 403) {
-           // clearStores(true)
-            await router.push({ name: 'auth' })
+            // clearStores(true)
+            await router.push({name: 'auth'})
         }
         return Promise.reject(error)
     }

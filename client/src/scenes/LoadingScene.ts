@@ -18,6 +18,12 @@ export default class LoadingScene extends Phaser.Scene {
         // Пример загрузки ассетов
         this.load.image('background', 'assets/background.png')
         this.load.image('plot', 'assets/plot.png')
+        this.load.image('xp-bar-bg', 'assets/ui/xp-bar-bg.png')
+        this.load.image('xp-bar-fill', 'assets/ui/xp-bar-fill.png')
+        this.load.image('xp-frame', 'assets/ui/xp-frame.png')
+        this.load.bitmapFont('fantasy-font', 'assets/fonts/fantasy.png', 'assets/fonts/fantasy.fnt')
+        this.load.image('carrot', 'assets/crops/carrot.png')
+        this.load.image('cucumber', 'assets/crops/cucumber.png')
     }
 
     create() {

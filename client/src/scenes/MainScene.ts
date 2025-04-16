@@ -1,21 +1,40 @@
 import Phaser from 'phaser'
+import characterService from "../api/characterService.ts";
+import {XPBar} from "../ui/XPBar.ts";
+import {Plot} from "../entities/Plot.ts";
+
 
 export default class MainScene extends Phaser.Scene {
+    private xpBar!: XPBar
+    private plots: Plot[] = []
+
     constructor() {
         super('MainScene')
     }
 
     preload() {
-        // Загружаем фон
+
     }
 
-    create() {
+    async create() {
         const {width, height} = this.scale
 
         this.background = this.add.tileSprite(0, 0, width, height, 'background')
             .setOrigin(0, 0)
+        try {
+            const character = await characterService.one()
 
-        this.createPlotGrid(3, 3, 50, 50, 2)
+            this.xpBar = new XPBar(this, 100 + (character.level - 1) * 50)
+
+            this.xpBar.create()
+            this.xpBar.setXP(character.experience)
+            this.createPlotGrid(3, 3, 50, 50, 2)
+
+            this.add.text(10, 40, `Level: ${character.level}`, {fontSize: '14px', color: '#fff'}).setScrollFactor(0)
+            this.add.text(10, 60, `Coins: ${character.coins}`, {fontSize: '14px', color: '#fff'}).setScrollFactor(0)
+        } catch (err) {
+            console.error('Ошибка получения персонажа:', err)
+        }
     }
 
     createPlotGrid(rows: number, cols: number, plotWidth: number, plotHeight: number, padding: number) {
@@ -30,7 +49,9 @@ export default class MainScene extends Phaser.Scene {
                 const x = startX + col * (plotWidth + padding) + plotWidth / 2
                 const y = startY + row * (plotHeight + padding) + plotHeight / 2
 
-                this.add.image(x, y, 'plot').setDisplaySize(plotWidth, plotHeight)
+                const plot = new Plot(this, x, y, plotWidth, plotHeight, this.xpBar)
+
+                this.plots.push(plot)
             }
         }
     }

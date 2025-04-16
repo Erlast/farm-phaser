@@ -58,6 +58,8 @@ const registerHandler = async () => {
         password: password.value
       }
       await authService.register(credential)
+      await router.push('/auth')
+
 
       // emit('login')
     }

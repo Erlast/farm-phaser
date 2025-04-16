@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import router from '@/router/main'
+import {useAuthStore} from "../stores/authStore.ts";
 
 export default class AuthScene extends Phaser.Scene {
     constructor() {
@@ -7,6 +7,9 @@ export default class AuthScene extends Phaser.Scene {
     }
 
     create() {
-        router.push('/auth')
+        const authStore = useAuthStore();
+        if (authStore.isAuthenticated) {
+            this.scene.start('MainScene')
+        }
     }
 }
