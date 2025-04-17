@@ -36,6 +36,12 @@ model Character {
   updatedAt DateTime @updatedAt
 }
 
+model LevelRequirement {
+  id         Int @id @default(autoincrement())
+  level      Int @unique
+  xpRequired Int
+}
+
 enum Gender {
   M
   F

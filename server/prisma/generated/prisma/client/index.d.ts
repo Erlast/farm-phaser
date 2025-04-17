@@ -23,6 +23,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Character = $Result.DefaultSelection<Prisma.$CharacterPayload>
+/**
+ * Model LevelRequirement
+ * 
+ */
+export type LevelRequirement = $Result.DefaultSelection<Prisma.$LevelRequirementPayload>
 
 /**
  * Enums
@@ -185,6 +190,16 @@ export class PrismaClient<
     * ```
     */
   get character(): Prisma.CharacterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.levelRequirement`: Exposes CRUD operations for the **LevelRequirement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more LevelRequirements
+    * const levelRequirements = await prisma.levelRequirement.findMany()
+    * ```
+    */
+  get levelRequirement(): Prisma.LevelRequirementDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -626,7 +641,8 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Character: 'Character'
+    Character: 'Character',
+    LevelRequirement: 'LevelRequirement'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -645,7 +661,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "character"
+      modelProps: "user" | "character" | "levelRequirement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -797,6 +813,80 @@ export namespace Prisma {
           }
         }
       }
+      LevelRequirement: {
+        payload: Prisma.$LevelRequirementPayload<ExtArgs>
+        fields: Prisma.LevelRequirementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LevelRequirementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LevelRequirementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>
+          }
+          findFirst: {
+            args: Prisma.LevelRequirementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LevelRequirementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>
+          }
+          findMany: {
+            args: Prisma.LevelRequirementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>[]
+          }
+          create: {
+            args: Prisma.LevelRequirementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>
+          }
+          createMany: {
+            args: Prisma.LevelRequirementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LevelRequirementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>[]
+          }
+          delete: {
+            args: Prisma.LevelRequirementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>
+          }
+          update: {
+            args: Prisma.LevelRequirementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>
+          }
+          deleteMany: {
+            args: Prisma.LevelRequirementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LevelRequirementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.LevelRequirementUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>[]
+          }
+          upsert: {
+            args: Prisma.LevelRequirementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LevelRequirementPayload>
+          }
+          aggregate: {
+            args: Prisma.LevelRequirementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLevelRequirement>
+          }
+          groupBy: {
+            args: Prisma.LevelRequirementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LevelRequirementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LevelRequirementCountArgs<ExtArgs>
+            result: $Utils.Optional<LevelRequirementCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -883,6 +973,7 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     character?: CharacterOmit
+    levelRequirement?: LevelRequirementOmit
   }
 
   /* Types for Logging */
@@ -3209,6 +3300,1017 @@ export namespace Prisma {
 
 
   /**
+   * Model LevelRequirement
+   */
+
+  export type AggregateLevelRequirement = {
+    _count: LevelRequirementCountAggregateOutputType | null
+    _avg: LevelRequirementAvgAggregateOutputType | null
+    _sum: LevelRequirementSumAggregateOutputType | null
+    _min: LevelRequirementMinAggregateOutputType | null
+    _max: LevelRequirementMaxAggregateOutputType | null
+  }
+
+  export type LevelRequirementAvgAggregateOutputType = {
+    id: number | null
+    level: number | null
+    xpRequired: number | null
+  }
+
+  export type LevelRequirementSumAggregateOutputType = {
+    id: number | null
+    level: number | null
+    xpRequired: number | null
+  }
+
+  export type LevelRequirementMinAggregateOutputType = {
+    id: number | null
+    level: number | null
+    xpRequired: number | null
+  }
+
+  export type LevelRequirementMaxAggregateOutputType = {
+    id: number | null
+    level: number | null
+    xpRequired: number | null
+  }
+
+  export type LevelRequirementCountAggregateOutputType = {
+    id: number
+    level: number
+    xpRequired: number
+    _all: number
+  }
+
+
+  export type LevelRequirementAvgAggregateInputType = {
+    id?: true
+    level?: true
+    xpRequired?: true
+  }
+
+  export type LevelRequirementSumAggregateInputType = {
+    id?: true
+    level?: true
+    xpRequired?: true
+  }
+
+  export type LevelRequirementMinAggregateInputType = {
+    id?: true
+    level?: true
+    xpRequired?: true
+  }
+
+  export type LevelRequirementMaxAggregateInputType = {
+    id?: true
+    level?: true
+    xpRequired?: true
+  }
+
+  export type LevelRequirementCountAggregateInputType = {
+    id?: true
+    level?: true
+    xpRequired?: true
+    _all?: true
+  }
+
+  export type LevelRequirementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LevelRequirement to aggregate.
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LevelRequirements to fetch.
+     */
+    orderBy?: LevelRequirementOrderByWithRelationInput | LevelRequirementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LevelRequirementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LevelRequirements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LevelRequirements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned LevelRequirements
+    **/
+    _count?: true | LevelRequirementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LevelRequirementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LevelRequirementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LevelRequirementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LevelRequirementMaxAggregateInputType
+  }
+
+  export type GetLevelRequirementAggregateType<T extends LevelRequirementAggregateArgs> = {
+        [P in keyof T & keyof AggregateLevelRequirement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLevelRequirement[P]>
+      : GetScalarType<T[P], AggregateLevelRequirement[P]>
+  }
+
+
+
+
+  export type LevelRequirementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LevelRequirementWhereInput
+    orderBy?: LevelRequirementOrderByWithAggregationInput | LevelRequirementOrderByWithAggregationInput[]
+    by: LevelRequirementScalarFieldEnum[] | LevelRequirementScalarFieldEnum
+    having?: LevelRequirementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LevelRequirementCountAggregateInputType | true
+    _avg?: LevelRequirementAvgAggregateInputType
+    _sum?: LevelRequirementSumAggregateInputType
+    _min?: LevelRequirementMinAggregateInputType
+    _max?: LevelRequirementMaxAggregateInputType
+  }
+
+  export type LevelRequirementGroupByOutputType = {
+    id: number
+    level: number
+    xpRequired: number
+    _count: LevelRequirementCountAggregateOutputType | null
+    _avg: LevelRequirementAvgAggregateOutputType | null
+    _sum: LevelRequirementSumAggregateOutputType | null
+    _min: LevelRequirementMinAggregateOutputType | null
+    _max: LevelRequirementMaxAggregateOutputType | null
+  }
+
+  type GetLevelRequirementGroupByPayload<T extends LevelRequirementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LevelRequirementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LevelRequirementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LevelRequirementGroupByOutputType[P]>
+            : GetScalarType<T[P], LevelRequirementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LevelRequirementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    level?: boolean
+    xpRequired?: boolean
+  }, ExtArgs["result"]["levelRequirement"]>
+
+  export type LevelRequirementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    level?: boolean
+    xpRequired?: boolean
+  }, ExtArgs["result"]["levelRequirement"]>
+
+  export type LevelRequirementSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    level?: boolean
+    xpRequired?: boolean
+  }, ExtArgs["result"]["levelRequirement"]>
+
+  export type LevelRequirementSelectScalar = {
+    id?: boolean
+    level?: boolean
+    xpRequired?: boolean
+  }
+
+  export type LevelRequirementOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "level" | "xpRequired", ExtArgs["result"]["levelRequirement"]>
+
+  export type $LevelRequirementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "LevelRequirement"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      level: number
+      xpRequired: number
+    }, ExtArgs["result"]["levelRequirement"]>
+    composites: {}
+  }
+
+  type LevelRequirementGetPayload<S extends boolean | null | undefined | LevelRequirementDefaultArgs> = $Result.GetResult<Prisma.$LevelRequirementPayload, S>
+
+  type LevelRequirementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LevelRequirementFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LevelRequirementCountAggregateInputType | true
+    }
+
+  export interface LevelRequirementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['LevelRequirement'], meta: { name: 'LevelRequirement' } }
+    /**
+     * Find zero or one LevelRequirement that matches the filter.
+     * @param {LevelRequirementFindUniqueArgs} args - Arguments to find a LevelRequirement
+     * @example
+     * // Get one LevelRequirement
+     * const levelRequirement = await prisma.levelRequirement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LevelRequirementFindUniqueArgs>(args: SelectSubset<T, LevelRequirementFindUniqueArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one LevelRequirement that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LevelRequirementFindUniqueOrThrowArgs} args - Arguments to find a LevelRequirement
+     * @example
+     * // Get one LevelRequirement
+     * const levelRequirement = await prisma.levelRequirement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LevelRequirementFindUniqueOrThrowArgs>(args: SelectSubset<T, LevelRequirementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LevelRequirement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementFindFirstArgs} args - Arguments to find a LevelRequirement
+     * @example
+     * // Get one LevelRequirement
+     * const levelRequirement = await prisma.levelRequirement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LevelRequirementFindFirstArgs>(args?: SelectSubset<T, LevelRequirementFindFirstArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first LevelRequirement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementFindFirstOrThrowArgs} args - Arguments to find a LevelRequirement
+     * @example
+     * // Get one LevelRequirement
+     * const levelRequirement = await prisma.levelRequirement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LevelRequirementFindFirstOrThrowArgs>(args?: SelectSubset<T, LevelRequirementFindFirstOrThrowArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more LevelRequirements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all LevelRequirements
+     * const levelRequirements = await prisma.levelRequirement.findMany()
+     * 
+     * // Get first 10 LevelRequirements
+     * const levelRequirements = await prisma.levelRequirement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const levelRequirementWithIdOnly = await prisma.levelRequirement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LevelRequirementFindManyArgs>(args?: SelectSubset<T, LevelRequirementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a LevelRequirement.
+     * @param {LevelRequirementCreateArgs} args - Arguments to create a LevelRequirement.
+     * @example
+     * // Create one LevelRequirement
+     * const LevelRequirement = await prisma.levelRequirement.create({
+     *   data: {
+     *     // ... data to create a LevelRequirement
+     *   }
+     * })
+     * 
+     */
+    create<T extends LevelRequirementCreateArgs>(args: SelectSubset<T, LevelRequirementCreateArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many LevelRequirements.
+     * @param {LevelRequirementCreateManyArgs} args - Arguments to create many LevelRequirements.
+     * @example
+     * // Create many LevelRequirements
+     * const levelRequirement = await prisma.levelRequirement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LevelRequirementCreateManyArgs>(args?: SelectSubset<T, LevelRequirementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many LevelRequirements and returns the data saved in the database.
+     * @param {LevelRequirementCreateManyAndReturnArgs} args - Arguments to create many LevelRequirements.
+     * @example
+     * // Create many LevelRequirements
+     * const levelRequirement = await prisma.levelRequirement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many LevelRequirements and only return the `id`
+     * const levelRequirementWithIdOnly = await prisma.levelRequirement.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LevelRequirementCreateManyAndReturnArgs>(args?: SelectSubset<T, LevelRequirementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a LevelRequirement.
+     * @param {LevelRequirementDeleteArgs} args - Arguments to delete one LevelRequirement.
+     * @example
+     * // Delete one LevelRequirement
+     * const LevelRequirement = await prisma.levelRequirement.delete({
+     *   where: {
+     *     // ... filter to delete one LevelRequirement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LevelRequirementDeleteArgs>(args: SelectSubset<T, LevelRequirementDeleteArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one LevelRequirement.
+     * @param {LevelRequirementUpdateArgs} args - Arguments to update one LevelRequirement.
+     * @example
+     * // Update one LevelRequirement
+     * const levelRequirement = await prisma.levelRequirement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LevelRequirementUpdateArgs>(args: SelectSubset<T, LevelRequirementUpdateArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more LevelRequirements.
+     * @param {LevelRequirementDeleteManyArgs} args - Arguments to filter LevelRequirements to delete.
+     * @example
+     * // Delete a few LevelRequirements
+     * const { count } = await prisma.levelRequirement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LevelRequirementDeleteManyArgs>(args?: SelectSubset<T, LevelRequirementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LevelRequirements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many LevelRequirements
+     * const levelRequirement = await prisma.levelRequirement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LevelRequirementUpdateManyArgs>(args: SelectSubset<T, LevelRequirementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more LevelRequirements and returns the data updated in the database.
+     * @param {LevelRequirementUpdateManyAndReturnArgs} args - Arguments to update many LevelRequirements.
+     * @example
+     * // Update many LevelRequirements
+     * const levelRequirement = await prisma.levelRequirement.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more LevelRequirements and only return the `id`
+     * const levelRequirementWithIdOnly = await prisma.levelRequirement.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LevelRequirementUpdateManyAndReturnArgs>(args: SelectSubset<T, LevelRequirementUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one LevelRequirement.
+     * @param {LevelRequirementUpsertArgs} args - Arguments to update or create a LevelRequirement.
+     * @example
+     * // Update or create a LevelRequirement
+     * const levelRequirement = await prisma.levelRequirement.upsert({
+     *   create: {
+     *     // ... data to create a LevelRequirement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the LevelRequirement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LevelRequirementUpsertArgs>(args: SelectSubset<T, LevelRequirementUpsertArgs<ExtArgs>>): Prisma__LevelRequirementClient<$Result.GetResult<Prisma.$LevelRequirementPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of LevelRequirements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementCountArgs} args - Arguments to filter LevelRequirements to count.
+     * @example
+     * // Count the number of LevelRequirements
+     * const count = await prisma.levelRequirement.count({
+     *   where: {
+     *     // ... the filter for the LevelRequirements we want to count
+     *   }
+     * })
+    **/
+    count<T extends LevelRequirementCountArgs>(
+      args?: Subset<T, LevelRequirementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LevelRequirementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a LevelRequirement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LevelRequirementAggregateArgs>(args: Subset<T, LevelRequirementAggregateArgs>): Prisma.PrismaPromise<GetLevelRequirementAggregateType<T>>
+
+    /**
+     * Group by LevelRequirement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LevelRequirementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LevelRequirementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LevelRequirementGroupByArgs['orderBy'] }
+        : { orderBy?: LevelRequirementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LevelRequirementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLevelRequirementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the LevelRequirement model
+   */
+  readonly fields: LevelRequirementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for LevelRequirement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LevelRequirementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the LevelRequirement model
+   */
+  interface LevelRequirementFieldRefs {
+    readonly id: FieldRef<"LevelRequirement", 'Int'>
+    readonly level: FieldRef<"LevelRequirement", 'Int'>
+    readonly xpRequired: FieldRef<"LevelRequirement", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * LevelRequirement findUnique
+   */
+  export type LevelRequirementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * Filter, which LevelRequirement to fetch.
+     */
+    where: LevelRequirementWhereUniqueInput
+  }
+
+  /**
+   * LevelRequirement findUniqueOrThrow
+   */
+  export type LevelRequirementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * Filter, which LevelRequirement to fetch.
+     */
+    where: LevelRequirementWhereUniqueInput
+  }
+
+  /**
+   * LevelRequirement findFirst
+   */
+  export type LevelRequirementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * Filter, which LevelRequirement to fetch.
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LevelRequirements to fetch.
+     */
+    orderBy?: LevelRequirementOrderByWithRelationInput | LevelRequirementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LevelRequirements.
+     */
+    cursor?: LevelRequirementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LevelRequirements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LevelRequirements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LevelRequirements.
+     */
+    distinct?: LevelRequirementScalarFieldEnum | LevelRequirementScalarFieldEnum[]
+  }
+
+  /**
+   * LevelRequirement findFirstOrThrow
+   */
+  export type LevelRequirementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * Filter, which LevelRequirement to fetch.
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LevelRequirements to fetch.
+     */
+    orderBy?: LevelRequirementOrderByWithRelationInput | LevelRequirementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for LevelRequirements.
+     */
+    cursor?: LevelRequirementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LevelRequirements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LevelRequirements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of LevelRequirements.
+     */
+    distinct?: LevelRequirementScalarFieldEnum | LevelRequirementScalarFieldEnum[]
+  }
+
+  /**
+   * LevelRequirement findMany
+   */
+  export type LevelRequirementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * Filter, which LevelRequirements to fetch.
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of LevelRequirements to fetch.
+     */
+    orderBy?: LevelRequirementOrderByWithRelationInput | LevelRequirementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing LevelRequirements.
+     */
+    cursor?: LevelRequirementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` LevelRequirements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` LevelRequirements.
+     */
+    skip?: number
+    distinct?: LevelRequirementScalarFieldEnum | LevelRequirementScalarFieldEnum[]
+  }
+
+  /**
+   * LevelRequirement create
+   */
+  export type LevelRequirementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * The data needed to create a LevelRequirement.
+     */
+    data: XOR<LevelRequirementCreateInput, LevelRequirementUncheckedCreateInput>
+  }
+
+  /**
+   * LevelRequirement createMany
+   */
+  export type LevelRequirementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many LevelRequirements.
+     */
+    data: LevelRequirementCreateManyInput | LevelRequirementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LevelRequirement createManyAndReturn
+   */
+  export type LevelRequirementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * The data used to create many LevelRequirements.
+     */
+    data: LevelRequirementCreateManyInput | LevelRequirementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * LevelRequirement update
+   */
+  export type LevelRequirementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * The data needed to update a LevelRequirement.
+     */
+    data: XOR<LevelRequirementUpdateInput, LevelRequirementUncheckedUpdateInput>
+    /**
+     * Choose, which LevelRequirement to update.
+     */
+    where: LevelRequirementWhereUniqueInput
+  }
+
+  /**
+   * LevelRequirement updateMany
+   */
+  export type LevelRequirementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update LevelRequirements.
+     */
+    data: XOR<LevelRequirementUpdateManyMutationInput, LevelRequirementUncheckedUpdateManyInput>
+    /**
+     * Filter which LevelRequirements to update
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * Limit how many LevelRequirements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LevelRequirement updateManyAndReturn
+   */
+  export type LevelRequirementUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * The data used to update LevelRequirements.
+     */
+    data: XOR<LevelRequirementUpdateManyMutationInput, LevelRequirementUncheckedUpdateManyInput>
+    /**
+     * Filter which LevelRequirements to update
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * Limit how many LevelRequirements to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * LevelRequirement upsert
+   */
+  export type LevelRequirementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * The filter to search for the LevelRequirement to update in case it exists.
+     */
+    where: LevelRequirementWhereUniqueInput
+    /**
+     * In case the LevelRequirement found by the `where` argument doesn't exist, create a new LevelRequirement with this data.
+     */
+    create: XOR<LevelRequirementCreateInput, LevelRequirementUncheckedCreateInput>
+    /**
+     * In case the LevelRequirement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LevelRequirementUpdateInput, LevelRequirementUncheckedUpdateInput>
+  }
+
+  /**
+   * LevelRequirement delete
+   */
+  export type LevelRequirementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+    /**
+     * Filter which LevelRequirement to delete.
+     */
+    where: LevelRequirementWhereUniqueInput
+  }
+
+  /**
+   * LevelRequirement deleteMany
+   */
+  export type LevelRequirementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which LevelRequirements to delete
+     */
+    where?: LevelRequirementWhereInput
+    /**
+     * Limit how many LevelRequirements to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * LevelRequirement without action
+   */
+  export type LevelRequirementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LevelRequirement
+     */
+    select?: LevelRequirementSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the LevelRequirement
+     */
+    omit?: LevelRequirementOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -3244,6 +4346,15 @@ export namespace Prisma {
   };
 
   export type CharacterScalarFieldEnum = (typeof CharacterScalarFieldEnum)[keyof typeof CharacterScalarFieldEnum]
+
+
+  export const LevelRequirementScalarFieldEnum: {
+    id: 'id',
+    level: 'level',
+    xpRequired: 'xpRequired'
+  };
+
+  export type LevelRequirementScalarFieldEnum = (typeof LevelRequirementScalarFieldEnum)[keyof typeof LevelRequirementScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -3472,6 +4583,50 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Character"> | Date | string
   }
 
+  export type LevelRequirementWhereInput = {
+    AND?: LevelRequirementWhereInput | LevelRequirementWhereInput[]
+    OR?: LevelRequirementWhereInput[]
+    NOT?: LevelRequirementWhereInput | LevelRequirementWhereInput[]
+    id?: IntFilter<"LevelRequirement"> | number
+    level?: IntFilter<"LevelRequirement"> | number
+    xpRequired?: IntFilter<"LevelRequirement"> | number
+  }
+
+  export type LevelRequirementOrderByWithRelationInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
+  }
+
+  export type LevelRequirementWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    level?: number
+    AND?: LevelRequirementWhereInput | LevelRequirementWhereInput[]
+    OR?: LevelRequirementWhereInput[]
+    NOT?: LevelRequirementWhereInput | LevelRequirementWhereInput[]
+    xpRequired?: IntFilter<"LevelRequirement"> | number
+  }, "id" | "level">
+
+  export type LevelRequirementOrderByWithAggregationInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
+    _count?: LevelRequirementCountOrderByAggregateInput
+    _avg?: LevelRequirementAvgOrderByAggregateInput
+    _max?: LevelRequirementMaxOrderByAggregateInput
+    _min?: LevelRequirementMinOrderByAggregateInput
+    _sum?: LevelRequirementSumOrderByAggregateInput
+  }
+
+  export type LevelRequirementScalarWhereWithAggregatesInput = {
+    AND?: LevelRequirementScalarWhereWithAggregatesInput | LevelRequirementScalarWhereWithAggregatesInput[]
+    OR?: LevelRequirementScalarWhereWithAggregatesInput[]
+    NOT?: LevelRequirementScalarWhereWithAggregatesInput | LevelRequirementScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"LevelRequirement"> | number
+    level?: IntWithAggregatesFilter<"LevelRequirement"> | number
+    xpRequired?: IntWithAggregatesFilter<"LevelRequirement"> | number
+  }
+
   export type UserCreateInput = {
     username: string
     password: string
@@ -3593,6 +4748,45 @@ export namespace Prisma {
     coins?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LevelRequirementCreateInput = {
+    level: number
+    xpRequired: number
+  }
+
+  export type LevelRequirementUncheckedCreateInput = {
+    id?: number
+    level: number
+    xpRequired: number
+  }
+
+  export type LevelRequirementUpdateInput = {
+    level?: IntFieldUpdateOperationsInput | number
+    xpRequired?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LevelRequirementUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    xpRequired?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LevelRequirementCreateManyInput = {
+    id?: number
+    level: number
+    xpRequired: number
+  }
+
+  export type LevelRequirementUpdateManyMutationInput = {
+    level?: IntFieldUpdateOperationsInput | number
+    xpRequired?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LevelRequirementUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    level?: IntFieldUpdateOperationsInput | number
+    xpRequired?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -3788,6 +4982,36 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedEnumGenderNullableFilter<$PrismaModel>
     _max?: NestedEnumGenderNullableFilter<$PrismaModel>
+  }
+
+  export type LevelRequirementCountOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
+  }
+
+  export type LevelRequirementAvgOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
+  }
+
+  export type LevelRequirementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
+  }
+
+  export type LevelRequirementMinOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
+  }
+
+  export type LevelRequirementSumOrderByAggregateInput = {
+    id?: SortOrder
+    level?: SortOrder
+    xpRequired?: SortOrder
   }
 
   export type CharacterCreateNestedOneWithoutUserInput = {

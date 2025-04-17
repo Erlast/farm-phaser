@@ -135,6 +135,12 @@ exports.Prisma.CharacterScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.LevelRequirementScalarFieldEnum = {
+  id: 'id',
+  level: 'level',
+  xpRequired: 'xpRequired'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -156,7 +162,8 @@ exports.Gender = exports.$Enums.Gender = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Character: 'Character'
+  Character: 'Character',
+  LevelRequirement: 'LevelRequirement'
 };
 
 /**
