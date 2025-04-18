@@ -5,16 +5,16 @@ export class XPBar {
     private scene: Phaser.Scene
     private background!: Phaser.GameObjects.Rectangle
     private fill!: Phaser.GameObjects.Rectangle
-    private maxXP: number
     private currentXP: number = 0
+    private minXP: number = 0
+    private maxXP: number = 100
 
     private barWidth = 200
     private barHeight = 20
     private margin = 10
 
-    constructor(scene: Phaser.Scene, maxXP: number = 100) {
+    constructor(scene: Phaser.Scene) {
         this.scene = scene
-        this.maxXP = maxXP
     }
 
     create() {
@@ -49,16 +49,32 @@ export class XPBar {
         //     .setScrollFactor(0)
     }
 
+    setXPRange(minXP: number, maxXP: number) {
+        this.minXP = minXP
+        this.maxXP = maxXP
+        this.updateBar()
+    }
+
     setXP(currentXP: number) {
-        this.currentXP = Phaser.Math.Clamp(currentXP, 0, this.maxXP)
-        this.fill.width = (this.currentXP / this.maxXP) * this.barWidth
+        this.currentXP = currentXP
+        this.updateBar()
         //   this.fill.setDisplaySize(fillWidth, this.barHeight)
     }
 
-    async addXP(amount: number) {
-        this.setXP(this.currentXP + amount)
+    private updateBar() {
+        const relativeXP = this.currentXP - this.minXP
+        const range = this.maxXP - this.minXP
+        const clamped = Phaser.Math.Clamp(relativeXP / range, 0, 1)
 
-        await characterService.addXP(amount)
+        this.fill.width = this.barWidth * clamped
+    }
+
+    async addXP(amount: number) {
+        const newXP = this.currentXP + amount
+
+        const data = await characterService.addXP(amount)
+        this.setXPRange(data.minXP, data.maxXP)
+        this.setXP(newXP)
     }
 
     getXP() {

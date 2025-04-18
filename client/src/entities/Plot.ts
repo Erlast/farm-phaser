@@ -1,20 +1,8 @@
 import Phaser from 'phaser'
 import {SeedSelector} from "../ui/SeedSelector.ts";
 import {XPBar} from "../ui/XPBar.ts";
-
-type SeedType = 'carrot' | 'cucumber'
-
-interface SeedInfo {
-    key: SeedType
-    growTime: number // в мс
-    texture: string
-    xp: number
-}
-
-const SEEDS: Record<SeedType, SeedInfo> = {
-    carrot: {key: 'carrot', growTime: 5000, texture: 'carrot', xp: 5},
-    cucumber: {key: 'cucumber', growTime: 8000, texture: 'cucumber', xp: 10}
-}
+import {useSeedsStore} from "../stores/seedsStore.ts";
+import {useCharacterStore} from "../stores/characterStore.ts";
 
 export class Plot {
     private scene: Phaser.Scene
@@ -41,7 +29,7 @@ export class Plot {
     }
 
     private onClick(pointer) {
-        if (this.state === 'empty') {
+        if (this.state === 'empty' && !this.seedType) {
             this.showSeedChoice(pointer)
         } else if (this.state === 'ready') {
             this.harvest()
@@ -49,33 +37,38 @@ export class Plot {
     }
 
     private showSeedChoice(pointer: Phaser.Input.Pointer) {
-        new SeedSelector(this.scene, pointer.x, pointer.y, [
-            {
-                name: 'Морковка',
-                texture: 'carrot', // Имя текстуры морковки
-                onSelect: () => {
-                    this.plantSeed('carrot') // 5 секунд на рост морковки
-                }
-            },
-            {
-                name: 'Огурец',
-                texture: 'cucumber', // Имя текстуры огурца
-                onSelect: () => {
-                    this.plantSeed('cucumber') // 7 секунд на рост огурца
-                }
-            }
-        ])
+        const seedStore = useSeedsStore()
+
+        const seeds = Object.values(seedStore.seeds)
+        new SeedSelector(this.scene, pointer.x, pointer.y, seeds.map(seed => ({
+            name: seed.name,
+            texture: seed.texture,
+            onSelect: () => this.plantSeed(seed.id)
+        })))
     }
 
-    plantSeed(type: SeedType) {
-        const info = SEEDS[type]
+    async plantSeed(type: SeedType) {
+        const seedStore = useSeedsStore()
+        const characterStore = useCharacterStore()
+
+        const seed = seedStore.getSeed(type)
+
+        if (!seed) return
+
+        if (characterStore.character.coins < seed.buyPrice) {
+            console.warn('Недостаточно монет для посадки')
+            return
+        }
+
+        await characterStore.changeBalance(-seed.buyPrice)
+
         this.seedType = type
         this.state = 'growing'
 
-        this.crop = this.scene.add.image(0, 0, info.texture).setAlpha(0.5).setDisplaySize(45, 45)
+        this.crop = this.scene.add.image(0, 0, seed.texture).setAlpha(0.5).setDisplaySize(45, 45)
         this.container.add(this.crop)
 
-        this.growTimer = this.scene.time.delayedCall(info.growTime, () => {
+        this.growTimer = this.scene.time.delayedCall(seed.growTime, () => {
             this.setReady()
         })
     }
@@ -87,12 +80,19 @@ export class Plot {
         }
     }
 
-    private harvest() {
+    private async harvest() {
         if (!this.seedType) return
 
-        const info = SEEDS[this.seedType]
-        this.xpBar.addXP(info.xp)
+        const seedStore = useSeedsStore()
+        const characterStore = useCharacterStore()
 
+        const seed = seedStore.getSeed(this.seedType)
+        if (!seed) return
+        await this.xpBar.addXP(seed.xp)
+
+        await characterStore.changeBalance(seed.sellPrice)
+
+        this.growTimer?.destroy
         this.state = 'empty'
         this.seedType = undefined
         this.crop?.destroy()

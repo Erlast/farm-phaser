@@ -15,6 +15,15 @@ const characterService = {
             }
         )
         return response.data
+    },
+    async changeBalance(amount: number) {
+        const response = await httpCommunicator.post(
+            '/character/change-balance',
+            {
+                amount: amount
+            }
+        )
+        return response.data
     }
 }
 

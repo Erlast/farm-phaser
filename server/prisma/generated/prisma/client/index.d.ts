@@ -28,6 +28,11 @@ export type Character = $Result.DefaultSelection<Prisma.$CharacterPayload>
  * 
  */
 export type LevelRequirement = $Result.DefaultSelection<Prisma.$LevelRequirementPayload>
+/**
+ * Model Seed
+ * 
+ */
+export type Seed = $Result.DefaultSelection<Prisma.$SeedPayload>
 
 /**
  * Enums
@@ -200,6 +205,16 @@ export class PrismaClient<
     * ```
     */
   get levelRequirement(): Prisma.LevelRequirementDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.seed`: Exposes CRUD operations for the **Seed** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Seeds
+    * const seeds = await prisma.seed.findMany()
+    * ```
+    */
+  get seed(): Prisma.SeedDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -642,7 +657,8 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Character: 'Character',
-    LevelRequirement: 'LevelRequirement'
+    LevelRequirement: 'LevelRequirement',
+    Seed: 'Seed'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -661,7 +677,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "character" | "levelRequirement"
+      modelProps: "user" | "character" | "levelRequirement" | "seed"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -887,6 +903,80 @@ export namespace Prisma {
           }
         }
       }
+      Seed: {
+        payload: Prisma.$SeedPayload<ExtArgs>
+        fields: Prisma.SeedFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeedFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeedFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>
+          }
+          findFirst: {
+            args: Prisma.SeedFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeedFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>
+          }
+          findMany: {
+            args: Prisma.SeedFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>[]
+          }
+          create: {
+            args: Prisma.SeedCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>
+          }
+          createMany: {
+            args: Prisma.SeedCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SeedCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>[]
+          }
+          delete: {
+            args: Prisma.SeedDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>
+          }
+          update: {
+            args: Prisma.SeedUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>
+          }
+          deleteMany: {
+            args: Prisma.SeedDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeedUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SeedUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>[]
+          }
+          upsert: {
+            args: Prisma.SeedUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeedPayload>
+          }
+          aggregate: {
+            args: Prisma.SeedAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeed>
+          }
+          groupBy: {
+            args: Prisma.SeedGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeedGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeedCountArgs<ExtArgs>
+            result: $Utils.Optional<SeedCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -974,6 +1064,7 @@ export namespace Prisma {
     user?: UserOmit
     character?: CharacterOmit
     levelRequirement?: LevelRequirementOmit
+    seed?: SeedOmit
   }
 
   /* Types for Logging */
@@ -4311,6 +4402,1090 @@ export namespace Prisma {
 
 
   /**
+   * Model Seed
+   */
+
+  export type AggregateSeed = {
+    _count: SeedCountAggregateOutputType | null
+    _avg: SeedAvgAggregateOutputType | null
+    _sum: SeedSumAggregateOutputType | null
+    _min: SeedMinAggregateOutputType | null
+    _max: SeedMaxAggregateOutputType | null
+  }
+
+  export type SeedAvgAggregateOutputType = {
+    id: number | null
+    growTime: number | null
+    xp: number | null
+    buyPrice: number | null
+    sellPrice: number | null
+  }
+
+  export type SeedSumAggregateOutputType = {
+    id: number | null
+    growTime: number | null
+    xp: number | null
+    buyPrice: number | null
+    sellPrice: number | null
+  }
+
+  export type SeedMinAggregateOutputType = {
+    id: number | null
+    key: string | null
+    name: string | null
+    texture: string | null
+    growTime: number | null
+    xp: number | null
+    buyPrice: number | null
+    sellPrice: number | null
+  }
+
+  export type SeedMaxAggregateOutputType = {
+    id: number | null
+    key: string | null
+    name: string | null
+    texture: string | null
+    growTime: number | null
+    xp: number | null
+    buyPrice: number | null
+    sellPrice: number | null
+  }
+
+  export type SeedCountAggregateOutputType = {
+    id: number
+    key: number
+    name: number
+    texture: number
+    growTime: number
+    xp: number
+    buyPrice: number
+    sellPrice: number
+    _all: number
+  }
+
+
+  export type SeedAvgAggregateInputType = {
+    id?: true
+    growTime?: true
+    xp?: true
+    buyPrice?: true
+    sellPrice?: true
+  }
+
+  export type SeedSumAggregateInputType = {
+    id?: true
+    growTime?: true
+    xp?: true
+    buyPrice?: true
+    sellPrice?: true
+  }
+
+  export type SeedMinAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    texture?: true
+    growTime?: true
+    xp?: true
+    buyPrice?: true
+    sellPrice?: true
+  }
+
+  export type SeedMaxAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    texture?: true
+    growTime?: true
+    xp?: true
+    buyPrice?: true
+    sellPrice?: true
+  }
+
+  export type SeedCountAggregateInputType = {
+    id?: true
+    key?: true
+    name?: true
+    texture?: true
+    growTime?: true
+    xp?: true
+    buyPrice?: true
+    sellPrice?: true
+    _all?: true
+  }
+
+  export type SeedAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Seed to aggregate.
+     */
+    where?: SeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seeds to fetch.
+     */
+    orderBy?: SeedOrderByWithRelationInput | SeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Seeds
+    **/
+    _count?: true | SeedCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SeedAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SeedSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeedMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeedMaxAggregateInputType
+  }
+
+  export type GetSeedAggregateType<T extends SeedAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeed]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeed[P]>
+      : GetScalarType<T[P], AggregateSeed[P]>
+  }
+
+
+
+
+  export type SeedGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeedWhereInput
+    orderBy?: SeedOrderByWithAggregationInput | SeedOrderByWithAggregationInput[]
+    by: SeedScalarFieldEnum[] | SeedScalarFieldEnum
+    having?: SeedScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeedCountAggregateInputType | true
+    _avg?: SeedAvgAggregateInputType
+    _sum?: SeedSumAggregateInputType
+    _min?: SeedMinAggregateInputType
+    _max?: SeedMaxAggregateInputType
+  }
+
+  export type SeedGroupByOutputType = {
+    id: number
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice: number
+    sellPrice: number
+    _count: SeedCountAggregateOutputType | null
+    _avg: SeedAvgAggregateOutputType | null
+    _sum: SeedSumAggregateOutputType | null
+    _min: SeedMinAggregateOutputType | null
+    _max: SeedMaxAggregateOutputType | null
+  }
+
+  type GetSeedGroupByPayload<T extends SeedGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeedGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeedGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeedGroupByOutputType[P]>
+            : GetScalarType<T[P], SeedGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeedSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    texture?: boolean
+    growTime?: boolean
+    xp?: boolean
+    buyPrice?: boolean
+    sellPrice?: boolean
+  }, ExtArgs["result"]["seed"]>
+
+  export type SeedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    texture?: boolean
+    growTime?: boolean
+    xp?: boolean
+    buyPrice?: boolean
+    sellPrice?: boolean
+  }, ExtArgs["result"]["seed"]>
+
+  export type SeedSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    texture?: boolean
+    growTime?: boolean
+    xp?: boolean
+    buyPrice?: boolean
+    sellPrice?: boolean
+  }, ExtArgs["result"]["seed"]>
+
+  export type SeedSelectScalar = {
+    id?: boolean
+    key?: boolean
+    name?: boolean
+    texture?: boolean
+    growTime?: boolean
+    xp?: boolean
+    buyPrice?: boolean
+    sellPrice?: boolean
+  }
+
+  export type SeedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "texture" | "growTime" | "xp" | "buyPrice" | "sellPrice", ExtArgs["result"]["seed"]>
+
+  export type $SeedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Seed"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      key: string
+      name: string
+      texture: string
+      growTime: number
+      xp: number
+      buyPrice: number
+      sellPrice: number
+    }, ExtArgs["result"]["seed"]>
+    composites: {}
+  }
+
+  type SeedGetPayload<S extends boolean | null | undefined | SeedDefaultArgs> = $Result.GetResult<Prisma.$SeedPayload, S>
+
+  type SeedCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SeedFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SeedCountAggregateInputType | true
+    }
+
+  export interface SeedDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Seed'], meta: { name: 'Seed' } }
+    /**
+     * Find zero or one Seed that matches the filter.
+     * @param {SeedFindUniqueArgs} args - Arguments to find a Seed
+     * @example
+     * // Get one Seed
+     * const seed = await prisma.seed.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeedFindUniqueArgs>(args: SelectSubset<T, SeedFindUniqueArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Seed that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SeedFindUniqueOrThrowArgs} args - Arguments to find a Seed
+     * @example
+     * // Get one Seed
+     * const seed = await prisma.seed.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeedFindUniqueOrThrowArgs>(args: SelectSubset<T, SeedFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Seed that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedFindFirstArgs} args - Arguments to find a Seed
+     * @example
+     * // Get one Seed
+     * const seed = await prisma.seed.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeedFindFirstArgs>(args?: SelectSubset<T, SeedFindFirstArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Seed that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedFindFirstOrThrowArgs} args - Arguments to find a Seed
+     * @example
+     * // Get one Seed
+     * const seed = await prisma.seed.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeedFindFirstOrThrowArgs>(args?: SelectSubset<T, SeedFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Seeds that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Seeds
+     * const seeds = await prisma.seed.findMany()
+     * 
+     * // Get first 10 Seeds
+     * const seeds = await prisma.seed.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const seedWithIdOnly = await prisma.seed.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SeedFindManyArgs>(args?: SelectSubset<T, SeedFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Seed.
+     * @param {SeedCreateArgs} args - Arguments to create a Seed.
+     * @example
+     * // Create one Seed
+     * const Seed = await prisma.seed.create({
+     *   data: {
+     *     // ... data to create a Seed
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeedCreateArgs>(args: SelectSubset<T, SeedCreateArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Seeds.
+     * @param {SeedCreateManyArgs} args - Arguments to create many Seeds.
+     * @example
+     * // Create many Seeds
+     * const seed = await prisma.seed.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeedCreateManyArgs>(args?: SelectSubset<T, SeedCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Seeds and returns the data saved in the database.
+     * @param {SeedCreateManyAndReturnArgs} args - Arguments to create many Seeds.
+     * @example
+     * // Create many Seeds
+     * const seed = await prisma.seed.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Seeds and only return the `id`
+     * const seedWithIdOnly = await prisma.seed.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SeedCreateManyAndReturnArgs>(args?: SelectSubset<T, SeedCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Seed.
+     * @param {SeedDeleteArgs} args - Arguments to delete one Seed.
+     * @example
+     * // Delete one Seed
+     * const Seed = await prisma.seed.delete({
+     *   where: {
+     *     // ... filter to delete one Seed
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeedDeleteArgs>(args: SelectSubset<T, SeedDeleteArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Seed.
+     * @param {SeedUpdateArgs} args - Arguments to update one Seed.
+     * @example
+     * // Update one Seed
+     * const seed = await prisma.seed.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeedUpdateArgs>(args: SelectSubset<T, SeedUpdateArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Seeds.
+     * @param {SeedDeleteManyArgs} args - Arguments to filter Seeds to delete.
+     * @example
+     * // Delete a few Seeds
+     * const { count } = await prisma.seed.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeedDeleteManyArgs>(args?: SelectSubset<T, SeedDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Seeds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Seeds
+     * const seed = await prisma.seed.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeedUpdateManyArgs>(args: SelectSubset<T, SeedUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Seeds and returns the data updated in the database.
+     * @param {SeedUpdateManyAndReturnArgs} args - Arguments to update many Seeds.
+     * @example
+     * // Update many Seeds
+     * const seed = await prisma.seed.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Seeds and only return the `id`
+     * const seedWithIdOnly = await prisma.seed.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SeedUpdateManyAndReturnArgs>(args: SelectSubset<T, SeedUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Seed.
+     * @param {SeedUpsertArgs} args - Arguments to update or create a Seed.
+     * @example
+     * // Update or create a Seed
+     * const seed = await prisma.seed.upsert({
+     *   create: {
+     *     // ... data to create a Seed
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Seed we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeedUpsertArgs>(args: SelectSubset<T, SeedUpsertArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Seeds.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedCountArgs} args - Arguments to filter Seeds to count.
+     * @example
+     * // Count the number of Seeds
+     * const count = await prisma.seed.count({
+     *   where: {
+     *     // ... the filter for the Seeds we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeedCountArgs>(
+      args?: Subset<T, SeedCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeedCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Seed.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeedAggregateArgs>(args: Subset<T, SeedAggregateArgs>): Prisma.PrismaPromise<GetSeedAggregateType<T>>
+
+    /**
+     * Group by Seed.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeedGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeedGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeedGroupByArgs['orderBy'] }
+        : { orderBy?: SeedGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeedGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeedGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Seed model
+   */
+  readonly fields: SeedFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Seed.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Seed model
+   */
+  interface SeedFieldRefs {
+    readonly id: FieldRef<"Seed", 'Int'>
+    readonly key: FieldRef<"Seed", 'String'>
+    readonly name: FieldRef<"Seed", 'String'>
+    readonly texture: FieldRef<"Seed", 'String'>
+    readonly growTime: FieldRef<"Seed", 'Int'>
+    readonly xp: FieldRef<"Seed", 'Int'>
+    readonly buyPrice: FieldRef<"Seed", 'Int'>
+    readonly sellPrice: FieldRef<"Seed", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Seed findUnique
+   */
+  export type SeedFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Filter, which Seed to fetch.
+     */
+    where: SeedWhereUniqueInput
+  }
+
+  /**
+   * Seed findUniqueOrThrow
+   */
+  export type SeedFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Filter, which Seed to fetch.
+     */
+    where: SeedWhereUniqueInput
+  }
+
+  /**
+   * Seed findFirst
+   */
+  export type SeedFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Filter, which Seed to fetch.
+     */
+    where?: SeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seeds to fetch.
+     */
+    orderBy?: SeedOrderByWithRelationInput | SeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Seeds.
+     */
+    cursor?: SeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Seeds.
+     */
+    distinct?: SeedScalarFieldEnum | SeedScalarFieldEnum[]
+  }
+
+  /**
+   * Seed findFirstOrThrow
+   */
+  export type SeedFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Filter, which Seed to fetch.
+     */
+    where?: SeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seeds to fetch.
+     */
+    orderBy?: SeedOrderByWithRelationInput | SeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Seeds.
+     */
+    cursor?: SeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seeds.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Seeds.
+     */
+    distinct?: SeedScalarFieldEnum | SeedScalarFieldEnum[]
+  }
+
+  /**
+   * Seed findMany
+   */
+  export type SeedFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Filter, which Seeds to fetch.
+     */
+    where?: SeedWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seeds to fetch.
+     */
+    orderBy?: SeedOrderByWithRelationInput | SeedOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Seeds.
+     */
+    cursor?: SeedWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seeds from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seeds.
+     */
+    skip?: number
+    distinct?: SeedScalarFieldEnum | SeedScalarFieldEnum[]
+  }
+
+  /**
+   * Seed create
+   */
+  export type SeedCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * The data needed to create a Seed.
+     */
+    data: XOR<SeedCreateInput, SeedUncheckedCreateInput>
+  }
+
+  /**
+   * Seed createMany
+   */
+  export type SeedCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Seeds.
+     */
+    data: SeedCreateManyInput | SeedCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Seed createManyAndReturn
+   */
+  export type SeedCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * The data used to create many Seeds.
+     */
+    data: SeedCreateManyInput | SeedCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Seed update
+   */
+  export type SeedUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * The data needed to update a Seed.
+     */
+    data: XOR<SeedUpdateInput, SeedUncheckedUpdateInput>
+    /**
+     * Choose, which Seed to update.
+     */
+    where: SeedWhereUniqueInput
+  }
+
+  /**
+   * Seed updateMany
+   */
+  export type SeedUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Seeds.
+     */
+    data: XOR<SeedUpdateManyMutationInput, SeedUncheckedUpdateManyInput>
+    /**
+     * Filter which Seeds to update
+     */
+    where?: SeedWhereInput
+    /**
+     * Limit how many Seeds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Seed updateManyAndReturn
+   */
+  export type SeedUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * The data used to update Seeds.
+     */
+    data: XOR<SeedUpdateManyMutationInput, SeedUncheckedUpdateManyInput>
+    /**
+     * Filter which Seeds to update
+     */
+    where?: SeedWhereInput
+    /**
+     * Limit how many Seeds to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Seed upsert
+   */
+  export type SeedUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * The filter to search for the Seed to update in case it exists.
+     */
+    where: SeedWhereUniqueInput
+    /**
+     * In case the Seed found by the `where` argument doesn't exist, create a new Seed with this data.
+     */
+    create: XOR<SeedCreateInput, SeedUncheckedCreateInput>
+    /**
+     * In case the Seed was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeedUpdateInput, SeedUncheckedUpdateInput>
+  }
+
+  /**
+   * Seed delete
+   */
+  export type SeedDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Filter which Seed to delete.
+     */
+    where: SeedWhereUniqueInput
+  }
+
+  /**
+   * Seed deleteMany
+   */
+  export type SeedDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Seeds to delete
+     */
+    where?: SeedWhereInput
+    /**
+     * Limit how many Seeds to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Seed without action
+   */
+  export type SeedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4355,6 +5530,20 @@ export namespace Prisma {
   };
 
   export type LevelRequirementScalarFieldEnum = (typeof LevelRequirementScalarFieldEnum)[keyof typeof LevelRequirementScalarFieldEnum]
+
+
+  export const SeedScalarFieldEnum: {
+    id: 'id',
+    key: 'key',
+    name: 'name',
+    texture: 'texture',
+    growTime: 'growTime',
+    xp: 'xp',
+    buyPrice: 'buyPrice',
+    sellPrice: 'sellPrice'
+  };
+
+  export type SeedScalarFieldEnum = (typeof SeedScalarFieldEnum)[keyof typeof SeedScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4627,6 +5816,75 @@ export namespace Prisma {
     xpRequired?: IntWithAggregatesFilter<"LevelRequirement"> | number
   }
 
+  export type SeedWhereInput = {
+    AND?: SeedWhereInput | SeedWhereInput[]
+    OR?: SeedWhereInput[]
+    NOT?: SeedWhereInput | SeedWhereInput[]
+    id?: IntFilter<"Seed"> | number
+    key?: StringFilter<"Seed"> | string
+    name?: StringFilter<"Seed"> | string
+    texture?: StringFilter<"Seed"> | string
+    growTime?: IntFilter<"Seed"> | number
+    xp?: IntFilter<"Seed"> | number
+    buyPrice?: IntFilter<"Seed"> | number
+    sellPrice?: IntFilter<"Seed"> | number
+  }
+
+  export type SeedOrderByWithRelationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    texture?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
+  }
+
+  export type SeedWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    key?: string
+    AND?: SeedWhereInput | SeedWhereInput[]
+    OR?: SeedWhereInput[]
+    NOT?: SeedWhereInput | SeedWhereInput[]
+    name?: StringFilter<"Seed"> | string
+    texture?: StringFilter<"Seed"> | string
+    growTime?: IntFilter<"Seed"> | number
+    xp?: IntFilter<"Seed"> | number
+    buyPrice?: IntFilter<"Seed"> | number
+    sellPrice?: IntFilter<"Seed"> | number
+  }, "id" | "key">
+
+  export type SeedOrderByWithAggregationInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    texture?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
+    _count?: SeedCountOrderByAggregateInput
+    _avg?: SeedAvgOrderByAggregateInput
+    _max?: SeedMaxOrderByAggregateInput
+    _min?: SeedMinOrderByAggregateInput
+    _sum?: SeedSumOrderByAggregateInput
+  }
+
+  export type SeedScalarWhereWithAggregatesInput = {
+    AND?: SeedScalarWhereWithAggregatesInput | SeedScalarWhereWithAggregatesInput[]
+    OR?: SeedScalarWhereWithAggregatesInput[]
+    NOT?: SeedScalarWhereWithAggregatesInput | SeedScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Seed"> | number
+    key?: StringWithAggregatesFilter<"Seed"> | string
+    name?: StringWithAggregatesFilter<"Seed"> | string
+    texture?: StringWithAggregatesFilter<"Seed"> | string
+    growTime?: IntWithAggregatesFilter<"Seed"> | number
+    xp?: IntWithAggregatesFilter<"Seed"> | number
+    buyPrice?: IntWithAggregatesFilter<"Seed"> | number
+    sellPrice?: IntWithAggregatesFilter<"Seed"> | number
+  }
+
   export type UserCreateInput = {
     username: string
     password: string
@@ -4787,6 +6045,80 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     level?: IntFieldUpdateOperationsInput | number
     xpRequired?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeedCreateInput = {
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+  }
+
+  export type SeedUncheckedCreateInput = {
+    id?: number
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+  }
+
+  export type SeedUpdateInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeedUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeedCreateManyInput = {
+    id?: number
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+  }
+
+  export type SeedUpdateManyMutationInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeedUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5012,6 +6344,55 @@ export namespace Prisma {
     id?: SortOrder
     level?: SortOrder
     xpRequired?: SortOrder
+  }
+
+  export type SeedCountOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    texture?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
+  }
+
+  export type SeedAvgOrderByAggregateInput = {
+    id?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
+  }
+
+  export type SeedMaxOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    texture?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
+  }
+
+  export type SeedMinOrderByAggregateInput = {
+    id?: SortOrder
+    key?: SortOrder
+    name?: SortOrder
+    texture?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
+  }
+
+  export type SeedSumOrderByAggregateInput = {
+    id?: SortOrder
+    growTime?: SortOrder
+    xp?: SortOrder
+    buyPrice?: SortOrder
+    sellPrice?: SortOrder
   }
 
   export type CharacterCreateNestedOneWithoutUserInput = {

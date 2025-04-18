@@ -9,27 +9,114 @@ export const one = async (req: any, res: any) => {
         return res.status(404).json({message: 'Пользователь не найден'})
     }
 
-    return res.json(character)
+    const currentLevelReq = await prisma.levelRequirement.findUnique({
+        where: {level: character.level - 1}
+    })
+
+    const nextLevelReq = await prisma.levelRequirement.findUnique({
+        where: {level: character.level}
+    })
+
+    const minXP = currentLevelReq?.xpRequired || 0
+    const maxXP = nextLevelReq?.xpRequired || (minXP + 100) // запасной вариант
+
+    return res.json({...character, minXP: minXP, maxXP: maxXP})
+}
+
+export const update = async (req: any, res: any) => {
+    const character = await prisma.character.update({
+        where: {userId: req.userId},
+        data: req.body
+    })
+
+    return res
 }
 
 export const addXP = async (req: any, res: any) => {
     const userId = req.userId
-    const { experience } = req.body
+    const {experience} = req.body
 
     if (typeof experience !== 'number') {
-        return res.status(400).json({ error: 'Invalid XP amount' })
+        return res.status(400).json({error: 'Invalid XP amount'})
     }
 
     try {
-        await prisma.character.update({
-            where: { userId },
-            data: {
-                experience: { increment: experience }
+        let minXP = 0
+        let maxXP = 100
+
+        await prisma.$transaction(async (tx) => {
+            let character = await tx.character.findUnique({
+                where: {userId},
+            })
+
+            if (!character) {
+                throw new Error('Character not found')
             }
+
+            const updatedXP = character.experience + experience
+            const nextLevel = character.level
+
+            // Сначала обновляем XP
+            await tx.character.update({
+                where: {userId},
+                data: {
+                    experience: updatedXP,
+                },
+            })
+
+            // Получаем требуемый XP для следующего уровня
+            const requirement = await tx.levelRequirement.findUnique({
+                where: {level: nextLevel},
+            })
+
+            if (requirement && updatedXP >= requirement.xpRequired) {
+                // Повышаем уровень
+                character = await tx.character.update({
+                    where: {userId},
+                    data: {
+                        level: {increment: 1},
+                    },
+                })
+            }
+
+            const currentLevelReq = await prisma.levelRequirement.findUnique({
+                where: {level: character.level - 1}
+            })
+
+            const nextLevelReq = await prisma.levelRequirement.findUnique({
+                where: {level: character.level}
+            })
+
+            minXP = currentLevelReq?.xpRequired || 0
+            maxXP = nextLevelReq?.xpRequired || (minXP + 100) // запасной вариант
         })
 
-        res.json({ message: 'XP updated' })
+        res.json({minXP: minXP, maxXP: maxXP})
     } catch (err) {
-        res.status(500).json({ error: 'Failed to update XP' })
+        res.status(500).json({error: 'Failed to update XP and level'})
+    }
+}
+
+export const changeBalance = async (req: any, res: any) => {
+    const {amount} = req.body
+    const userId = req.userId
+
+    if (typeof amount !== 'number') {
+        return res.status(400).json({error: 'Invalid amount'})
+    }
+
+    try {
+        const updated = await prisma.character.update({
+            where: {userId},
+            data: {
+                coins: {
+                    increment: amount, // можно положительное или отрицательное
+                }
+            }
+        })
+        res.json({coins: updated.coins})
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({error: 'Failed to update coins'})
     }
 }

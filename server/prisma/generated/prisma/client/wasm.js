@@ -141,6 +141,17 @@ exports.Prisma.LevelRequirementScalarFieldEnum = {
   xpRequired: 'xpRequired'
 };
 
+exports.Prisma.SeedScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  name: 'name',
+  texture: 'texture',
+  growTime: 'growTime',
+  xp: 'xp',
+  buyPrice: 'buyPrice',
+  sellPrice: 'sellPrice'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -163,7 +174,8 @@ exports.Gender = exports.$Enums.Gender = {
 exports.Prisma.ModelName = {
   User: 'User',
   Character: 'Character',
-  LevelRequirement: 'LevelRequirement'
+  LevelRequirement: 'LevelRequirement',
+  Seed: 'Seed'
 };
 
 /**

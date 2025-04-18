@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import {useCharacterStore, useSeedsStore} from "../stores/characterStore.ts";
 
 export default class LoadingScene extends Phaser.Scene {
     constructor() {
@@ -6,7 +7,7 @@ export default class LoadingScene extends Phaser.Scene {
     }
 
     preload() {
-        const { width, height } = this.scale
+        const {width, height} = this.scale
 
         this.load.image('logo', '/assets/logo.png') // логотип
 
@@ -26,8 +27,13 @@ export default class LoadingScene extends Phaser.Scene {
         this.load.image('cucumber', 'assets/crops/cucumber.png')
     }
 
-    create() {
-        const { width, height } = this.scale
+    async create() {
+        // const seedStore = useSeedsStore()
+        // await seedStore.fetchSeeds()
+      //  const characterStore = useCharacterStore()
+       // await characterStore.getCharacter()
+
+        const {width, height} = this.scale
 
         // Добавляем логотип в центр экрана
         const logo = this.add.image(width / 2, height / 2 - 50, 'logo').setOrigin(0.5)
@@ -38,4 +44,5 @@ export default class LoadingScene extends Phaser.Scene {
         this.scene.start('AuthScene')
 
     }
+
 }

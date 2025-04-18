@@ -42,6 +42,17 @@ model LevelRequirement {
   xpRequired Int
 }
 
+model Seed {
+  id        Int    @id @default(autoincrement())
+  key       String @unique
+  name      String
+  texture   String
+  growTime  Int // в миллисекундах
+  xp        Int
+  buyPrice  Int    @default(0) // стоимость посадки
+  sellPrice Int    @default(0) // прибыль при сборе
+}
+
 enum Gender {
   M
   F

@@ -7,8 +7,13 @@ type SeedOption = {
 }
 
 export class SeedSelector extends Phaser.GameObjects.Container {
+    private static activeSelector?: SeedSelector
+
     constructor(scene: Phaser.Scene, x: number, y: number, options: SeedOption[]) {
         super(scene, x, y)
+
+        SeedSelector.activeSelector?.destroy()
+        SeedSelector.activeSelector = this
         scene.add.existing(this)
 
         const background = scene.add.rectangle(0, 0, 150, options.length * 60 + 20, 0x000000, 0.7)
@@ -33,5 +38,17 @@ export class SeedSelector extends Phaser.GameObjects.Container {
 
             this.add([icon, label, hitArea])
         })
+    }
+
+    destroy(fromScene?: boolean): void {
+        // Удалить активный селектор, если это он
+        if (SeedSelector.activeSelector === this) {
+            SeedSelector.activeSelector = undefined
+        }
+        super.destroy(fromScene)
+    }
+
+    static closeActive() {
+        SeedSelector.activeSelector?.destroy()
     }
 }

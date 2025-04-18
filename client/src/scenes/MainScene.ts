@@ -1,8 +1,7 @@
 import Phaser from 'phaser'
-import characterService from "../api/characterService.ts";
 import {XPBar} from "../ui/XPBar.ts";
 import {Plot} from "../entities/Plot.ts";
-
+import {useCharacterStore} from "../stores/characterStore.ts";
 
 export default class MainScene extends Phaser.Scene {
     private xpBar!: XPBar
@@ -22,16 +21,32 @@ export default class MainScene extends Phaser.Scene {
         this.background = this.add.tileSprite(0, 0, width, height, 'background')
             .setOrigin(0, 0)
         try {
-            const character = await characterService.one()
+            const characterStore = useCharacterStore()
 
-            this.xpBar = new XPBar(this, 100 + (character.level - 1) * 50)
+            this.xpBar = new XPBar(this)
 
             this.xpBar.create()
-            this.xpBar.setXP(character.experience)
-            this.createPlotGrid(3, 3, 50, 50, 2)
+            this.xpBar.setXPRange(characterStore.character.minXP, characterStore.character.maxXP)
+            this.xpBar.setXP(characterStore.character.experience)
+            this.createPlotGrid(3, 3, 60, 60, 2)
 
-            this.add.text(10, 40, `Level: ${character.level}`, {fontSize: '14px', color: '#fff'}).setScrollFactor(0)
-            this.add.text(10, 60, `Coins: ${character.coins}`, {fontSize: '14px', color: '#fff'}).setScrollFactor(0)
+            const coinsText = this.add.text(10, 60, `Coins: ${characterStore.character.coins}`, {
+                fontSize: '14px',
+                color: '#fff'
+            }).setScrollFactor(0)
+
+            const levelText = this.add.text(10, 40, `Level: ${characterStore.character.level}`, {
+                fontSize: '14px',
+                color: '#fff'
+            }).setScrollFactor(0)
+
+            this.watchEffect = characterStore.$subscribe((mutation, state) => {
+                coinsText.setText(`Coins: ${state.character.coins}`)
+                levelText.setText(`Level: ${state.character.level}`)
+                this.xpBar.setXP(state.character.experience)
+                this.xpBar.setXPRange(state.character.minXP, state.character.maxXP)
+            })
+
         } catch (err) {
             console.error('Ошибка получения персонажа:', err)
         }
@@ -53,6 +68,12 @@ export default class MainScene extends Phaser.Scene {
 
                 this.plots.push(plot)
             }
+        }
+    }
+
+    shutdown() {
+        if (this.watchEffect) {
+            this.watchEffect() // вызов функции отписки
         }
     }
 
