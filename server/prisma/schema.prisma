@@ -34,6 +34,8 @@ model Character {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  plots Plot[]
 }
 
 model LevelRequirement {
@@ -51,6 +53,18 @@ model Seed {
   xp        Int
   buyPrice  Int    @default(0) // стоимость посадки
   sellPrice Int    @default(0) // прибыль при сборе
+  Plot      Plot[]
+}
+
+model Plot {
+  id          Int       @id @default(autoincrement())
+  characterId Int
+  seedId      Int? // null если грядка пустая
+  plantedAt   DateTime? // null если ничего не посажено
+  isReady     Boolean   @default(false)
+
+  character Character @relation(fields: [characterId], references: [id])
+  seed      Seed?     @relation(fields: [seedId], references: [id])
 }
 
 enum Gender {

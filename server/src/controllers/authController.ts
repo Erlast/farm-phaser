@@ -32,7 +32,10 @@ export const register = async (req: any, res: any) => {
                 userId: user.id,
                 level: 1,
                 experience: 0,
-                coins: 100
+                coins: 100,
+                plots: {
+                    create: Array(5).fill({}) // создаст 9 пустых грядок
+                }
             }
         })
     })

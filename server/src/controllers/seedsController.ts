@@ -5,6 +5,7 @@ export const seeds = async (req: any, res: any) => {
         const seeds = await prisma.seed.findMany()
         res.json(seeds)
     } catch (error) {
+        console.log(error)
         res.status(500).json({error: 'Failed to fetch seeds'})
     }
 }

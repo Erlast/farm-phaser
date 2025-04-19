@@ -3,6 +3,28 @@ import {SeedSelector} from "../ui/SeedSelector.ts";
 import {XPBar} from "../ui/XPBar.ts";
 import {useSeedsStore} from "../stores/seedsStore.ts";
 import {useCharacterStore} from "../stores/characterStore.ts";
+import {socket} from '../socket'
+import characterService from "../api/characterService.ts";
+
+interface seedData {
+    id: number
+    name: string
+    texture: string
+    buyPrice: number
+    sellPrice: number
+    growTime: number
+    xp: number
+    key: string
+}
+
+interface plotData {
+    characterId: number
+    id: number
+    seedId: number
+    isReady: boolean
+    plantedAt: string
+    seed: seedData
+}
 
 export class Plot {
     private scene: Phaser.Scene
@@ -10,16 +32,19 @@ export class Plot {
     private background: Phaser.GameObjects.Image
     private crop?: Phaser.GameObjects.Image
     private state: 'empty' | 'growing' | 'ready' = 'empty'
-    private seedType?: SeedType
+    private seedType?: number
     private growTimer?: Phaser.Time.TimerEvent
     private xpBar: XPBar
+    private plotData: plotData
 
-    constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, xpBar: XPBar) {
+    constructor(scene: Phaser.Scene, x: number, y: number, width: number, height: number, xpBar: XPBar, plotData: plotData) {
         this.scene = scene
         this.xpBar = xpBar
+        this.plotData = plotData
 
         this.background = scene.add.image(0, 0, 'plot').setDisplaySize(width, height)
-
+        if (plotData.seed)
+            this.plantSeed(plotData.seed.id)
         this.container = scene.add.container(x, y, [this.background])
         this.container.setSize(width, height)
         this.container.setInteractive({useHandCursor: true})
@@ -47,7 +72,7 @@ export class Plot {
         })))
     }
 
-    async plantSeed(type: SeedType) {
+    async plantSeed(type: number) {
         const seedStore = useSeedsStore()
         const characterStore = useCharacterStore()
 
@@ -60,23 +85,41 @@ export class Plot {
             return
         }
 
+        const plot = characterStore.character.plots.find(p => p.seedId === type)
+
+        this.plotData.seed = seed
+
         await characterStore.changeBalance(-seed.buyPrice)
 
         this.seedType = type
         this.state = 'growing'
 
-        this.crop = this.scene.add.image(0, 0, seed.texture).setAlpha(0.5).setDisplaySize(45, 45)
+        const plantedTexture = seed.texture + '_planted' // например: "carrot_planted"
+        this.crop = this.scene.add.image(0, 0, plantedTexture).setDisplaySize(50, 50)
         this.container.add(this.crop)
 
-        this.growTimer = this.scene.time.delayedCall(seed.growTime, () => {
+        if (this.plotData.seed && this.plotData.isReady) {
             this.setReady()
+            return
+        }
+
+        socket.emit('plant-seed', {
+            plotIndex: this.plotData.id,
+            seedId: seed.id,
+            userId: characterStore.character.id
         })
     }
 
     private setReady() {
         this.state = 'ready'
-        if (this.crop) {
-            this.crop.setAlpha(1)
+
+        if (this.crop && this.plotData.seed) {
+            const seedStore = useSeedsStore()
+            const seed = seedStore.getSeed(this.plotData.seed.id)
+
+            if (seed) {
+                this.crop.setTexture(seed.texture) // например: "carrot"
+            }
         }
     }
 
@@ -91,10 +134,11 @@ export class Plot {
         await this.xpBar.addXP(seed.xp)
 
         await characterStore.changeBalance(seed.sellPrice)
+        await characterService.harvest(this.plotData.id)
 
         this.growTimer?.destroy
         this.state = 'empty'
-        this.seedType = undefined
+        this.seedType = null
         this.crop?.destroy()
         this.crop = undefined
     }

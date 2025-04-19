@@ -24,6 +24,15 @@ const characterService = {
             }
         )
         return response.data
+    },
+    async harvest(plotIndex: number) {
+        const response = await httpCommunicator.post(
+            '/character/harvest',
+            {
+                plotIndex: plotIndex
+            }
+        )
+        return response.data
     }
 }
 

@@ -1,5 +1,6 @@
 import {defineStore} from 'pinia'
 import characterService from "../api/characterService.ts";
+import {useRouter} from "vue-router";
 
 export const useCharacterStore = defineStore('character', {
     state: () => ({
@@ -8,7 +9,8 @@ export const useCharacterStore = defineStore('character', {
             level: 1,
             experience: 0,
             minXP: 0,
-            maxXP: 100
+            maxXP: 100,
+            plots: []
         },
         timer: null
     }),
@@ -28,7 +30,9 @@ export const useCharacterStore = defineStore('character', {
             try {
                 this.character = await characterService.one()
             } catch (error: any) {
-                console.log(error)
+                if (error.status === 404) {
+                    window.location.href = '/auth'
+                }
             }
         },
         async startAutoUpdate(interval: number) {

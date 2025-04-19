@@ -152,6 +152,14 @@ exports.Prisma.SeedScalarFieldEnum = {
   sellPrice: 'sellPrice'
 };
 
+exports.Prisma.PlotScalarFieldEnum = {
+  id: 'id',
+  characterId: 'characterId',
+  seedId: 'seedId',
+  plantedAt: 'plantedAt',
+  isReady: 'isReady'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -175,7 +183,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Character: 'Character',
   LevelRequirement: 'LevelRequirement',
-  Seed: 'Seed'
+  Seed: 'Seed',
+  Plot: 'Plot'
 };
 
 /**

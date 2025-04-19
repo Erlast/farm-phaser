@@ -2,7 +2,17 @@ import {prisma} from "../prisma/client";
 
 export const one = async (req: any, res: any) => {
     const character = await prisma.character.findUnique({
-        where: {userId: req.userId}
+        where: {userId: req.userId},
+        include: {
+            plots: {
+                include: {
+                    seed: true
+                },
+                orderBy: {
+                    id: 'asc' // или 'desc' — если нужно по убыванию
+                }
+            }
+        }
     })
 
     if (!character) {
@@ -20,7 +30,7 @@ export const one = async (req: any, res: any) => {
     const minXP = currentLevelReq?.xpRequired || 0
     const maxXP = nextLevelReq?.xpRequired || (minXP + 100) // запасной вариант
 
-    return res.json({...character, minXP: minXP, maxXP: maxXP})
+    return res.json({...character, minXP: minXP, maxXP: maxXP, plots: character.plots})
 }
 
 export const update = async (req: any, res: any) => {
@@ -118,5 +128,40 @@ export const changeBalance = async (req: any, res: any) => {
     } catch (err) {
         console.error(err)
         res.status(500).json({error: 'Failed to update coins'})
+    }
+}
+
+export const harvest=async (req: any, res: any) => {
+    const {plotIndex} = req.body;
+
+    try {
+        const character = await prisma.character.findUnique({
+            where: {userId: req.userId},
+        });
+
+        if (!character) return res.status(404).json({message: 'Character not found'});
+
+        const plot = await prisma.plot.findFirst({
+            where: {
+                characterId: character.id,
+                id: plotIndex
+            }
+        });
+
+        if (!plot) return res.status(404).json({message: 'Plot not found'});
+
+        await prisma.plot.update({
+            where: {id: plot.id},
+            data: {
+                seedId: null,
+                plantedAt: null,
+                isReady: false
+            },
+        });
+
+        res.json({message: 'Plot harvested successfully'});
+    } catch (err) {
+        console.error('Ошибка при сборе урожая:', err);
+        res.status(500).json({message: 'Ошибка при сборе урожая'});
     }
 }

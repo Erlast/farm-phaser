@@ -7,7 +7,7 @@ const characterStore = useCharacterStore()
 const seedsStore = useSeedsStore()
 
 onMounted(async () => {
-  await characterStore.startAutoUpdate(5000)
+ await characterStore.startAutoUpdate(5000)
   await seedsStore.startAutoUpdate(50000)
 })
 

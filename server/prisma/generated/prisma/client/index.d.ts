@@ -33,6 +33,11 @@ export type LevelRequirement = $Result.DefaultSelection<Prisma.$LevelRequirement
  * 
  */
 export type Seed = $Result.DefaultSelection<Prisma.$SeedPayload>
+/**
+ * Model Plot
+ * 
+ */
+export type Plot = $Result.DefaultSelection<Prisma.$PlotPayload>
 
 /**
  * Enums
@@ -215,6 +220,16 @@ export class PrismaClient<
     * ```
     */
   get seed(): Prisma.SeedDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.plot`: Exposes CRUD operations for the **Plot** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Plots
+    * const plots = await prisma.plot.findMany()
+    * ```
+    */
+  get plot(): Prisma.PlotDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -658,7 +673,8 @@ export namespace Prisma {
     User: 'User',
     Character: 'Character',
     LevelRequirement: 'LevelRequirement',
-    Seed: 'Seed'
+    Seed: 'Seed',
+    Plot: 'Plot'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -677,7 +693,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "character" | "levelRequirement" | "seed"
+      modelProps: "user" | "character" | "levelRequirement" | "seed" | "plot"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -977,6 +993,80 @@ export namespace Prisma {
           }
         }
       }
+      Plot: {
+        payload: Prisma.$PlotPayload<ExtArgs>
+        fields: Prisma.PlotFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PlotFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PlotFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>
+          }
+          findFirst: {
+            args: Prisma.PlotFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PlotFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>
+          }
+          findMany: {
+            args: Prisma.PlotFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>[]
+          }
+          create: {
+            args: Prisma.PlotCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>
+          }
+          createMany: {
+            args: Prisma.PlotCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PlotCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>[]
+          }
+          delete: {
+            args: Prisma.PlotDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>
+          }
+          update: {
+            args: Prisma.PlotUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>
+          }
+          deleteMany: {
+            args: Prisma.PlotDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PlotUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PlotUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>[]
+          }
+          upsert: {
+            args: Prisma.PlotUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PlotPayload>
+          }
+          aggregate: {
+            args: Prisma.PlotAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePlot>
+          }
+          groupBy: {
+            args: Prisma.PlotGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PlotGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PlotCountArgs<ExtArgs>
+            result: $Utils.Optional<PlotCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1065,6 +1155,7 @@ export namespace Prisma {
     character?: CharacterOmit
     levelRequirement?: LevelRequirementOmit
     seed?: SeedOmit
+    plot?: PlotOmit
   }
 
   /* Types for Logging */
@@ -1153,6 +1244,67 @@ export namespace Prisma {
    * Count Types
    */
 
+
+  /**
+   * Count Type CharacterCountOutputType
+   */
+
+  export type CharacterCountOutputType = {
+    plots: number
+  }
+
+  export type CharacterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    plots?: boolean | CharacterCountOutputTypeCountPlotsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CharacterCountOutputType without action
+   */
+  export type CharacterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CharacterCountOutputType
+     */
+    select?: CharacterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CharacterCountOutputType without action
+   */
+  export type CharacterCountOutputTypeCountPlotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlotWhereInput
+  }
+
+
+  /**
+   * Count Type SeedCountOutputType
+   */
+
+  export type SeedCountOutputType = {
+    Plot: number
+  }
+
+  export type SeedCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Plot?: boolean | SeedCountOutputTypeCountPlotArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SeedCountOutputType without action
+   */
+  export type SeedCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeedCountOutputType
+     */
+    select?: SeedCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SeedCountOutputType without action
+   */
+  export type SeedCountOutputTypeCountPlotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlotWhereInput
+  }
 
 
   /**
@@ -2482,6 +2634,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
+    plots?: boolean | Character$plotsArgs<ExtArgs>
+    _count?: boolean | CharacterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["character"]>
 
   export type CharacterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2522,6 +2676,8 @@ export namespace Prisma {
   export type CharacterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "gender" | "level" | "experience" | "coins" | "createdAt" | "updatedAt", ExtArgs["result"]["character"]>
   export type CharacterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
+    plots?: boolean | Character$plotsArgs<ExtArgs>
+    _count?: boolean | CharacterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CharacterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -2534,6 +2690,7 @@ export namespace Prisma {
     name: "Character"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
+      plots: Prisma.$PlotPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -2939,6 +3096,7 @@ export namespace Prisma {
   export interface Prisma__CharacterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    plots<T extends Character$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Character$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3369,6 +3527,30 @@ export namespace Prisma {
      * Limit how many Characters to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Character.plots
+   */
+  export type Character$plotsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    where?: PlotWhereInput
+    orderBy?: PlotOrderByWithRelationInput | PlotOrderByWithRelationInput[]
+    cursor?: PlotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
   }
 
   /**
@@ -4639,6 +4821,8 @@ export namespace Prisma {
     xp?: boolean
     buyPrice?: boolean
     sellPrice?: boolean
+    Plot?: boolean | Seed$PlotArgs<ExtArgs>
+    _count?: boolean | SeedCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["seed"]>
 
   export type SeedSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4675,10 +4859,18 @@ export namespace Prisma {
   }
 
   export type SeedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "texture" | "growTime" | "xp" | "buyPrice" | "sellPrice", ExtArgs["result"]["seed"]>
+  export type SeedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    Plot?: boolean | Seed$PlotArgs<ExtArgs>
+    _count?: boolean | SeedCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SeedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SeedIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $SeedPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Seed"
-    objects: {}
+    objects: {
+      Plot: Prisma.$PlotPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       key: string
@@ -5082,6 +5274,7 @@ export namespace Prisma {
    */
   export interface Prisma__SeedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    Plot<T extends Seed$PlotArgs<ExtArgs> = {}>(args?: Subset<T, Seed$PlotArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5136,6 +5329,10 @@ export namespace Prisma {
      */
     omit?: SeedOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    /**
      * Filter, which Seed to fetch.
      */
     where: SeedWhereUniqueInput
@@ -5154,6 +5351,10 @@ export namespace Prisma {
      */
     omit?: SeedOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    /**
      * Filter, which Seed to fetch.
      */
     where: SeedWhereUniqueInput
@@ -5171,6 +5372,10 @@ export namespace Prisma {
      * Omit specific fields from the Seed
      */
     omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
     /**
      * Filter, which Seed to fetch.
      */
@@ -5220,6 +5425,10 @@ export namespace Prisma {
      */
     omit?: SeedOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    /**
      * Filter, which Seed to fetch.
      */
     where?: SeedWhereInput
@@ -5268,6 +5477,10 @@ export namespace Prisma {
      */
     omit?: SeedOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    /**
      * Filter, which Seeds to fetch.
      */
     where?: SeedWhereInput
@@ -5310,6 +5523,10 @@ export namespace Prisma {
      * Omit specific fields from the Seed
      */
     omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
     /**
      * The data needed to create a Seed.
      */
@@ -5358,6 +5575,10 @@ export namespace Prisma {
      * Omit specific fields from the Seed
      */
     omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
     /**
      * The data needed to update a Seed.
      */
@@ -5425,6 +5646,10 @@ export namespace Prisma {
      */
     omit?: SeedOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    /**
      * The filter to search for the Seed to update in case it exists.
      */
     where: SeedWhereUniqueInput
@@ -5451,6 +5676,10 @@ export namespace Prisma {
      */
     omit?: SeedOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    /**
      * Filter which Seed to delete.
      */
     where: SeedWhereUniqueInput
@@ -5471,6 +5700,30 @@ export namespace Prisma {
   }
 
   /**
+   * Seed.Plot
+   */
+  export type Seed$PlotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    where?: PlotWhereInput
+    orderBy?: PlotOrderByWithRelationInput | PlotOrderByWithRelationInput[]
+    cursor?: PlotWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
    * Seed without action
    */
   export type SeedDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5482,6 +5735,1137 @@ export namespace Prisma {
      * Omit specific fields from the Seed
      */
     omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Plot
+   */
+
+  export type AggregatePlot = {
+    _count: PlotCountAggregateOutputType | null
+    _avg: PlotAvgAggregateOutputType | null
+    _sum: PlotSumAggregateOutputType | null
+    _min: PlotMinAggregateOutputType | null
+    _max: PlotMaxAggregateOutputType | null
+  }
+
+  export type PlotAvgAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    seedId: number | null
+  }
+
+  export type PlotSumAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    seedId: number | null
+  }
+
+  export type PlotMinAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    seedId: number | null
+    plantedAt: Date | null
+    isReady: boolean | null
+  }
+
+  export type PlotMaxAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    seedId: number | null
+    plantedAt: Date | null
+    isReady: boolean | null
+  }
+
+  export type PlotCountAggregateOutputType = {
+    id: number
+    characterId: number
+    seedId: number
+    plantedAt: number
+    isReady: number
+    _all: number
+  }
+
+
+  export type PlotAvgAggregateInputType = {
+    id?: true
+    characterId?: true
+    seedId?: true
+  }
+
+  export type PlotSumAggregateInputType = {
+    id?: true
+    characterId?: true
+    seedId?: true
+  }
+
+  export type PlotMinAggregateInputType = {
+    id?: true
+    characterId?: true
+    seedId?: true
+    plantedAt?: true
+    isReady?: true
+  }
+
+  export type PlotMaxAggregateInputType = {
+    id?: true
+    characterId?: true
+    seedId?: true
+    plantedAt?: true
+    isReady?: true
+  }
+
+  export type PlotCountAggregateInputType = {
+    id?: true
+    characterId?: true
+    seedId?: true
+    plantedAt?: true
+    isReady?: true
+    _all?: true
+  }
+
+  export type PlotAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Plot to aggregate.
+     */
+    where?: PlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Plots to fetch.
+     */
+    orderBy?: PlotOrderByWithRelationInput | PlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Plots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Plots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Plots
+    **/
+    _count?: true | PlotCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PlotAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PlotSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PlotMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PlotMaxAggregateInputType
+  }
+
+  export type GetPlotAggregateType<T extends PlotAggregateArgs> = {
+        [P in keyof T & keyof AggregatePlot]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePlot[P]>
+      : GetScalarType<T[P], AggregatePlot[P]>
+  }
+
+
+
+
+  export type PlotGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PlotWhereInput
+    orderBy?: PlotOrderByWithAggregationInput | PlotOrderByWithAggregationInput[]
+    by: PlotScalarFieldEnum[] | PlotScalarFieldEnum
+    having?: PlotScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PlotCountAggregateInputType | true
+    _avg?: PlotAvgAggregateInputType
+    _sum?: PlotSumAggregateInputType
+    _min?: PlotMinAggregateInputType
+    _max?: PlotMaxAggregateInputType
+  }
+
+  export type PlotGroupByOutputType = {
+    id: number
+    characterId: number
+    seedId: number | null
+    plantedAt: Date | null
+    isReady: boolean
+    _count: PlotCountAggregateOutputType | null
+    _avg: PlotAvgAggregateOutputType | null
+    _sum: PlotSumAggregateOutputType | null
+    _min: PlotMinAggregateOutputType | null
+    _max: PlotMaxAggregateOutputType | null
+  }
+
+  type GetPlotGroupByPayload<T extends PlotGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PlotGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PlotGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PlotGroupByOutputType[P]>
+            : GetScalarType<T[P], PlotGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PlotSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    characterId?: boolean
+    seedId?: boolean
+    plantedAt?: boolean
+    isReady?: boolean
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    seed?: boolean | Plot$seedArgs<ExtArgs>
+  }, ExtArgs["result"]["plot"]>
+
+  export type PlotSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    characterId?: boolean
+    seedId?: boolean
+    plantedAt?: boolean
+    isReady?: boolean
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    seed?: boolean | Plot$seedArgs<ExtArgs>
+  }, ExtArgs["result"]["plot"]>
+
+  export type PlotSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    characterId?: boolean
+    seedId?: boolean
+    plantedAt?: boolean
+    isReady?: boolean
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    seed?: boolean | Plot$seedArgs<ExtArgs>
+  }, ExtArgs["result"]["plot"]>
+
+  export type PlotSelectScalar = {
+    id?: boolean
+    characterId?: boolean
+    seedId?: boolean
+    plantedAt?: boolean
+    isReady?: boolean
+  }
+
+  export type PlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "characterId" | "seedId" | "plantedAt" | "isReady", ExtArgs["result"]["plot"]>
+  export type PlotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    seed?: boolean | Plot$seedArgs<ExtArgs>
+  }
+  export type PlotIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    seed?: boolean | Plot$seedArgs<ExtArgs>
+  }
+  export type PlotIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    seed?: boolean | Plot$seedArgs<ExtArgs>
+  }
+
+  export type $PlotPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Plot"
+    objects: {
+      character: Prisma.$CharacterPayload<ExtArgs>
+      seed: Prisma.$SeedPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      characterId: number
+      seedId: number | null
+      plantedAt: Date | null
+      isReady: boolean
+    }, ExtArgs["result"]["plot"]>
+    composites: {}
+  }
+
+  type PlotGetPayload<S extends boolean | null | undefined | PlotDefaultArgs> = $Result.GetResult<Prisma.$PlotPayload, S>
+
+  type PlotCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PlotFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PlotCountAggregateInputType | true
+    }
+
+  export interface PlotDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Plot'], meta: { name: 'Plot' } }
+    /**
+     * Find zero or one Plot that matches the filter.
+     * @param {PlotFindUniqueArgs} args - Arguments to find a Plot
+     * @example
+     * // Get one Plot
+     * const plot = await prisma.plot.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PlotFindUniqueArgs>(args: SelectSubset<T, PlotFindUniqueArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Plot that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PlotFindUniqueOrThrowArgs} args - Arguments to find a Plot
+     * @example
+     * // Get one Plot
+     * const plot = await prisma.plot.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PlotFindUniqueOrThrowArgs>(args: SelectSubset<T, PlotFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Plot that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotFindFirstArgs} args - Arguments to find a Plot
+     * @example
+     * // Get one Plot
+     * const plot = await prisma.plot.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PlotFindFirstArgs>(args?: SelectSubset<T, PlotFindFirstArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Plot that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotFindFirstOrThrowArgs} args - Arguments to find a Plot
+     * @example
+     * // Get one Plot
+     * const plot = await prisma.plot.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PlotFindFirstOrThrowArgs>(args?: SelectSubset<T, PlotFindFirstOrThrowArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Plots that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Plots
+     * const plots = await prisma.plot.findMany()
+     * 
+     * // Get first 10 Plots
+     * const plots = await prisma.plot.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const plotWithIdOnly = await prisma.plot.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PlotFindManyArgs>(args?: SelectSubset<T, PlotFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Plot.
+     * @param {PlotCreateArgs} args - Arguments to create a Plot.
+     * @example
+     * // Create one Plot
+     * const Plot = await prisma.plot.create({
+     *   data: {
+     *     // ... data to create a Plot
+     *   }
+     * })
+     * 
+     */
+    create<T extends PlotCreateArgs>(args: SelectSubset<T, PlotCreateArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Plots.
+     * @param {PlotCreateManyArgs} args - Arguments to create many Plots.
+     * @example
+     * // Create many Plots
+     * const plot = await prisma.plot.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PlotCreateManyArgs>(args?: SelectSubset<T, PlotCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Plots and returns the data saved in the database.
+     * @param {PlotCreateManyAndReturnArgs} args - Arguments to create many Plots.
+     * @example
+     * // Create many Plots
+     * const plot = await prisma.plot.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Plots and only return the `id`
+     * const plotWithIdOnly = await prisma.plot.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PlotCreateManyAndReturnArgs>(args?: SelectSubset<T, PlotCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Plot.
+     * @param {PlotDeleteArgs} args - Arguments to delete one Plot.
+     * @example
+     * // Delete one Plot
+     * const Plot = await prisma.plot.delete({
+     *   where: {
+     *     // ... filter to delete one Plot
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PlotDeleteArgs>(args: SelectSubset<T, PlotDeleteArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Plot.
+     * @param {PlotUpdateArgs} args - Arguments to update one Plot.
+     * @example
+     * // Update one Plot
+     * const plot = await prisma.plot.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PlotUpdateArgs>(args: SelectSubset<T, PlotUpdateArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Plots.
+     * @param {PlotDeleteManyArgs} args - Arguments to filter Plots to delete.
+     * @example
+     * // Delete a few Plots
+     * const { count } = await prisma.plot.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PlotDeleteManyArgs>(args?: SelectSubset<T, PlotDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Plots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Plots
+     * const plot = await prisma.plot.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PlotUpdateManyArgs>(args: SelectSubset<T, PlotUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Plots and returns the data updated in the database.
+     * @param {PlotUpdateManyAndReturnArgs} args - Arguments to update many Plots.
+     * @example
+     * // Update many Plots
+     * const plot = await prisma.plot.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Plots and only return the `id`
+     * const plotWithIdOnly = await prisma.plot.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PlotUpdateManyAndReturnArgs>(args: SelectSubset<T, PlotUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Plot.
+     * @param {PlotUpsertArgs} args - Arguments to update or create a Plot.
+     * @example
+     * // Update or create a Plot
+     * const plot = await prisma.plot.upsert({
+     *   create: {
+     *     // ... data to create a Plot
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Plot we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PlotUpsertArgs>(args: SelectSubset<T, PlotUpsertArgs<ExtArgs>>): Prisma__PlotClient<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Plots.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotCountArgs} args - Arguments to filter Plots to count.
+     * @example
+     * // Count the number of Plots
+     * const count = await prisma.plot.count({
+     *   where: {
+     *     // ... the filter for the Plots we want to count
+     *   }
+     * })
+    **/
+    count<T extends PlotCountArgs>(
+      args?: Subset<T, PlotCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PlotCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Plot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PlotAggregateArgs>(args: Subset<T, PlotAggregateArgs>): Prisma.PrismaPromise<GetPlotAggregateType<T>>
+
+    /**
+     * Group by Plot.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PlotGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PlotGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PlotGroupByArgs['orderBy'] }
+        : { orderBy?: PlotGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PlotGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPlotGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Plot model
+   */
+  readonly fields: PlotFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Plot.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PlotClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    character<T extends CharacterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CharacterDefaultArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    seed<T extends Plot$seedArgs<ExtArgs> = {}>(args?: Subset<T, Plot$seedArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Plot model
+   */
+  interface PlotFieldRefs {
+    readonly id: FieldRef<"Plot", 'Int'>
+    readonly characterId: FieldRef<"Plot", 'Int'>
+    readonly seedId: FieldRef<"Plot", 'Int'>
+    readonly plantedAt: FieldRef<"Plot", 'DateTime'>
+    readonly isReady: FieldRef<"Plot", 'Boolean'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Plot findUnique
+   */
+  export type PlotFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * Filter, which Plot to fetch.
+     */
+    where: PlotWhereUniqueInput
+  }
+
+  /**
+   * Plot findUniqueOrThrow
+   */
+  export type PlotFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * Filter, which Plot to fetch.
+     */
+    where: PlotWhereUniqueInput
+  }
+
+  /**
+   * Plot findFirst
+   */
+  export type PlotFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * Filter, which Plot to fetch.
+     */
+    where?: PlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Plots to fetch.
+     */
+    orderBy?: PlotOrderByWithRelationInput | PlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Plots.
+     */
+    cursor?: PlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Plots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Plots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Plots.
+     */
+    distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
+   * Plot findFirstOrThrow
+   */
+  export type PlotFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * Filter, which Plot to fetch.
+     */
+    where?: PlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Plots to fetch.
+     */
+    orderBy?: PlotOrderByWithRelationInput | PlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Plots.
+     */
+    cursor?: PlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Plots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Plots.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Plots.
+     */
+    distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
+   * Plot findMany
+   */
+  export type PlotFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * Filter, which Plots to fetch.
+     */
+    where?: PlotWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Plots to fetch.
+     */
+    orderBy?: PlotOrderByWithRelationInput | PlotOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Plots.
+     */
+    cursor?: PlotWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Plots from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Plots.
+     */
+    skip?: number
+    distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
+   * Plot create
+   */
+  export type PlotCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Plot.
+     */
+    data: XOR<PlotCreateInput, PlotUncheckedCreateInput>
+  }
+
+  /**
+   * Plot createMany
+   */
+  export type PlotCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Plots.
+     */
+    data: PlotCreateManyInput | PlotCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Plot createManyAndReturn
+   */
+  export type PlotCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * The data used to create many Plots.
+     */
+    data: PlotCreateManyInput | PlotCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Plot update
+   */
+  export type PlotUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Plot.
+     */
+    data: XOR<PlotUpdateInput, PlotUncheckedUpdateInput>
+    /**
+     * Choose, which Plot to update.
+     */
+    where: PlotWhereUniqueInput
+  }
+
+  /**
+   * Plot updateMany
+   */
+  export type PlotUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Plots.
+     */
+    data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyInput>
+    /**
+     * Filter which Plots to update
+     */
+    where?: PlotWhereInput
+    /**
+     * Limit how many Plots to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Plot updateManyAndReturn
+   */
+  export type PlotUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * The data used to update Plots.
+     */
+    data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyInput>
+    /**
+     * Filter which Plots to update
+     */
+    where?: PlotWhereInput
+    /**
+     * Limit how many Plots to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Plot upsert
+   */
+  export type PlotUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Plot to update in case it exists.
+     */
+    where: PlotWhereUniqueInput
+    /**
+     * In case the Plot found by the `where` argument doesn't exist, create a new Plot with this data.
+     */
+    create: XOR<PlotCreateInput, PlotUncheckedCreateInput>
+    /**
+     * In case the Plot was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PlotUpdateInput, PlotUncheckedUpdateInput>
+  }
+
+  /**
+   * Plot delete
+   */
+  export type PlotDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
+    /**
+     * Filter which Plot to delete.
+     */
+    where: PlotWhereUniqueInput
+  }
+
+  /**
+   * Plot deleteMany
+   */
+  export type PlotDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Plots to delete
+     */
+    where?: PlotWhereInput
+    /**
+     * Limit how many Plots to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Plot.seed
+   */
+  export type Plot$seedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    where?: SeedWhereInput
+  }
+
+  /**
+   * Plot without action
+   */
+  export type PlotDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Plot
+     */
+    select?: PlotSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Plot
+     */
+    omit?: PlotOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PlotInclude<ExtArgs> | null
   }
 
 
@@ -5544,6 +6928,17 @@ export namespace Prisma {
   };
 
   export type SeedScalarFieldEnum = (typeof SeedScalarFieldEnum)[keyof typeof SeedScalarFieldEnum]
+
+
+  export const PlotScalarFieldEnum: {
+    id: 'id',
+    characterId: 'characterId',
+    seedId: 'seedId',
+    plantedAt: 'plantedAt',
+    isReady: 'isReady'
+  };
+
+  export type PlotScalarFieldEnum = (typeof PlotScalarFieldEnum)[keyof typeof PlotScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5632,6 +7027,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -5713,6 +7115,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Character"> | Date | string
     updatedAt?: DateTimeFilter<"Character"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    plots?: PlotListRelationFilter
   }
 
   export type CharacterOrderByWithRelationInput = {
@@ -5725,6 +7128,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
+    plots?: PlotOrderByRelationAggregateInput
   }
 
   export type CharacterWhereUniqueInput = Prisma.AtLeast<{
@@ -5740,6 +7144,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Character"> | Date | string
     updatedAt?: DateTimeFilter<"Character"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
+    plots?: PlotListRelationFilter
   }, "id" | "userId">
 
   export type CharacterOrderByWithAggregationInput = {
@@ -5828,6 +7233,7 @@ export namespace Prisma {
     xp?: IntFilter<"Seed"> | number
     buyPrice?: IntFilter<"Seed"> | number
     sellPrice?: IntFilter<"Seed"> | number
+    Plot?: PlotListRelationFilter
   }
 
   export type SeedOrderByWithRelationInput = {
@@ -5839,6 +7245,7 @@ export namespace Prisma {
     xp?: SortOrder
     buyPrice?: SortOrder
     sellPrice?: SortOrder
+    Plot?: PlotOrderByRelationAggregateInput
   }
 
   export type SeedWhereUniqueInput = Prisma.AtLeast<{
@@ -5853,6 +7260,7 @@ export namespace Prisma {
     xp?: IntFilter<"Seed"> | number
     buyPrice?: IntFilter<"Seed"> | number
     sellPrice?: IntFilter<"Seed"> | number
+    Plot?: PlotListRelationFilter
   }, "id" | "key">
 
   export type SeedOrderByWithAggregationInput = {
@@ -5883,6 +7291,66 @@ export namespace Prisma {
     xp?: IntWithAggregatesFilter<"Seed"> | number
     buyPrice?: IntWithAggregatesFilter<"Seed"> | number
     sellPrice?: IntWithAggregatesFilter<"Seed"> | number
+  }
+
+  export type PlotWhereInput = {
+    AND?: PlotWhereInput | PlotWhereInput[]
+    OR?: PlotWhereInput[]
+    NOT?: PlotWhereInput | PlotWhereInput[]
+    id?: IntFilter<"Plot"> | number
+    characterId?: IntFilter<"Plot"> | number
+    seedId?: IntNullableFilter<"Plot"> | number | null
+    plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    isReady?: BoolFilter<"Plot"> | boolean
+    character?: XOR<CharacterScalarRelationFilter, CharacterWhereInput>
+    seed?: XOR<SeedNullableScalarRelationFilter, SeedWhereInput> | null
+  }
+
+  export type PlotOrderByWithRelationInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrderInput | SortOrder
+    plantedAt?: SortOrderInput | SortOrder
+    isReady?: SortOrder
+    character?: CharacterOrderByWithRelationInput
+    seed?: SeedOrderByWithRelationInput
+  }
+
+  export type PlotWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: PlotWhereInput | PlotWhereInput[]
+    OR?: PlotWhereInput[]
+    NOT?: PlotWhereInput | PlotWhereInput[]
+    characterId?: IntFilter<"Plot"> | number
+    seedId?: IntNullableFilter<"Plot"> | number | null
+    plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    isReady?: BoolFilter<"Plot"> | boolean
+    character?: XOR<CharacterScalarRelationFilter, CharacterWhereInput>
+    seed?: XOR<SeedNullableScalarRelationFilter, SeedWhereInput> | null
+  }, "id">
+
+  export type PlotOrderByWithAggregationInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrderInput | SortOrder
+    plantedAt?: SortOrderInput | SortOrder
+    isReady?: SortOrder
+    _count?: PlotCountOrderByAggregateInput
+    _avg?: PlotAvgOrderByAggregateInput
+    _max?: PlotMaxOrderByAggregateInput
+    _min?: PlotMinOrderByAggregateInput
+    _sum?: PlotSumOrderByAggregateInput
+  }
+
+  export type PlotScalarWhereWithAggregatesInput = {
+    AND?: PlotScalarWhereWithAggregatesInput | PlotScalarWhereWithAggregatesInput[]
+    OR?: PlotScalarWhereWithAggregatesInput[]
+    NOT?: PlotScalarWhereWithAggregatesInput | PlotScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Plot"> | number
+    characterId?: IntWithAggregatesFilter<"Plot"> | number
+    seedId?: IntNullableWithAggregatesFilter<"Plot"> | number | null
+    plantedAt?: DateTimeNullableWithAggregatesFilter<"Plot"> | Date | string | null
+    isReady?: BoolWithAggregatesFilter<"Plot"> | boolean
   }
 
   export type UserCreateInput = {
@@ -5943,6 +7411,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCharacterInput
+    plots?: PlotCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUncheckedCreateInput = {
@@ -5954,6 +7423,7 @@ export namespace Prisma {
     coins?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    plots?: PlotUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUpdateInput = {
@@ -5964,6 +7434,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCharacterNestedInput
+    plots?: PlotUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterUncheckedUpdateInput = {
@@ -5975,6 +7446,7 @@ export namespace Prisma {
     coins?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterCreateManyInput = {
@@ -6055,6 +7527,7 @@ export namespace Prisma {
     xp: number
     buyPrice?: number
     sellPrice?: number
+    Plot?: PlotCreateNestedManyWithoutSeedInput
   }
 
   export type SeedUncheckedCreateInput = {
@@ -6066,6 +7539,7 @@ export namespace Prisma {
     xp: number
     buyPrice?: number
     sellPrice?: number
+    Plot?: PlotUncheckedCreateNestedManyWithoutSeedInput
   }
 
   export type SeedUpdateInput = {
@@ -6076,6 +7550,7 @@ export namespace Prisma {
     xp?: IntFieldUpdateOperationsInput | number
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
+    Plot?: PlotUpdateManyWithoutSeedNestedInput
   }
 
   export type SeedUncheckedUpdateInput = {
@@ -6087,6 +7562,7 @@ export namespace Prisma {
     xp?: IntFieldUpdateOperationsInput | number
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
+    Plot?: PlotUncheckedUpdateManyWithoutSeedNestedInput
   }
 
   export type SeedCreateManyInput = {
@@ -6119,6 +7595,57 @@ export namespace Prisma {
     xp?: IntFieldUpdateOperationsInput | number
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PlotCreateInput = {
+    plantedAt?: Date | string | null
+    isReady?: boolean
+    character: CharacterCreateNestedOneWithoutPlotsInput
+    seed?: SeedCreateNestedOneWithoutPlotInput
+  }
+
+  export type PlotUncheckedCreateInput = {
+    id?: number
+    characterId: number
+    seedId?: number | null
+    plantedAt?: Date | string | null
+    isReady?: boolean
+  }
+
+  export type PlotUpdateInput = {
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+    character?: CharacterUpdateOneRequiredWithoutPlotsNestedInput
+    seed?: SeedUpdateOneWithoutPlotNestedInput
+  }
+
+  export type PlotUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    seedId?: NullableIntFieldUpdateOperationsInput | number | null
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PlotCreateManyInput = {
+    id?: number
+    characterId: number
+    seedId?: number | null
+    plantedAt?: Date | string | null
+    isReady?: boolean
+  }
+
+  export type PlotUpdateManyMutationInput = {
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PlotUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    seedId?: NullableIntFieldUpdateOperationsInput | number | null
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6252,9 +7779,19 @@ export namespace Prisma {
     isNot?: UserWhereInput
   }
 
+  export type PlotListRelationFilter = {
+    every?: PlotWhereInput
+    some?: PlotWhereInput
+    none?: PlotWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type PlotOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type CharacterCountOrderByAggregateInput = {
@@ -6395,6 +7932,117 @@ export namespace Prisma {
     sellPrice?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type CharacterScalarRelationFilter = {
+    is?: CharacterWhereInput
+    isNot?: CharacterWhereInput
+  }
+
+  export type SeedNullableScalarRelationFilter = {
+    is?: SeedWhereInput | null
+    isNot?: SeedWhereInput | null
+  }
+
+  export type PlotCountOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrder
+    plantedAt?: SortOrder
+    isReady?: SortOrder
+  }
+
+  export type PlotAvgOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrder
+  }
+
+  export type PlotMaxOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrder
+    plantedAt?: SortOrder
+    isReady?: SortOrder
+  }
+
+  export type PlotMinOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrder
+    plantedAt?: SortOrder
+    isReady?: SortOrder
+  }
+
+  export type PlotSumOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    seedId?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type CharacterCreateNestedOneWithoutUserInput = {
     create?: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput>
     connectOrCreate?: CharacterCreateOrConnectWithoutUserInput
@@ -6449,6 +8097,20 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type PlotCreateNestedManyWithoutCharacterInput = {
+    create?: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput> | PlotCreateWithoutCharacterInput[] | PlotUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutCharacterInput | PlotCreateOrConnectWithoutCharacterInput[]
+    createMany?: PlotCreateManyCharacterInputEnvelope
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type PlotUncheckedCreateNestedManyWithoutCharacterInput = {
+    create?: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput> | PlotCreateWithoutCharacterInput[] | PlotUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutCharacterInput | PlotCreateOrConnectWithoutCharacterInput[]
+    createMany?: PlotCreateManyCharacterInputEnvelope
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
   export type NullableEnumGenderFieldUpdateOperationsInput = {
     set?: $Enums.Gender | null
   }
@@ -6459,6 +8121,122 @@ export namespace Prisma {
     upsert?: UserUpsertWithoutCharacterInput
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCharacterInput, UserUpdateWithoutCharacterInput>, UserUncheckedUpdateWithoutCharacterInput>
+  }
+
+  export type PlotUpdateManyWithoutCharacterNestedInput = {
+    create?: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput> | PlotCreateWithoutCharacterInput[] | PlotUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutCharacterInput | PlotCreateOrConnectWithoutCharacterInput[]
+    upsert?: PlotUpsertWithWhereUniqueWithoutCharacterInput | PlotUpsertWithWhereUniqueWithoutCharacterInput[]
+    createMany?: PlotCreateManyCharacterInputEnvelope
+    set?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    disconnect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    delete?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    update?: PlotUpdateWithWhereUniqueWithoutCharacterInput | PlotUpdateWithWhereUniqueWithoutCharacterInput[]
+    updateMany?: PlotUpdateManyWithWhereWithoutCharacterInput | PlotUpdateManyWithWhereWithoutCharacterInput[]
+    deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type PlotUncheckedUpdateManyWithoutCharacterNestedInput = {
+    create?: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput> | PlotCreateWithoutCharacterInput[] | PlotUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutCharacterInput | PlotCreateOrConnectWithoutCharacterInput[]
+    upsert?: PlotUpsertWithWhereUniqueWithoutCharacterInput | PlotUpsertWithWhereUniqueWithoutCharacterInput[]
+    createMany?: PlotCreateManyCharacterInputEnvelope
+    set?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    disconnect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    delete?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    update?: PlotUpdateWithWhereUniqueWithoutCharacterInput | PlotUpdateWithWhereUniqueWithoutCharacterInput[]
+    updateMany?: PlotUpdateManyWithWhereWithoutCharacterInput | PlotUpdateManyWithWhereWithoutCharacterInput[]
+    deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type PlotCreateNestedManyWithoutSeedInput = {
+    create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
+    createMany?: PlotCreateManySeedInputEnvelope
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type PlotUncheckedCreateNestedManyWithoutSeedInput = {
+    create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
+    createMany?: PlotCreateManySeedInputEnvelope
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type PlotUpdateManyWithoutSeedNestedInput = {
+    create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
+    upsert?: PlotUpsertWithWhereUniqueWithoutSeedInput | PlotUpsertWithWhereUniqueWithoutSeedInput[]
+    createMany?: PlotCreateManySeedInputEnvelope
+    set?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    disconnect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    delete?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    update?: PlotUpdateWithWhereUniqueWithoutSeedInput | PlotUpdateWithWhereUniqueWithoutSeedInput[]
+    updateMany?: PlotUpdateManyWithWhereWithoutSeedInput | PlotUpdateManyWithWhereWithoutSeedInput[]
+    deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type PlotUncheckedUpdateManyWithoutSeedNestedInput = {
+    create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
+    connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
+    upsert?: PlotUpsertWithWhereUniqueWithoutSeedInput | PlotUpsertWithWhereUniqueWithoutSeedInput[]
+    createMany?: PlotCreateManySeedInputEnvelope
+    set?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    disconnect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    delete?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+    update?: PlotUpdateWithWhereUniqueWithoutSeedInput | PlotUpdateWithWhereUniqueWithoutSeedInput[]
+    updateMany?: PlotUpdateManyWithWhereWithoutSeedInput | PlotUpdateManyWithWhereWithoutSeedInput[]
+    deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type CharacterCreateNestedOneWithoutPlotsInput = {
+    create?: XOR<CharacterCreateWithoutPlotsInput, CharacterUncheckedCreateWithoutPlotsInput>
+    connectOrCreate?: CharacterCreateOrConnectWithoutPlotsInput
+    connect?: CharacterWhereUniqueInput
+  }
+
+  export type SeedCreateNestedOneWithoutPlotInput = {
+    create?: XOR<SeedCreateWithoutPlotInput, SeedUncheckedCreateWithoutPlotInput>
+    connectOrCreate?: SeedCreateOrConnectWithoutPlotInput
+    connect?: SeedWhereUniqueInput
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type CharacterUpdateOneRequiredWithoutPlotsNestedInput = {
+    create?: XOR<CharacterCreateWithoutPlotsInput, CharacterUncheckedCreateWithoutPlotsInput>
+    connectOrCreate?: CharacterCreateOrConnectWithoutPlotsInput
+    upsert?: CharacterUpsertWithoutPlotsInput
+    connect?: CharacterWhereUniqueInput
+    update?: XOR<XOR<CharacterUpdateToOneWithWhereWithoutPlotsInput, CharacterUpdateWithoutPlotsInput>, CharacterUncheckedUpdateWithoutPlotsInput>
+  }
+
+  export type SeedUpdateOneWithoutPlotNestedInput = {
+    create?: XOR<SeedCreateWithoutPlotInput, SeedUncheckedCreateWithoutPlotInput>
+    connectOrCreate?: SeedCreateOrConnectWithoutPlotInput
+    upsert?: SeedUpsertWithoutPlotInput
+    disconnect?: SeedWhereInput | boolean
+    delete?: SeedWhereInput | boolean
+    connect?: SeedWhereUniqueInput
+    update?: XOR<XOR<SeedUpdateToOneWithWhereWithoutPlotInput, SeedUpdateWithoutPlotInput>, SeedUncheckedUpdateWithoutPlotInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6583,6 +8361,71 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type CharacterCreateWithoutUserInput = {
     gender?: $Enums.Gender | null
     level?: number
@@ -6590,6 +8433,7 @@ export namespace Prisma {
     coins?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    plots?: PlotCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUncheckedCreateWithoutUserInput = {
@@ -6600,6 +8444,7 @@ export namespace Prisma {
     coins?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    plots?: PlotUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterCreateOrConnectWithoutUserInput = {
@@ -6625,6 +8470,7 @@ export namespace Prisma {
     coins?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterUncheckedUpdateWithoutUserInput = {
@@ -6635,6 +8481,7 @@ export namespace Prisma {
     coins?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type UserCreateWithoutCharacterInput = {
@@ -6653,6 +8500,29 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutCharacterInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutCharacterInput, UserUncheckedCreateWithoutCharacterInput>
+  }
+
+  export type PlotCreateWithoutCharacterInput = {
+    plantedAt?: Date | string | null
+    isReady?: boolean
+    seed?: SeedCreateNestedOneWithoutPlotInput
+  }
+
+  export type PlotUncheckedCreateWithoutCharacterInput = {
+    id?: number
+    seedId?: number | null
+    plantedAt?: Date | string | null
+    isReady?: boolean
+  }
+
+  export type PlotCreateOrConnectWithoutCharacterInput = {
+    where: PlotWhereUniqueInput
+    create: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput>
+  }
+
+  export type PlotCreateManyCharacterInputEnvelope = {
+    data: PlotCreateManyCharacterInput | PlotCreateManyCharacterInput[]
+    skipDuplicates?: boolean
   }
 
   export type UserUpsertWithoutCharacterInput = {
@@ -6677,6 +8547,242 @@ export namespace Prisma {
     username?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PlotUpsertWithWhereUniqueWithoutCharacterInput = {
+    where: PlotWhereUniqueInput
+    update: XOR<PlotUpdateWithoutCharacterInput, PlotUncheckedUpdateWithoutCharacterInput>
+    create: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput>
+  }
+
+  export type PlotUpdateWithWhereUniqueWithoutCharacterInput = {
+    where: PlotWhereUniqueInput
+    data: XOR<PlotUpdateWithoutCharacterInput, PlotUncheckedUpdateWithoutCharacterInput>
+  }
+
+  export type PlotUpdateManyWithWhereWithoutCharacterInput = {
+    where: PlotScalarWhereInput
+    data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyWithoutCharacterInput>
+  }
+
+  export type PlotScalarWhereInput = {
+    AND?: PlotScalarWhereInput | PlotScalarWhereInput[]
+    OR?: PlotScalarWhereInput[]
+    NOT?: PlotScalarWhereInput | PlotScalarWhereInput[]
+    id?: IntFilter<"Plot"> | number
+    characterId?: IntFilter<"Plot"> | number
+    seedId?: IntNullableFilter<"Plot"> | number | null
+    plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
+    isReady?: BoolFilter<"Plot"> | boolean
+  }
+
+  export type PlotCreateWithoutSeedInput = {
+    plantedAt?: Date | string | null
+    isReady?: boolean
+    character: CharacterCreateNestedOneWithoutPlotsInput
+  }
+
+  export type PlotUncheckedCreateWithoutSeedInput = {
+    id?: number
+    characterId: number
+    plantedAt?: Date | string | null
+    isReady?: boolean
+  }
+
+  export type PlotCreateOrConnectWithoutSeedInput = {
+    where: PlotWhereUniqueInput
+    create: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput>
+  }
+
+  export type PlotCreateManySeedInputEnvelope = {
+    data: PlotCreateManySeedInput | PlotCreateManySeedInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PlotUpsertWithWhereUniqueWithoutSeedInput = {
+    where: PlotWhereUniqueInput
+    update: XOR<PlotUpdateWithoutSeedInput, PlotUncheckedUpdateWithoutSeedInput>
+    create: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput>
+  }
+
+  export type PlotUpdateWithWhereUniqueWithoutSeedInput = {
+    where: PlotWhereUniqueInput
+    data: XOR<PlotUpdateWithoutSeedInput, PlotUncheckedUpdateWithoutSeedInput>
+  }
+
+  export type PlotUpdateManyWithWhereWithoutSeedInput = {
+    where: PlotScalarWhereInput
+    data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyWithoutSeedInput>
+  }
+
+  export type CharacterCreateWithoutPlotsInput = {
+    gender?: $Enums.Gender | null
+    level?: number
+    experience?: number
+    coins?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCharacterInput
+  }
+
+  export type CharacterUncheckedCreateWithoutPlotsInput = {
+    id?: number
+    userId: number
+    gender?: $Enums.Gender | null
+    level?: number
+    experience?: number
+    coins?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type CharacterCreateOrConnectWithoutPlotsInput = {
+    where: CharacterWhereUniqueInput
+    create: XOR<CharacterCreateWithoutPlotsInput, CharacterUncheckedCreateWithoutPlotsInput>
+  }
+
+  export type SeedCreateWithoutPlotInput = {
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+  }
+
+  export type SeedUncheckedCreateWithoutPlotInput = {
+    id?: number
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+  }
+
+  export type SeedCreateOrConnectWithoutPlotInput = {
+    where: SeedWhereUniqueInput
+    create: XOR<SeedCreateWithoutPlotInput, SeedUncheckedCreateWithoutPlotInput>
+  }
+
+  export type CharacterUpsertWithoutPlotsInput = {
+    update: XOR<CharacterUpdateWithoutPlotsInput, CharacterUncheckedUpdateWithoutPlotsInput>
+    create: XOR<CharacterCreateWithoutPlotsInput, CharacterUncheckedCreateWithoutPlotsInput>
+    where?: CharacterWhereInput
+  }
+
+  export type CharacterUpdateToOneWithWhereWithoutPlotsInput = {
+    where?: CharacterWhereInput
+    data: XOR<CharacterUpdateWithoutPlotsInput, CharacterUncheckedUpdateWithoutPlotsInput>
+  }
+
+  export type CharacterUpdateWithoutPlotsInput = {
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCharacterNestedInput
+  }
+
+  export type CharacterUncheckedUpdateWithoutPlotsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeedUpsertWithoutPlotInput = {
+    update: XOR<SeedUpdateWithoutPlotInput, SeedUncheckedUpdateWithoutPlotInput>
+    create: XOR<SeedCreateWithoutPlotInput, SeedUncheckedCreateWithoutPlotInput>
+    where?: SeedWhereInput
+  }
+
+  export type SeedUpdateToOneWithWhereWithoutPlotInput = {
+    where?: SeedWhereInput
+    data: XOR<SeedUpdateWithoutPlotInput, SeedUncheckedUpdateWithoutPlotInput>
+  }
+
+  export type SeedUpdateWithoutPlotInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeedUncheckedUpdateWithoutPlotInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type PlotCreateManyCharacterInput = {
+    id?: number
+    seedId?: number | null
+    plantedAt?: Date | string | null
+    isReady?: boolean
+  }
+
+  export type PlotUpdateWithoutCharacterInput = {
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+    seed?: SeedUpdateOneWithoutPlotNestedInput
+  }
+
+  export type PlotUncheckedUpdateWithoutCharacterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seedId?: NullableIntFieldUpdateOperationsInput | number | null
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PlotUncheckedUpdateManyWithoutCharacterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seedId?: NullableIntFieldUpdateOperationsInput | number | null
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PlotCreateManySeedInput = {
+    id?: number
+    characterId: number
+    plantedAt?: Date | string | null
+    isReady?: boolean
+  }
+
+  export type PlotUpdateWithoutSeedInput = {
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+    character?: CharacterUpdateOneRequiredWithoutPlotsNestedInput
+  }
+
+  export type PlotUncheckedUpdateWithoutSeedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type PlotUncheckedUpdateManyWithoutSeedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    isReady?: BoolFieldUpdateOperationsInput | boolean
   }
 
 

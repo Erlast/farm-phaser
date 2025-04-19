@@ -1,5 +1,4 @@
 import Phaser from 'phaser'
-import {useCharacterStore, useSeedsStore} from "../stores/characterStore.ts";
 
 export default class LoadingScene extends Phaser.Scene {
     constructor() {
@@ -19,20 +18,17 @@ export default class LoadingScene extends Phaser.Scene {
         // Пример загрузки ассетов
         this.load.image('background', 'assets/background.png')
         this.load.image('plot', 'assets/plot.png')
-        this.load.image('xp-bar-bg', 'assets/ui/xp-bar-bg.png')
-        this.load.image('xp-bar-fill', 'assets/ui/xp-bar-fill.png')
-        this.load.image('xp-frame', 'assets/ui/xp-frame.png')
-        this.load.bitmapFont('fantasy-font', 'assets/fonts/fantasy.png', 'assets/fonts/fantasy.fnt')
+        //this.load.image('xp-bar-bg', 'assets/ui/xp-bar-bg.png')
+        //this.load.image('xp-bar-fill', 'assets/ui/xp-bar-fill.png')
+        //this.load.image('xp-frame', 'assets/ui/xp-frame.png')
+        //this.load.bitmapFont('fantasy-font', 'assets/fonts/fantasy.png', 'assets/fonts/fantasy.fnt')
         this.load.image('carrot', 'assets/crops/carrot.png')
+        this.load.image('carrot_planted', 'assets/crops/carrot_planted.png')
         this.load.image('cucumber', 'assets/crops/cucumber.png')
+        this.load.image('cucumber_planted', 'assets/crops/cucumber_planted.png')
     }
 
     async create() {
-        // const seedStore = useSeedsStore()
-        // await seedStore.fetchSeeds()
-      //  const characterStore = useCharacterStore()
-       // await characterStore.getCharacter()
-
         const {width, height} = this.scale
 
         // Добавляем логотип в центр экрана

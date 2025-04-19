@@ -5,9 +5,11 @@ import userRoutes from './routes/user'
 import characterRoutes from './routes/character'
 import levelRoutes from './routes/level'
 import seedRoutes from './routes/seeds'
+import { initSocket } from './socket';
 
 import 'tsconfig-paths/register'
 import dotenv from 'dotenv'
+import http from "http";
 
 dotenv.config()
 
@@ -34,4 +36,8 @@ app.get('/api/health', (req: Request, res: Response) => {
 })
 
 const PORT = process.env.PORT || 4000
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+
+const server = http.createServer(app)
+initSocket(server)
+
+server.listen(PORT, () => console.log(`Server started on port ${PORT}`))
