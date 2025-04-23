@@ -160,6 +160,40 @@ exports.Prisma.PlotScalarFieldEnum = {
   isReady: 'isReady'
 };
 
+exports.Prisma.QuestScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  recommendedLevel: 'recommendedLevel',
+  rewardXP: 'rewardXP',
+  rewardCoins: 'rewardCoins'
+};
+
+exports.Prisma.QuestStepScalarFieldEnum = {
+  id: 'id',
+  questId: 'questId',
+  type: 'type',
+  targetSeedId: 'targetSeedId',
+  targetAmount: 'targetAmount'
+};
+
+exports.Prisma.QuestProgressScalarFieldEnum = {
+  id: 'id',
+  characterId: 'characterId',
+  questId: 'questId',
+  completed: 'completed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.QuestStepProgressScalarFieldEnum = {
+  id: 'id',
+  stepId: 'stepId',
+  current: 'current',
+  completed: 'completed',
+  progressId: 'progressId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -179,12 +213,23 @@ exports.Gender = exports.$Enums.Gender = {
   F: 'F'
 };
 
+exports.QuestType = exports.$Enums.QuestType = {
+  HARVEST: 'HARVEST',
+  PLANT: 'PLANT',
+  LEVEL_UP: 'LEVEL_UP',
+  BUY_PLOT: 'BUY_PLOT'
+};
+
 exports.Prisma.ModelName = {
   User: 'User',
   Character: 'Character',
   LevelRequirement: 'LevelRequirement',
   Seed: 'Seed',
-  Plot: 'Plot'
+  Plot: 'Plot',
+  Quest: 'Quest',
+  QuestStep: 'QuestStep',
+  QuestProgress: 'QuestProgress',
+  QuestStepProgress: 'QuestStepProgress'
 };
 
 /**

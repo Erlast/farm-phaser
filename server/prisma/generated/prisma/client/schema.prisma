@@ -35,7 +35,8 @@ model Character {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  plots Plot[]
+  plots           Plot[]
+  questProgresses QuestProgress[]
 }
 
 model LevelRequirement {
@@ -45,15 +46,16 @@ model LevelRequirement {
 }
 
 model Seed {
-  id        Int    @id @default(autoincrement())
-  key       String @unique
-  name      String
-  texture   String
-  growTime  Int // в миллисекундах
-  xp        Int
-  buyPrice  Int    @default(0) // стоимость посадки
-  sellPrice Int    @default(0) // прибыль при сборе
-  Plot      Plot[]
+  id         Int         @id @default(autoincrement())
+  key        String      @unique
+  name       String
+  texture    String
+  growTime   Int // в миллисекундах
+  xp         Int
+  buyPrice   Int         @default(0) // стоимость посадки
+  sellPrice  Int         @default(0) // прибыль при сборе
+  Plot       Plot[]
+  questSteps QuestStep[]
 }
 
 model Plot {
@@ -65,6 +67,62 @@ model Plot {
 
   character Character @relation(fields: [characterId], references: [id])
   seed      Seed?     @relation(fields: [seedId], references: [id])
+}
+
+enum QuestType {
+  HARVEST
+  PLANT
+  LEVEL_UP
+  BUY_PLOT
+}
+
+model Quest {
+  id               Int             @id @default(autoincrement())
+  title            String
+  description      String
+  recommendedLevel Int             @default(1)
+  rewardXP         Int
+  rewardCoins      Int
+  steps            QuestStep[]
+  progresses       QuestProgress[]
+}
+
+model QuestStep {
+  id           Int       @id @default(autoincrement())
+  quest        Quest     @relation(fields: [questId], references: [id])
+  questId      Int
+  type         QuestType
+  targetSeed   Seed?     @relation(fields: [targetSeedId], references: [id])
+  targetSeedId Int?
+  targetAmount Int
+
+  progress QuestStepProgress[]
+}
+
+model QuestProgress {
+  id          Int                 @id @default(autoincrement())
+  character   Character           @relation(fields: [characterId], references: [id])
+  characterId Int
+  quest       Quest               @relation(fields: [questId], references: [id])
+  questId     Int
+  steps       QuestStepProgress[]
+  completed   Boolean             @default(false)
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+
+  @@unique([characterId, questId])
+}
+
+model QuestStepProgress {
+  id         Int           @id @default(autoincrement())
+  step       QuestStep     @relation(fields: [stepId], references: [id])
+  stepId     Int
+  current    Int           @default(0)
+  completed  Boolean       @default(false)
+  progressId Int
+  progress   QuestProgress @relation(fields: [progressId], references: [id])
+
+  @@unique([progressId, stepId])
 }
 
 enum Gender {

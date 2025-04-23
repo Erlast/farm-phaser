@@ -38,12 +38,42 @@ export type Seed = $Result.DefaultSelection<Prisma.$SeedPayload>
  * 
  */
 export type Plot = $Result.DefaultSelection<Prisma.$PlotPayload>
+/**
+ * Model Quest
+ * 
+ */
+export type Quest = $Result.DefaultSelection<Prisma.$QuestPayload>
+/**
+ * Model QuestStep
+ * 
+ */
+export type QuestStep = $Result.DefaultSelection<Prisma.$QuestStepPayload>
+/**
+ * Model QuestProgress
+ * 
+ */
+export type QuestProgress = $Result.DefaultSelection<Prisma.$QuestProgressPayload>
+/**
+ * Model QuestStepProgress
+ * 
+ */
+export type QuestStepProgress = $Result.DefaultSelection<Prisma.$QuestStepProgressPayload>
 
 /**
  * Enums
  */
 export namespace $Enums {
-  export const Gender: {
+  export const QuestType: {
+  HARVEST: 'HARVEST',
+  PLANT: 'PLANT',
+  LEVEL_UP: 'LEVEL_UP',
+  BUY_PLOT: 'BUY_PLOT'
+};
+
+export type QuestType = (typeof QuestType)[keyof typeof QuestType]
+
+
+export const Gender: {
   M: 'M',
   F: 'F'
 };
@@ -51,6 +81,10 @@ export namespace $Enums {
 export type Gender = (typeof Gender)[keyof typeof Gender]
 
 }
+
+export type QuestType = $Enums.QuestType
+
+export const QuestType: typeof $Enums.QuestType
 
 export type Gender = $Enums.Gender
 
@@ -230,6 +264,46 @@ export class PrismaClient<
     * ```
     */
   get plot(): Prisma.PlotDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.quest`: Exposes CRUD operations for the **Quest** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Quests
+    * const quests = await prisma.quest.findMany()
+    * ```
+    */
+  get quest(): Prisma.QuestDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.questStep`: Exposes CRUD operations for the **QuestStep** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QuestSteps
+    * const questSteps = await prisma.questStep.findMany()
+    * ```
+    */
+  get questStep(): Prisma.QuestStepDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.questProgress`: Exposes CRUD operations for the **QuestProgress** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QuestProgresses
+    * const questProgresses = await prisma.questProgress.findMany()
+    * ```
+    */
+  get questProgress(): Prisma.QuestProgressDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.questStepProgress`: Exposes CRUD operations for the **QuestStepProgress** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QuestStepProgresses
+    * const questStepProgresses = await prisma.questStepProgress.findMany()
+    * ```
+    */
+  get questStepProgress(): Prisma.QuestStepProgressDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -674,7 +748,11 @@ export namespace Prisma {
     Character: 'Character',
     LevelRequirement: 'LevelRequirement',
     Seed: 'Seed',
-    Plot: 'Plot'
+    Plot: 'Plot',
+    Quest: 'Quest',
+    QuestStep: 'QuestStep',
+    QuestProgress: 'QuestProgress',
+    QuestStepProgress: 'QuestStepProgress'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -693,7 +771,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "character" | "levelRequirement" | "seed" | "plot"
+      modelProps: "user" | "character" | "levelRequirement" | "seed" | "plot" | "quest" | "questStep" | "questProgress" | "questStepProgress"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1067,6 +1145,302 @@ export namespace Prisma {
           }
         }
       }
+      Quest: {
+        payload: Prisma.$QuestPayload<ExtArgs>
+        fields: Prisma.QuestFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuestFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuestFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>
+          }
+          findFirst: {
+            args: Prisma.QuestFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuestFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>
+          }
+          findMany: {
+            args: Prisma.QuestFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>[]
+          }
+          create: {
+            args: Prisma.QuestCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>
+          }
+          createMany: {
+            args: Prisma.QuestCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.QuestCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>[]
+          }
+          delete: {
+            args: Prisma.QuestDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>
+          }
+          update: {
+            args: Prisma.QuestUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuestDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuestUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.QuestUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>[]
+          }
+          upsert: {
+            args: Prisma.QuestUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestPayload>
+          }
+          aggregate: {
+            args: Prisma.QuestAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuest>
+          }
+          groupBy: {
+            args: Prisma.QuestGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuestGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuestCountArgs<ExtArgs>
+            result: $Utils.Optional<QuestCountAggregateOutputType> | number
+          }
+        }
+      }
+      QuestStep: {
+        payload: Prisma.$QuestStepPayload<ExtArgs>
+        fields: Prisma.QuestStepFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuestStepFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuestStepFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>
+          }
+          findFirst: {
+            args: Prisma.QuestStepFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuestStepFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>
+          }
+          findMany: {
+            args: Prisma.QuestStepFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>[]
+          }
+          create: {
+            args: Prisma.QuestStepCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>
+          }
+          createMany: {
+            args: Prisma.QuestStepCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.QuestStepCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>[]
+          }
+          delete: {
+            args: Prisma.QuestStepDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>
+          }
+          update: {
+            args: Prisma.QuestStepUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuestStepDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuestStepUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.QuestStepUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>[]
+          }
+          upsert: {
+            args: Prisma.QuestStepUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepPayload>
+          }
+          aggregate: {
+            args: Prisma.QuestStepAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuestStep>
+          }
+          groupBy: {
+            args: Prisma.QuestStepGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuestStepGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuestStepCountArgs<ExtArgs>
+            result: $Utils.Optional<QuestStepCountAggregateOutputType> | number
+          }
+        }
+      }
+      QuestProgress: {
+        payload: Prisma.$QuestProgressPayload<ExtArgs>
+        fields: Prisma.QuestProgressFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuestProgressFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuestProgressFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>
+          }
+          findFirst: {
+            args: Prisma.QuestProgressFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuestProgressFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>
+          }
+          findMany: {
+            args: Prisma.QuestProgressFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>[]
+          }
+          create: {
+            args: Prisma.QuestProgressCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>
+          }
+          createMany: {
+            args: Prisma.QuestProgressCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.QuestProgressCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>[]
+          }
+          delete: {
+            args: Prisma.QuestProgressDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>
+          }
+          update: {
+            args: Prisma.QuestProgressUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuestProgressDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuestProgressUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.QuestProgressUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>[]
+          }
+          upsert: {
+            args: Prisma.QuestProgressUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestProgressPayload>
+          }
+          aggregate: {
+            args: Prisma.QuestProgressAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuestProgress>
+          }
+          groupBy: {
+            args: Prisma.QuestProgressGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuestProgressGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuestProgressCountArgs<ExtArgs>
+            result: $Utils.Optional<QuestProgressCountAggregateOutputType> | number
+          }
+        }
+      }
+      QuestStepProgress: {
+        payload: Prisma.$QuestStepProgressPayload<ExtArgs>
+        fields: Prisma.QuestStepProgressFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuestStepProgressFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuestStepProgressFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>
+          }
+          findFirst: {
+            args: Prisma.QuestStepProgressFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuestStepProgressFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>
+          }
+          findMany: {
+            args: Prisma.QuestStepProgressFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>[]
+          }
+          create: {
+            args: Prisma.QuestStepProgressCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>
+          }
+          createMany: {
+            args: Prisma.QuestStepProgressCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.QuestStepProgressCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>[]
+          }
+          delete: {
+            args: Prisma.QuestStepProgressDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>
+          }
+          update: {
+            args: Prisma.QuestStepProgressUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuestStepProgressDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuestStepProgressUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.QuestStepProgressUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>[]
+          }
+          upsert: {
+            args: Prisma.QuestStepProgressUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuestStepProgressPayload>
+          }
+          aggregate: {
+            args: Prisma.QuestStepProgressAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuestStepProgress>
+          }
+          groupBy: {
+            args: Prisma.QuestStepProgressGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuestStepProgressGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuestStepProgressCountArgs<ExtArgs>
+            result: $Utils.Optional<QuestStepProgressCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1156,6 +1530,10 @@ export namespace Prisma {
     levelRequirement?: LevelRequirementOmit
     seed?: SeedOmit
     plot?: PlotOmit
+    quest?: QuestOmit
+    questStep?: QuestStepOmit
+    questProgress?: QuestProgressOmit
+    questStepProgress?: QuestStepProgressOmit
   }
 
   /* Types for Logging */
@@ -1251,10 +1629,12 @@ export namespace Prisma {
 
   export type CharacterCountOutputType = {
     plots: number
+    questProgresses: number
   }
 
   export type CharacterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     plots?: boolean | CharacterCountOutputTypeCountPlotsArgs
+    questProgresses?: boolean | CharacterCountOutputTypeCountQuestProgressesArgs
   }
 
   // Custom InputTypes
@@ -1275,6 +1655,13 @@ export namespace Prisma {
     where?: PlotWhereInput
   }
 
+  /**
+   * CharacterCountOutputType without action
+   */
+  export type CharacterCountOutputTypeCountQuestProgressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestProgressWhereInput
+  }
+
 
   /**
    * Count Type SeedCountOutputType
@@ -1282,10 +1669,12 @@ export namespace Prisma {
 
   export type SeedCountOutputType = {
     Plot: number
+    questSteps: number
   }
 
   export type SeedCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Plot?: boolean | SeedCountOutputTypeCountPlotArgs
+    questSteps?: boolean | SeedCountOutputTypeCountQuestStepsArgs
   }
 
   // Custom InputTypes
@@ -1304,6 +1693,115 @@ export namespace Prisma {
    */
   export type SeedCountOutputTypeCountPlotArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: PlotWhereInput
+  }
+
+  /**
+   * SeedCountOutputType without action
+   */
+  export type SeedCountOutputTypeCountQuestStepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestStepWhereInput
+  }
+
+
+  /**
+   * Count Type QuestCountOutputType
+   */
+
+  export type QuestCountOutputType = {
+    steps: number
+    progresses: number
+  }
+
+  export type QuestCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    steps?: boolean | QuestCountOutputTypeCountStepsArgs
+    progresses?: boolean | QuestCountOutputTypeCountProgressesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QuestCountOutputType without action
+   */
+  export type QuestCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestCountOutputType
+     */
+    select?: QuestCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QuestCountOutputType without action
+   */
+  export type QuestCountOutputTypeCountStepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestStepWhereInput
+  }
+
+  /**
+   * QuestCountOutputType without action
+   */
+  export type QuestCountOutputTypeCountProgressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestProgressWhereInput
+  }
+
+
+  /**
+   * Count Type QuestStepCountOutputType
+   */
+
+  export type QuestStepCountOutputType = {
+    progress: number
+  }
+
+  export type QuestStepCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    progress?: boolean | QuestStepCountOutputTypeCountProgressArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QuestStepCountOutputType without action
+   */
+  export type QuestStepCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepCountOutputType
+     */
+    select?: QuestStepCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QuestStepCountOutputType without action
+   */
+  export type QuestStepCountOutputTypeCountProgressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestStepProgressWhereInput
+  }
+
+
+  /**
+   * Count Type QuestProgressCountOutputType
+   */
+
+  export type QuestProgressCountOutputType = {
+    steps: number
+  }
+
+  export type QuestProgressCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    steps?: boolean | QuestProgressCountOutputTypeCountStepsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QuestProgressCountOutputType without action
+   */
+  export type QuestProgressCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgressCountOutputType
+     */
+    select?: QuestProgressCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QuestProgressCountOutputType without action
+   */
+  export type QuestProgressCountOutputTypeCountStepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestStepProgressWhereInput
   }
 
 
@@ -2635,6 +3133,7 @@ export namespace Prisma {
     updatedAt?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     plots?: boolean | Character$plotsArgs<ExtArgs>
+    questProgresses?: boolean | Character$questProgressesArgs<ExtArgs>
     _count?: boolean | CharacterCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["character"]>
 
@@ -2677,6 +3176,7 @@ export namespace Prisma {
   export type CharacterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     plots?: boolean | Character$plotsArgs<ExtArgs>
+    questProgresses?: boolean | Character$questProgressesArgs<ExtArgs>
     _count?: boolean | CharacterCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CharacterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2691,6 +3191,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       plots: Prisma.$PlotPayload<ExtArgs>[]
+      questProgresses: Prisma.$QuestProgressPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3097,6 +3598,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     plots<T extends Character$plotsArgs<ExtArgs> = {}>(args?: Subset<T, Character$plotsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    questProgresses<T extends Character$questProgressesArgs<ExtArgs> = {}>(args?: Subset<T, Character$questProgressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3551,6 +4053,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
+   * Character.questProgresses
+   */
+  export type Character$questProgressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    where?: QuestProgressWhereInput
+    orderBy?: QuestProgressOrderByWithRelationInput | QuestProgressOrderByWithRelationInput[]
+    cursor?: QuestProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestProgressScalarFieldEnum | QuestProgressScalarFieldEnum[]
   }
 
   /**
@@ -4822,6 +5348,7 @@ export namespace Prisma {
     buyPrice?: boolean
     sellPrice?: boolean
     Plot?: boolean | Seed$PlotArgs<ExtArgs>
+    questSteps?: boolean | Seed$questStepsArgs<ExtArgs>
     _count?: boolean | SeedCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["seed"]>
 
@@ -4861,6 +5388,7 @@ export namespace Prisma {
   export type SeedOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "key" | "name" | "texture" | "growTime" | "xp" | "buyPrice" | "sellPrice", ExtArgs["result"]["seed"]>
   export type SeedInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Plot?: boolean | Seed$PlotArgs<ExtArgs>
+    questSteps?: boolean | Seed$questStepsArgs<ExtArgs>
     _count?: boolean | SeedCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SeedIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -4870,6 +5398,7 @@ export namespace Prisma {
     name: "Seed"
     objects: {
       Plot: Prisma.$PlotPayload<ExtArgs>[]
+      questSteps: Prisma.$QuestStepPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5275,6 +5804,7 @@ export namespace Prisma {
   export interface Prisma__SeedClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     Plot<T extends Seed$PlotArgs<ExtArgs> = {}>(args?: Subset<T, Seed$PlotArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PlotPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    questSteps<T extends Seed$questStepsArgs<ExtArgs> = {}>(args?: Subset<T, Seed$questStepsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5721,6 +6251,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PlotScalarFieldEnum | PlotScalarFieldEnum[]
+  }
+
+  /**
+   * Seed.questSteps
+   */
+  export type Seed$questStepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    where?: QuestStepWhereInput
+    orderBy?: QuestStepOrderByWithRelationInput | QuestStepOrderByWithRelationInput[]
+    cursor?: QuestStepWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestStepScalarFieldEnum | QuestStepScalarFieldEnum[]
   }
 
   /**
@@ -6870,6 +7424,4587 @@ export namespace Prisma {
 
 
   /**
+   * Model Quest
+   */
+
+  export type AggregateQuest = {
+    _count: QuestCountAggregateOutputType | null
+    _avg: QuestAvgAggregateOutputType | null
+    _sum: QuestSumAggregateOutputType | null
+    _min: QuestMinAggregateOutputType | null
+    _max: QuestMaxAggregateOutputType | null
+  }
+
+  export type QuestAvgAggregateOutputType = {
+    id: number | null
+    recommendedLevel: number | null
+    rewardXP: number | null
+    rewardCoins: number | null
+  }
+
+  export type QuestSumAggregateOutputType = {
+    id: number | null
+    recommendedLevel: number | null
+    rewardXP: number | null
+    rewardCoins: number | null
+  }
+
+  export type QuestMinAggregateOutputType = {
+    id: number | null
+    title: string | null
+    description: string | null
+    recommendedLevel: number | null
+    rewardXP: number | null
+    rewardCoins: number | null
+  }
+
+  export type QuestMaxAggregateOutputType = {
+    id: number | null
+    title: string | null
+    description: string | null
+    recommendedLevel: number | null
+    rewardXP: number | null
+    rewardCoins: number | null
+  }
+
+  export type QuestCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    recommendedLevel: number
+    rewardXP: number
+    rewardCoins: number
+    _all: number
+  }
+
+
+  export type QuestAvgAggregateInputType = {
+    id?: true
+    recommendedLevel?: true
+    rewardXP?: true
+    rewardCoins?: true
+  }
+
+  export type QuestSumAggregateInputType = {
+    id?: true
+    recommendedLevel?: true
+    rewardXP?: true
+    rewardCoins?: true
+  }
+
+  export type QuestMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    recommendedLevel?: true
+    rewardXP?: true
+    rewardCoins?: true
+  }
+
+  export type QuestMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    recommendedLevel?: true
+    rewardXP?: true
+    rewardCoins?: true
+  }
+
+  export type QuestCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    recommendedLevel?: true
+    rewardXP?: true
+    rewardCoins?: true
+    _all?: true
+  }
+
+  export type QuestAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Quest to aggregate.
+     */
+    where?: QuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quests to fetch.
+     */
+    orderBy?: QuestOrderByWithRelationInput | QuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Quests
+    **/
+    _count?: true | QuestCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuestAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuestSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuestMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuestMaxAggregateInputType
+  }
+
+  export type GetQuestAggregateType<T extends QuestAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuest]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuest[P]>
+      : GetScalarType<T[P], AggregateQuest[P]>
+  }
+
+
+
+
+  export type QuestGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestWhereInput
+    orderBy?: QuestOrderByWithAggregationInput | QuestOrderByWithAggregationInput[]
+    by: QuestScalarFieldEnum[] | QuestScalarFieldEnum
+    having?: QuestScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuestCountAggregateInputType | true
+    _avg?: QuestAvgAggregateInputType
+    _sum?: QuestSumAggregateInputType
+    _min?: QuestMinAggregateInputType
+    _max?: QuestMaxAggregateInputType
+  }
+
+  export type QuestGroupByOutputType = {
+    id: number
+    title: string
+    description: string
+    recommendedLevel: number
+    rewardXP: number
+    rewardCoins: number
+    _count: QuestCountAggregateOutputType | null
+    _avg: QuestAvgAggregateOutputType | null
+    _sum: QuestSumAggregateOutputType | null
+    _min: QuestMinAggregateOutputType | null
+    _max: QuestMaxAggregateOutputType | null
+  }
+
+  type GetQuestGroupByPayload<T extends QuestGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuestGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuestGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuestGroupByOutputType[P]>
+            : GetScalarType<T[P], QuestGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuestSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    recommendedLevel?: boolean
+    rewardXP?: boolean
+    rewardCoins?: boolean
+    steps?: boolean | Quest$stepsArgs<ExtArgs>
+    progresses?: boolean | Quest$progressesArgs<ExtArgs>
+    _count?: boolean | QuestCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quest"]>
+
+  export type QuestSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    recommendedLevel?: boolean
+    rewardXP?: boolean
+    rewardCoins?: boolean
+  }, ExtArgs["result"]["quest"]>
+
+  export type QuestSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    recommendedLevel?: boolean
+    rewardXP?: boolean
+    rewardCoins?: boolean
+  }, ExtArgs["result"]["quest"]>
+
+  export type QuestSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    recommendedLevel?: boolean
+    rewardXP?: boolean
+    rewardCoins?: boolean
+  }
+
+  export type QuestOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "recommendedLevel" | "rewardXP" | "rewardCoins", ExtArgs["result"]["quest"]>
+  export type QuestInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    steps?: boolean | Quest$stepsArgs<ExtArgs>
+    progresses?: boolean | Quest$progressesArgs<ExtArgs>
+    _count?: boolean | QuestCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type QuestIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type QuestIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $QuestPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Quest"
+    objects: {
+      steps: Prisma.$QuestStepPayload<ExtArgs>[]
+      progresses: Prisma.$QuestProgressPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      title: string
+      description: string
+      recommendedLevel: number
+      rewardXP: number
+      rewardCoins: number
+    }, ExtArgs["result"]["quest"]>
+    composites: {}
+  }
+
+  type QuestGetPayload<S extends boolean | null | undefined | QuestDefaultArgs> = $Result.GetResult<Prisma.$QuestPayload, S>
+
+  type QuestCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuestFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuestCountAggregateInputType | true
+    }
+
+  export interface QuestDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Quest'], meta: { name: 'Quest' } }
+    /**
+     * Find zero or one Quest that matches the filter.
+     * @param {QuestFindUniqueArgs} args - Arguments to find a Quest
+     * @example
+     * // Get one Quest
+     * const quest = await prisma.quest.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuestFindUniqueArgs>(args: SelectSubset<T, QuestFindUniqueArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Quest that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuestFindUniqueOrThrowArgs} args - Arguments to find a Quest
+     * @example
+     * // Get one Quest
+     * const quest = await prisma.quest.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuestFindUniqueOrThrowArgs>(args: SelectSubset<T, QuestFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quest that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestFindFirstArgs} args - Arguments to find a Quest
+     * @example
+     * // Get one Quest
+     * const quest = await prisma.quest.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuestFindFirstArgs>(args?: SelectSubset<T, QuestFindFirstArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quest that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestFindFirstOrThrowArgs} args - Arguments to find a Quest
+     * @example
+     * // Get one Quest
+     * const quest = await prisma.quest.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuestFindFirstOrThrowArgs>(args?: SelectSubset<T, QuestFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Quests that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Quests
+     * const quests = await prisma.quest.findMany()
+     * 
+     * // Get first 10 Quests
+     * const quests = await prisma.quest.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const questWithIdOnly = await prisma.quest.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuestFindManyArgs>(args?: SelectSubset<T, QuestFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Quest.
+     * @param {QuestCreateArgs} args - Arguments to create a Quest.
+     * @example
+     * // Create one Quest
+     * const Quest = await prisma.quest.create({
+     *   data: {
+     *     // ... data to create a Quest
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuestCreateArgs>(args: SelectSubset<T, QuestCreateArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Quests.
+     * @param {QuestCreateManyArgs} args - Arguments to create many Quests.
+     * @example
+     * // Create many Quests
+     * const quest = await prisma.quest.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuestCreateManyArgs>(args?: SelectSubset<T, QuestCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Quests and returns the data saved in the database.
+     * @param {QuestCreateManyAndReturnArgs} args - Arguments to create many Quests.
+     * @example
+     * // Create many Quests
+     * const quest = await prisma.quest.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Quests and only return the `id`
+     * const questWithIdOnly = await prisma.quest.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends QuestCreateManyAndReturnArgs>(args?: SelectSubset<T, QuestCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Quest.
+     * @param {QuestDeleteArgs} args - Arguments to delete one Quest.
+     * @example
+     * // Delete one Quest
+     * const Quest = await prisma.quest.delete({
+     *   where: {
+     *     // ... filter to delete one Quest
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuestDeleteArgs>(args: SelectSubset<T, QuestDeleteArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Quest.
+     * @param {QuestUpdateArgs} args - Arguments to update one Quest.
+     * @example
+     * // Update one Quest
+     * const quest = await prisma.quest.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuestUpdateArgs>(args: SelectSubset<T, QuestUpdateArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Quests.
+     * @param {QuestDeleteManyArgs} args - Arguments to filter Quests to delete.
+     * @example
+     * // Delete a few Quests
+     * const { count } = await prisma.quest.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuestDeleteManyArgs>(args?: SelectSubset<T, QuestDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Quests
+     * const quest = await prisma.quest.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuestUpdateManyArgs>(args: SelectSubset<T, QuestUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quests and returns the data updated in the database.
+     * @param {QuestUpdateManyAndReturnArgs} args - Arguments to update many Quests.
+     * @example
+     * // Update many Quests
+     * const quest = await prisma.quest.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Quests and only return the `id`
+     * const questWithIdOnly = await prisma.quest.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends QuestUpdateManyAndReturnArgs>(args: SelectSubset<T, QuestUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Quest.
+     * @param {QuestUpsertArgs} args - Arguments to update or create a Quest.
+     * @example
+     * // Update or create a Quest
+     * const quest = await prisma.quest.upsert({
+     *   create: {
+     *     // ... data to create a Quest
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Quest we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuestUpsertArgs>(args: SelectSubset<T, QuestUpsertArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Quests.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestCountArgs} args - Arguments to filter Quests to count.
+     * @example
+     * // Count the number of Quests
+     * const count = await prisma.quest.count({
+     *   where: {
+     *     // ... the filter for the Quests we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuestCountArgs>(
+      args?: Subset<T, QuestCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuestCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Quest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuestAggregateArgs>(args: Subset<T, QuestAggregateArgs>): Prisma.PrismaPromise<GetQuestAggregateType<T>>
+
+    /**
+     * Group by Quest.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuestGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuestGroupByArgs['orderBy'] }
+        : { orderBy?: QuestGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuestGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuestGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Quest model
+   */
+  readonly fields: QuestFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Quest.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuestClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    steps<T extends Quest$stepsArgs<ExtArgs> = {}>(args?: Subset<T, Quest$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    progresses<T extends Quest$progressesArgs<ExtArgs> = {}>(args?: Subset<T, Quest$progressesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Quest model
+   */
+  interface QuestFieldRefs {
+    readonly id: FieldRef<"Quest", 'Int'>
+    readonly title: FieldRef<"Quest", 'String'>
+    readonly description: FieldRef<"Quest", 'String'>
+    readonly recommendedLevel: FieldRef<"Quest", 'Int'>
+    readonly rewardXP: FieldRef<"Quest", 'Int'>
+    readonly rewardCoins: FieldRef<"Quest", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Quest findUnique
+   */
+  export type QuestFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * Filter, which Quest to fetch.
+     */
+    where: QuestWhereUniqueInput
+  }
+
+  /**
+   * Quest findUniqueOrThrow
+   */
+  export type QuestFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * Filter, which Quest to fetch.
+     */
+    where: QuestWhereUniqueInput
+  }
+
+  /**
+   * Quest findFirst
+   */
+  export type QuestFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * Filter, which Quest to fetch.
+     */
+    where?: QuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quests to fetch.
+     */
+    orderBy?: QuestOrderByWithRelationInput | QuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Quests.
+     */
+    cursor?: QuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Quests.
+     */
+    distinct?: QuestScalarFieldEnum | QuestScalarFieldEnum[]
+  }
+
+  /**
+   * Quest findFirstOrThrow
+   */
+  export type QuestFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * Filter, which Quest to fetch.
+     */
+    where?: QuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quests to fetch.
+     */
+    orderBy?: QuestOrderByWithRelationInput | QuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Quests.
+     */
+    cursor?: QuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quests.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Quests.
+     */
+    distinct?: QuestScalarFieldEnum | QuestScalarFieldEnum[]
+  }
+
+  /**
+   * Quest findMany
+   */
+  export type QuestFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * Filter, which Quests to fetch.
+     */
+    where?: QuestWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quests to fetch.
+     */
+    orderBy?: QuestOrderByWithRelationInput | QuestOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Quests.
+     */
+    cursor?: QuestWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quests from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quests.
+     */
+    skip?: number
+    distinct?: QuestScalarFieldEnum | QuestScalarFieldEnum[]
+  }
+
+  /**
+   * Quest create
+   */
+  export type QuestCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Quest.
+     */
+    data: XOR<QuestCreateInput, QuestUncheckedCreateInput>
+  }
+
+  /**
+   * Quest createMany
+   */
+  export type QuestCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Quests.
+     */
+    data: QuestCreateManyInput | QuestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Quest createManyAndReturn
+   */
+  export type QuestCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * The data used to create many Quests.
+     */
+    data: QuestCreateManyInput | QuestCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Quest update
+   */
+  export type QuestUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Quest.
+     */
+    data: XOR<QuestUpdateInput, QuestUncheckedUpdateInput>
+    /**
+     * Choose, which Quest to update.
+     */
+    where: QuestWhereUniqueInput
+  }
+
+  /**
+   * Quest updateMany
+   */
+  export type QuestUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Quests.
+     */
+    data: XOR<QuestUpdateManyMutationInput, QuestUncheckedUpdateManyInput>
+    /**
+     * Filter which Quests to update
+     */
+    where?: QuestWhereInput
+    /**
+     * Limit how many Quests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Quest updateManyAndReturn
+   */
+  export type QuestUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * The data used to update Quests.
+     */
+    data: XOR<QuestUpdateManyMutationInput, QuestUncheckedUpdateManyInput>
+    /**
+     * Filter which Quests to update
+     */
+    where?: QuestWhereInput
+    /**
+     * Limit how many Quests to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Quest upsert
+   */
+  export type QuestUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Quest to update in case it exists.
+     */
+    where: QuestWhereUniqueInput
+    /**
+     * In case the Quest found by the `where` argument doesn't exist, create a new Quest with this data.
+     */
+    create: XOR<QuestCreateInput, QuestUncheckedCreateInput>
+    /**
+     * In case the Quest was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuestUpdateInput, QuestUncheckedUpdateInput>
+  }
+
+  /**
+   * Quest delete
+   */
+  export type QuestDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+    /**
+     * Filter which Quest to delete.
+     */
+    where: QuestWhereUniqueInput
+  }
+
+  /**
+   * Quest deleteMany
+   */
+  export type QuestDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Quests to delete
+     */
+    where?: QuestWhereInput
+    /**
+     * Limit how many Quests to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Quest.steps
+   */
+  export type Quest$stepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    where?: QuestStepWhereInput
+    orderBy?: QuestStepOrderByWithRelationInput | QuestStepOrderByWithRelationInput[]
+    cursor?: QuestStepWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestStepScalarFieldEnum | QuestStepScalarFieldEnum[]
+  }
+
+  /**
+   * Quest.progresses
+   */
+  export type Quest$progressesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    where?: QuestProgressWhereInput
+    orderBy?: QuestProgressOrderByWithRelationInput | QuestProgressOrderByWithRelationInput[]
+    cursor?: QuestProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestProgressScalarFieldEnum | QuestProgressScalarFieldEnum[]
+  }
+
+  /**
+   * Quest without action
+   */
+  export type QuestDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quest
+     */
+    select?: QuestSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quest
+     */
+    omit?: QuestOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model QuestStep
+   */
+
+  export type AggregateQuestStep = {
+    _count: QuestStepCountAggregateOutputType | null
+    _avg: QuestStepAvgAggregateOutputType | null
+    _sum: QuestStepSumAggregateOutputType | null
+    _min: QuestStepMinAggregateOutputType | null
+    _max: QuestStepMaxAggregateOutputType | null
+  }
+
+  export type QuestStepAvgAggregateOutputType = {
+    id: number | null
+    questId: number | null
+    targetSeedId: number | null
+    targetAmount: number | null
+  }
+
+  export type QuestStepSumAggregateOutputType = {
+    id: number | null
+    questId: number | null
+    targetSeedId: number | null
+    targetAmount: number | null
+  }
+
+  export type QuestStepMinAggregateOutputType = {
+    id: number | null
+    questId: number | null
+    type: $Enums.QuestType | null
+    targetSeedId: number | null
+    targetAmount: number | null
+  }
+
+  export type QuestStepMaxAggregateOutputType = {
+    id: number | null
+    questId: number | null
+    type: $Enums.QuestType | null
+    targetSeedId: number | null
+    targetAmount: number | null
+  }
+
+  export type QuestStepCountAggregateOutputType = {
+    id: number
+    questId: number
+    type: number
+    targetSeedId: number
+    targetAmount: number
+    _all: number
+  }
+
+
+  export type QuestStepAvgAggregateInputType = {
+    id?: true
+    questId?: true
+    targetSeedId?: true
+    targetAmount?: true
+  }
+
+  export type QuestStepSumAggregateInputType = {
+    id?: true
+    questId?: true
+    targetSeedId?: true
+    targetAmount?: true
+  }
+
+  export type QuestStepMinAggregateInputType = {
+    id?: true
+    questId?: true
+    type?: true
+    targetSeedId?: true
+    targetAmount?: true
+  }
+
+  export type QuestStepMaxAggregateInputType = {
+    id?: true
+    questId?: true
+    type?: true
+    targetSeedId?: true
+    targetAmount?: true
+  }
+
+  export type QuestStepCountAggregateInputType = {
+    id?: true
+    questId?: true
+    type?: true
+    targetSeedId?: true
+    targetAmount?: true
+    _all?: true
+  }
+
+  export type QuestStepAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestStep to aggregate.
+     */
+    where?: QuestStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestSteps to fetch.
+     */
+    orderBy?: QuestStepOrderByWithRelationInput | QuestStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuestStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QuestSteps
+    **/
+    _count?: true | QuestStepCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuestStepAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuestStepSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuestStepMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuestStepMaxAggregateInputType
+  }
+
+  export type GetQuestStepAggregateType<T extends QuestStepAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuestStep]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuestStep[P]>
+      : GetScalarType<T[P], AggregateQuestStep[P]>
+  }
+
+
+
+
+  export type QuestStepGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestStepWhereInput
+    orderBy?: QuestStepOrderByWithAggregationInput | QuestStepOrderByWithAggregationInput[]
+    by: QuestStepScalarFieldEnum[] | QuestStepScalarFieldEnum
+    having?: QuestStepScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuestStepCountAggregateInputType | true
+    _avg?: QuestStepAvgAggregateInputType
+    _sum?: QuestStepSumAggregateInputType
+    _min?: QuestStepMinAggregateInputType
+    _max?: QuestStepMaxAggregateInputType
+  }
+
+  export type QuestStepGroupByOutputType = {
+    id: number
+    questId: number
+    type: $Enums.QuestType
+    targetSeedId: number | null
+    targetAmount: number
+    _count: QuestStepCountAggregateOutputType | null
+    _avg: QuestStepAvgAggregateOutputType | null
+    _sum: QuestStepSumAggregateOutputType | null
+    _min: QuestStepMinAggregateOutputType | null
+    _max: QuestStepMaxAggregateOutputType | null
+  }
+
+  type GetQuestStepGroupByPayload<T extends QuestStepGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuestStepGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuestStepGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuestStepGroupByOutputType[P]>
+            : GetScalarType<T[P], QuestStepGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuestStepSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    questId?: boolean
+    type?: boolean
+    targetSeedId?: boolean
+    targetAmount?: boolean
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    targetSeed?: boolean | QuestStep$targetSeedArgs<ExtArgs>
+    progress?: boolean | QuestStep$progressArgs<ExtArgs>
+    _count?: boolean | QuestStepCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questStep"]>
+
+  export type QuestStepSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    questId?: boolean
+    type?: boolean
+    targetSeedId?: boolean
+    targetAmount?: boolean
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    targetSeed?: boolean | QuestStep$targetSeedArgs<ExtArgs>
+  }, ExtArgs["result"]["questStep"]>
+
+  export type QuestStepSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    questId?: boolean
+    type?: boolean
+    targetSeedId?: boolean
+    targetAmount?: boolean
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    targetSeed?: boolean | QuestStep$targetSeedArgs<ExtArgs>
+  }, ExtArgs["result"]["questStep"]>
+
+  export type QuestStepSelectScalar = {
+    id?: boolean
+    questId?: boolean
+    type?: boolean
+    targetSeedId?: boolean
+    targetAmount?: boolean
+  }
+
+  export type QuestStepOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "questId" | "type" | "targetSeedId" | "targetAmount", ExtArgs["result"]["questStep"]>
+  export type QuestStepInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    targetSeed?: boolean | QuestStep$targetSeedArgs<ExtArgs>
+    progress?: boolean | QuestStep$progressArgs<ExtArgs>
+    _count?: boolean | QuestStepCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type QuestStepIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    targetSeed?: boolean | QuestStep$targetSeedArgs<ExtArgs>
+  }
+  export type QuestStepIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    targetSeed?: boolean | QuestStep$targetSeedArgs<ExtArgs>
+  }
+
+  export type $QuestStepPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QuestStep"
+    objects: {
+      quest: Prisma.$QuestPayload<ExtArgs>
+      targetSeed: Prisma.$SeedPayload<ExtArgs> | null
+      progress: Prisma.$QuestStepProgressPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      questId: number
+      type: $Enums.QuestType
+      targetSeedId: number | null
+      targetAmount: number
+    }, ExtArgs["result"]["questStep"]>
+    composites: {}
+  }
+
+  type QuestStepGetPayload<S extends boolean | null | undefined | QuestStepDefaultArgs> = $Result.GetResult<Prisma.$QuestStepPayload, S>
+
+  type QuestStepCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuestStepFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuestStepCountAggregateInputType | true
+    }
+
+  export interface QuestStepDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QuestStep'], meta: { name: 'QuestStep' } }
+    /**
+     * Find zero or one QuestStep that matches the filter.
+     * @param {QuestStepFindUniqueArgs} args - Arguments to find a QuestStep
+     * @example
+     * // Get one QuestStep
+     * const questStep = await prisma.questStep.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuestStepFindUniqueArgs>(args: SelectSubset<T, QuestStepFindUniqueArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QuestStep that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuestStepFindUniqueOrThrowArgs} args - Arguments to find a QuestStep
+     * @example
+     * // Get one QuestStep
+     * const questStep = await prisma.questStep.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuestStepFindUniqueOrThrowArgs>(args: SelectSubset<T, QuestStepFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestStep that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepFindFirstArgs} args - Arguments to find a QuestStep
+     * @example
+     * // Get one QuestStep
+     * const questStep = await prisma.questStep.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuestStepFindFirstArgs>(args?: SelectSubset<T, QuestStepFindFirstArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestStep that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepFindFirstOrThrowArgs} args - Arguments to find a QuestStep
+     * @example
+     * // Get one QuestStep
+     * const questStep = await prisma.questStep.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuestStepFindFirstOrThrowArgs>(args?: SelectSubset<T, QuestStepFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuestSteps that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QuestSteps
+     * const questSteps = await prisma.questStep.findMany()
+     * 
+     * // Get first 10 QuestSteps
+     * const questSteps = await prisma.questStep.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const questStepWithIdOnly = await prisma.questStep.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuestStepFindManyArgs>(args?: SelectSubset<T, QuestStepFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QuestStep.
+     * @param {QuestStepCreateArgs} args - Arguments to create a QuestStep.
+     * @example
+     * // Create one QuestStep
+     * const QuestStep = await prisma.questStep.create({
+     *   data: {
+     *     // ... data to create a QuestStep
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuestStepCreateArgs>(args: SelectSubset<T, QuestStepCreateArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QuestSteps.
+     * @param {QuestStepCreateManyArgs} args - Arguments to create many QuestSteps.
+     * @example
+     * // Create many QuestSteps
+     * const questStep = await prisma.questStep.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuestStepCreateManyArgs>(args?: SelectSubset<T, QuestStepCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many QuestSteps and returns the data saved in the database.
+     * @param {QuestStepCreateManyAndReturnArgs} args - Arguments to create many QuestSteps.
+     * @example
+     * // Create many QuestSteps
+     * const questStep = await prisma.questStep.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many QuestSteps and only return the `id`
+     * const questStepWithIdOnly = await prisma.questStep.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends QuestStepCreateManyAndReturnArgs>(args?: SelectSubset<T, QuestStepCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a QuestStep.
+     * @param {QuestStepDeleteArgs} args - Arguments to delete one QuestStep.
+     * @example
+     * // Delete one QuestStep
+     * const QuestStep = await prisma.questStep.delete({
+     *   where: {
+     *     // ... filter to delete one QuestStep
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuestStepDeleteArgs>(args: SelectSubset<T, QuestStepDeleteArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QuestStep.
+     * @param {QuestStepUpdateArgs} args - Arguments to update one QuestStep.
+     * @example
+     * // Update one QuestStep
+     * const questStep = await prisma.questStep.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuestStepUpdateArgs>(args: SelectSubset<T, QuestStepUpdateArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QuestSteps.
+     * @param {QuestStepDeleteManyArgs} args - Arguments to filter QuestSteps to delete.
+     * @example
+     * // Delete a few QuestSteps
+     * const { count } = await prisma.questStep.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuestStepDeleteManyArgs>(args?: SelectSubset<T, QuestStepDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestSteps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QuestSteps
+     * const questStep = await prisma.questStep.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuestStepUpdateManyArgs>(args: SelectSubset<T, QuestStepUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestSteps and returns the data updated in the database.
+     * @param {QuestStepUpdateManyAndReturnArgs} args - Arguments to update many QuestSteps.
+     * @example
+     * // Update many QuestSteps
+     * const questStep = await prisma.questStep.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more QuestSteps and only return the `id`
+     * const questStepWithIdOnly = await prisma.questStep.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends QuestStepUpdateManyAndReturnArgs>(args: SelectSubset<T, QuestStepUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one QuestStep.
+     * @param {QuestStepUpsertArgs} args - Arguments to update or create a QuestStep.
+     * @example
+     * // Update or create a QuestStep
+     * const questStep = await prisma.questStep.upsert({
+     *   create: {
+     *     // ... data to create a QuestStep
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QuestStep we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuestStepUpsertArgs>(args: SelectSubset<T, QuestStepUpsertArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QuestSteps.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepCountArgs} args - Arguments to filter QuestSteps to count.
+     * @example
+     * // Count the number of QuestSteps
+     * const count = await prisma.questStep.count({
+     *   where: {
+     *     // ... the filter for the QuestSteps we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuestStepCountArgs>(
+      args?: Subset<T, QuestStepCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuestStepCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QuestStep.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuestStepAggregateArgs>(args: Subset<T, QuestStepAggregateArgs>): Prisma.PrismaPromise<GetQuestStepAggregateType<T>>
+
+    /**
+     * Group by QuestStep.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuestStepGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuestStepGroupByArgs['orderBy'] }
+        : { orderBy?: QuestStepGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuestStepGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuestStepGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QuestStep model
+   */
+  readonly fields: QuestStepFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QuestStep.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuestStepClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quest<T extends QuestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestDefaultArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    targetSeed<T extends QuestStep$targetSeedArgs<ExtArgs> = {}>(args?: Subset<T, QuestStep$targetSeedArgs<ExtArgs>>): Prisma__SeedClient<$Result.GetResult<Prisma.$SeedPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    progress<T extends QuestStep$progressArgs<ExtArgs> = {}>(args?: Subset<T, QuestStep$progressArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QuestStep model
+   */
+  interface QuestStepFieldRefs {
+    readonly id: FieldRef<"QuestStep", 'Int'>
+    readonly questId: FieldRef<"QuestStep", 'Int'>
+    readonly type: FieldRef<"QuestStep", 'QuestType'>
+    readonly targetSeedId: FieldRef<"QuestStep", 'Int'>
+    readonly targetAmount: FieldRef<"QuestStep", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QuestStep findUnique
+   */
+  export type QuestStepFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStep to fetch.
+     */
+    where: QuestStepWhereUniqueInput
+  }
+
+  /**
+   * QuestStep findUniqueOrThrow
+   */
+  export type QuestStepFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStep to fetch.
+     */
+    where: QuestStepWhereUniqueInput
+  }
+
+  /**
+   * QuestStep findFirst
+   */
+  export type QuestStepFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStep to fetch.
+     */
+    where?: QuestStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestSteps to fetch.
+     */
+    orderBy?: QuestStepOrderByWithRelationInput | QuestStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestSteps.
+     */
+    cursor?: QuestStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestSteps.
+     */
+    distinct?: QuestStepScalarFieldEnum | QuestStepScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStep findFirstOrThrow
+   */
+  export type QuestStepFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStep to fetch.
+     */
+    where?: QuestStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestSteps to fetch.
+     */
+    orderBy?: QuestStepOrderByWithRelationInput | QuestStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestSteps.
+     */
+    cursor?: QuestStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestSteps.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestSteps.
+     */
+    distinct?: QuestStepScalarFieldEnum | QuestStepScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStep findMany
+   */
+  export type QuestStepFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestSteps to fetch.
+     */
+    where?: QuestStepWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestSteps to fetch.
+     */
+    orderBy?: QuestStepOrderByWithRelationInput | QuestStepOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QuestSteps.
+     */
+    cursor?: QuestStepWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestSteps from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestSteps.
+     */
+    skip?: number
+    distinct?: QuestStepScalarFieldEnum | QuestStepScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStep create
+   */
+  export type QuestStepCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * The data needed to create a QuestStep.
+     */
+    data: XOR<QuestStepCreateInput, QuestStepUncheckedCreateInput>
+  }
+
+  /**
+   * QuestStep createMany
+   */
+  export type QuestStepCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QuestSteps.
+     */
+    data: QuestStepCreateManyInput | QuestStepCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QuestStep createManyAndReturn
+   */
+  export type QuestStepCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * The data used to create many QuestSteps.
+     */
+    data: QuestStepCreateManyInput | QuestStepCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestStep update
+   */
+  export type QuestStepUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * The data needed to update a QuestStep.
+     */
+    data: XOR<QuestStepUpdateInput, QuestStepUncheckedUpdateInput>
+    /**
+     * Choose, which QuestStep to update.
+     */
+    where: QuestStepWhereUniqueInput
+  }
+
+  /**
+   * QuestStep updateMany
+   */
+  export type QuestStepUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QuestSteps.
+     */
+    data: XOR<QuestStepUpdateManyMutationInput, QuestStepUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestSteps to update
+     */
+    where?: QuestStepWhereInput
+    /**
+     * Limit how many QuestSteps to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestStep updateManyAndReturn
+   */
+  export type QuestStepUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * The data used to update QuestSteps.
+     */
+    data: XOR<QuestStepUpdateManyMutationInput, QuestStepUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestSteps to update
+     */
+    where?: QuestStepWhereInput
+    /**
+     * Limit how many QuestSteps to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestStep upsert
+   */
+  export type QuestStepUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * The filter to search for the QuestStep to update in case it exists.
+     */
+    where: QuestStepWhereUniqueInput
+    /**
+     * In case the QuestStep found by the `where` argument doesn't exist, create a new QuestStep with this data.
+     */
+    create: XOR<QuestStepCreateInput, QuestStepUncheckedCreateInput>
+    /**
+     * In case the QuestStep was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuestStepUpdateInput, QuestStepUncheckedUpdateInput>
+  }
+
+  /**
+   * QuestStep delete
+   */
+  export type QuestStepDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+    /**
+     * Filter which QuestStep to delete.
+     */
+    where: QuestStepWhereUniqueInput
+  }
+
+  /**
+   * QuestStep deleteMany
+   */
+  export type QuestStepDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestSteps to delete
+     */
+    where?: QuestStepWhereInput
+    /**
+     * Limit how many QuestSteps to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestStep.targetSeed
+   */
+  export type QuestStep$targetSeedArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seed
+     */
+    select?: SeedSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Seed
+     */
+    omit?: SeedOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeedInclude<ExtArgs> | null
+    where?: SeedWhereInput
+  }
+
+  /**
+   * QuestStep.progress
+   */
+  export type QuestStep$progressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    where?: QuestStepProgressWhereInput
+    orderBy?: QuestStepProgressOrderByWithRelationInput | QuestStepProgressOrderByWithRelationInput[]
+    cursor?: QuestStepProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestStepProgressScalarFieldEnum | QuestStepProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStep without action
+   */
+  export type QuestStepDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStep
+     */
+    select?: QuestStepSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStep
+     */
+    omit?: QuestStepOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model QuestProgress
+   */
+
+  export type AggregateQuestProgress = {
+    _count: QuestProgressCountAggregateOutputType | null
+    _avg: QuestProgressAvgAggregateOutputType | null
+    _sum: QuestProgressSumAggregateOutputType | null
+    _min: QuestProgressMinAggregateOutputType | null
+    _max: QuestProgressMaxAggregateOutputType | null
+  }
+
+  export type QuestProgressAvgAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    questId: number | null
+  }
+
+  export type QuestProgressSumAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    questId: number | null
+  }
+
+  export type QuestProgressMinAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    questId: number | null
+    completed: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QuestProgressMaxAggregateOutputType = {
+    id: number | null
+    characterId: number | null
+    questId: number | null
+    completed: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QuestProgressCountAggregateOutputType = {
+    id: number
+    characterId: number
+    questId: number
+    completed: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type QuestProgressAvgAggregateInputType = {
+    id?: true
+    characterId?: true
+    questId?: true
+  }
+
+  export type QuestProgressSumAggregateInputType = {
+    id?: true
+    characterId?: true
+    questId?: true
+  }
+
+  export type QuestProgressMinAggregateInputType = {
+    id?: true
+    characterId?: true
+    questId?: true
+    completed?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QuestProgressMaxAggregateInputType = {
+    id?: true
+    characterId?: true
+    questId?: true
+    completed?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QuestProgressCountAggregateInputType = {
+    id?: true
+    characterId?: true
+    questId?: true
+    completed?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type QuestProgressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestProgress to aggregate.
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestProgresses to fetch.
+     */
+    orderBy?: QuestProgressOrderByWithRelationInput | QuestProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuestProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QuestProgresses
+    **/
+    _count?: true | QuestProgressCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuestProgressAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuestProgressSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuestProgressMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuestProgressMaxAggregateInputType
+  }
+
+  export type GetQuestProgressAggregateType<T extends QuestProgressAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuestProgress]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuestProgress[P]>
+      : GetScalarType<T[P], AggregateQuestProgress[P]>
+  }
+
+
+
+
+  export type QuestProgressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestProgressWhereInput
+    orderBy?: QuestProgressOrderByWithAggregationInput | QuestProgressOrderByWithAggregationInput[]
+    by: QuestProgressScalarFieldEnum[] | QuestProgressScalarFieldEnum
+    having?: QuestProgressScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuestProgressCountAggregateInputType | true
+    _avg?: QuestProgressAvgAggregateInputType
+    _sum?: QuestProgressSumAggregateInputType
+    _min?: QuestProgressMinAggregateInputType
+    _max?: QuestProgressMaxAggregateInputType
+  }
+
+  export type QuestProgressGroupByOutputType = {
+    id: number
+    characterId: number
+    questId: number
+    completed: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: QuestProgressCountAggregateOutputType | null
+    _avg: QuestProgressAvgAggregateOutputType | null
+    _sum: QuestProgressSumAggregateOutputType | null
+    _min: QuestProgressMinAggregateOutputType | null
+    _max: QuestProgressMaxAggregateOutputType | null
+  }
+
+  type GetQuestProgressGroupByPayload<T extends QuestProgressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuestProgressGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuestProgressGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuestProgressGroupByOutputType[P]>
+            : GetScalarType<T[P], QuestProgressGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuestProgressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    characterId?: boolean
+    questId?: boolean
+    completed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    steps?: boolean | QuestProgress$stepsArgs<ExtArgs>
+    _count?: boolean | QuestProgressCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questProgress"]>
+
+  export type QuestProgressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    characterId?: boolean
+    questId?: boolean
+    completed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questProgress"]>
+
+  export type QuestProgressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    characterId?: boolean
+    questId?: boolean
+    completed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questProgress"]>
+
+  export type QuestProgressSelectScalar = {
+    id?: boolean
+    characterId?: boolean
+    questId?: boolean
+    completed?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type QuestProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "characterId" | "questId" | "completed" | "createdAt" | "updatedAt", ExtArgs["result"]["questProgress"]>
+  export type QuestProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+    steps?: boolean | QuestProgress$stepsArgs<ExtArgs>
+    _count?: boolean | QuestProgressCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type QuestProgressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+  }
+  export type QuestProgressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    character?: boolean | CharacterDefaultArgs<ExtArgs>
+    quest?: boolean | QuestDefaultArgs<ExtArgs>
+  }
+
+  export type $QuestProgressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QuestProgress"
+    objects: {
+      character: Prisma.$CharacterPayload<ExtArgs>
+      quest: Prisma.$QuestPayload<ExtArgs>
+      steps: Prisma.$QuestStepProgressPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      characterId: number
+      questId: number
+      completed: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["questProgress"]>
+    composites: {}
+  }
+
+  type QuestProgressGetPayload<S extends boolean | null | undefined | QuestProgressDefaultArgs> = $Result.GetResult<Prisma.$QuestProgressPayload, S>
+
+  type QuestProgressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuestProgressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuestProgressCountAggregateInputType | true
+    }
+
+  export interface QuestProgressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QuestProgress'], meta: { name: 'QuestProgress' } }
+    /**
+     * Find zero or one QuestProgress that matches the filter.
+     * @param {QuestProgressFindUniqueArgs} args - Arguments to find a QuestProgress
+     * @example
+     * // Get one QuestProgress
+     * const questProgress = await prisma.questProgress.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuestProgressFindUniqueArgs>(args: SelectSubset<T, QuestProgressFindUniqueArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QuestProgress that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuestProgressFindUniqueOrThrowArgs} args - Arguments to find a QuestProgress
+     * @example
+     * // Get one QuestProgress
+     * const questProgress = await prisma.questProgress.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuestProgressFindUniqueOrThrowArgs>(args: SelectSubset<T, QuestProgressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestProgress that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressFindFirstArgs} args - Arguments to find a QuestProgress
+     * @example
+     * // Get one QuestProgress
+     * const questProgress = await prisma.questProgress.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuestProgressFindFirstArgs>(args?: SelectSubset<T, QuestProgressFindFirstArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestProgress that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressFindFirstOrThrowArgs} args - Arguments to find a QuestProgress
+     * @example
+     * // Get one QuestProgress
+     * const questProgress = await prisma.questProgress.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuestProgressFindFirstOrThrowArgs>(args?: SelectSubset<T, QuestProgressFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuestProgresses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QuestProgresses
+     * const questProgresses = await prisma.questProgress.findMany()
+     * 
+     * // Get first 10 QuestProgresses
+     * const questProgresses = await prisma.questProgress.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const questProgressWithIdOnly = await prisma.questProgress.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuestProgressFindManyArgs>(args?: SelectSubset<T, QuestProgressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QuestProgress.
+     * @param {QuestProgressCreateArgs} args - Arguments to create a QuestProgress.
+     * @example
+     * // Create one QuestProgress
+     * const QuestProgress = await prisma.questProgress.create({
+     *   data: {
+     *     // ... data to create a QuestProgress
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuestProgressCreateArgs>(args: SelectSubset<T, QuestProgressCreateArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QuestProgresses.
+     * @param {QuestProgressCreateManyArgs} args - Arguments to create many QuestProgresses.
+     * @example
+     * // Create many QuestProgresses
+     * const questProgress = await prisma.questProgress.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuestProgressCreateManyArgs>(args?: SelectSubset<T, QuestProgressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many QuestProgresses and returns the data saved in the database.
+     * @param {QuestProgressCreateManyAndReturnArgs} args - Arguments to create many QuestProgresses.
+     * @example
+     * // Create many QuestProgresses
+     * const questProgress = await prisma.questProgress.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many QuestProgresses and only return the `id`
+     * const questProgressWithIdOnly = await prisma.questProgress.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends QuestProgressCreateManyAndReturnArgs>(args?: SelectSubset<T, QuestProgressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a QuestProgress.
+     * @param {QuestProgressDeleteArgs} args - Arguments to delete one QuestProgress.
+     * @example
+     * // Delete one QuestProgress
+     * const QuestProgress = await prisma.questProgress.delete({
+     *   where: {
+     *     // ... filter to delete one QuestProgress
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuestProgressDeleteArgs>(args: SelectSubset<T, QuestProgressDeleteArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QuestProgress.
+     * @param {QuestProgressUpdateArgs} args - Arguments to update one QuestProgress.
+     * @example
+     * // Update one QuestProgress
+     * const questProgress = await prisma.questProgress.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuestProgressUpdateArgs>(args: SelectSubset<T, QuestProgressUpdateArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QuestProgresses.
+     * @param {QuestProgressDeleteManyArgs} args - Arguments to filter QuestProgresses to delete.
+     * @example
+     * // Delete a few QuestProgresses
+     * const { count } = await prisma.questProgress.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuestProgressDeleteManyArgs>(args?: SelectSubset<T, QuestProgressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestProgresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QuestProgresses
+     * const questProgress = await prisma.questProgress.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuestProgressUpdateManyArgs>(args: SelectSubset<T, QuestProgressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestProgresses and returns the data updated in the database.
+     * @param {QuestProgressUpdateManyAndReturnArgs} args - Arguments to update many QuestProgresses.
+     * @example
+     * // Update many QuestProgresses
+     * const questProgress = await prisma.questProgress.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more QuestProgresses and only return the `id`
+     * const questProgressWithIdOnly = await prisma.questProgress.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends QuestProgressUpdateManyAndReturnArgs>(args: SelectSubset<T, QuestProgressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one QuestProgress.
+     * @param {QuestProgressUpsertArgs} args - Arguments to update or create a QuestProgress.
+     * @example
+     * // Update or create a QuestProgress
+     * const questProgress = await prisma.questProgress.upsert({
+     *   create: {
+     *     // ... data to create a QuestProgress
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QuestProgress we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuestProgressUpsertArgs>(args: SelectSubset<T, QuestProgressUpsertArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QuestProgresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressCountArgs} args - Arguments to filter QuestProgresses to count.
+     * @example
+     * // Count the number of QuestProgresses
+     * const count = await prisma.questProgress.count({
+     *   where: {
+     *     // ... the filter for the QuestProgresses we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuestProgressCountArgs>(
+      args?: Subset<T, QuestProgressCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuestProgressCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QuestProgress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuestProgressAggregateArgs>(args: Subset<T, QuestProgressAggregateArgs>): Prisma.PrismaPromise<GetQuestProgressAggregateType<T>>
+
+    /**
+     * Group by QuestProgress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestProgressGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuestProgressGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuestProgressGroupByArgs['orderBy'] }
+        : { orderBy?: QuestProgressGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuestProgressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuestProgressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QuestProgress model
+   */
+  readonly fields: QuestProgressFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QuestProgress.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuestProgressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    character<T extends CharacterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CharacterDefaultArgs<ExtArgs>>): Prisma__CharacterClient<$Result.GetResult<Prisma.$CharacterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    quest<T extends QuestDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestDefaultArgs<ExtArgs>>): Prisma__QuestClient<$Result.GetResult<Prisma.$QuestPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    steps<T extends QuestProgress$stepsArgs<ExtArgs> = {}>(args?: Subset<T, QuestProgress$stepsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QuestProgress model
+   */
+  interface QuestProgressFieldRefs {
+    readonly id: FieldRef<"QuestProgress", 'Int'>
+    readonly characterId: FieldRef<"QuestProgress", 'Int'>
+    readonly questId: FieldRef<"QuestProgress", 'Int'>
+    readonly completed: FieldRef<"QuestProgress", 'Boolean'>
+    readonly createdAt: FieldRef<"QuestProgress", 'DateTime'>
+    readonly updatedAt: FieldRef<"QuestProgress", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QuestProgress findUnique
+   */
+  export type QuestProgressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestProgress to fetch.
+     */
+    where: QuestProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestProgress findUniqueOrThrow
+   */
+  export type QuestProgressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestProgress to fetch.
+     */
+    where: QuestProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestProgress findFirst
+   */
+  export type QuestProgressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestProgress to fetch.
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestProgresses to fetch.
+     */
+    orderBy?: QuestProgressOrderByWithRelationInput | QuestProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestProgresses.
+     */
+    cursor?: QuestProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestProgresses.
+     */
+    distinct?: QuestProgressScalarFieldEnum | QuestProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestProgress findFirstOrThrow
+   */
+  export type QuestProgressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestProgress to fetch.
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestProgresses to fetch.
+     */
+    orderBy?: QuestProgressOrderByWithRelationInput | QuestProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestProgresses.
+     */
+    cursor?: QuestProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestProgresses.
+     */
+    distinct?: QuestProgressScalarFieldEnum | QuestProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestProgress findMany
+   */
+  export type QuestProgressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestProgresses to fetch.
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestProgresses to fetch.
+     */
+    orderBy?: QuestProgressOrderByWithRelationInput | QuestProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QuestProgresses.
+     */
+    cursor?: QuestProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestProgresses.
+     */
+    skip?: number
+    distinct?: QuestProgressScalarFieldEnum | QuestProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestProgress create
+   */
+  export type QuestProgressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to create a QuestProgress.
+     */
+    data: XOR<QuestProgressCreateInput, QuestProgressUncheckedCreateInput>
+  }
+
+  /**
+   * QuestProgress createMany
+   */
+  export type QuestProgressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QuestProgresses.
+     */
+    data: QuestProgressCreateManyInput | QuestProgressCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QuestProgress createManyAndReturn
+   */
+  export type QuestProgressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * The data used to create many QuestProgresses.
+     */
+    data: QuestProgressCreateManyInput | QuestProgressCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestProgress update
+   */
+  export type QuestProgressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to update a QuestProgress.
+     */
+    data: XOR<QuestProgressUpdateInput, QuestProgressUncheckedUpdateInput>
+    /**
+     * Choose, which QuestProgress to update.
+     */
+    where: QuestProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestProgress updateMany
+   */
+  export type QuestProgressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QuestProgresses.
+     */
+    data: XOR<QuestProgressUpdateManyMutationInput, QuestProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestProgresses to update
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * Limit how many QuestProgresses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestProgress updateManyAndReturn
+   */
+  export type QuestProgressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * The data used to update QuestProgresses.
+     */
+    data: XOR<QuestProgressUpdateManyMutationInput, QuestProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestProgresses to update
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * Limit how many QuestProgresses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestProgress upsert
+   */
+  export type QuestProgressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * The filter to search for the QuestProgress to update in case it exists.
+     */
+    where: QuestProgressWhereUniqueInput
+    /**
+     * In case the QuestProgress found by the `where` argument doesn't exist, create a new QuestProgress with this data.
+     */
+    create: XOR<QuestProgressCreateInput, QuestProgressUncheckedCreateInput>
+    /**
+     * In case the QuestProgress was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuestProgressUpdateInput, QuestProgressUncheckedUpdateInput>
+  }
+
+  /**
+   * QuestProgress delete
+   */
+  export type QuestProgressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+    /**
+     * Filter which QuestProgress to delete.
+     */
+    where: QuestProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestProgress deleteMany
+   */
+  export type QuestProgressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestProgresses to delete
+     */
+    where?: QuestProgressWhereInput
+    /**
+     * Limit how many QuestProgresses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestProgress.steps
+   */
+  export type QuestProgress$stepsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    where?: QuestStepProgressWhereInput
+    orderBy?: QuestStepProgressOrderByWithRelationInput | QuestStepProgressOrderByWithRelationInput[]
+    cursor?: QuestStepProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuestStepProgressScalarFieldEnum | QuestStepProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestProgress without action
+   */
+  export type QuestProgressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestProgress
+     */
+    select?: QuestProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestProgress
+     */
+    omit?: QuestProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestProgressInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model QuestStepProgress
+   */
+
+  export type AggregateQuestStepProgress = {
+    _count: QuestStepProgressCountAggregateOutputType | null
+    _avg: QuestStepProgressAvgAggregateOutputType | null
+    _sum: QuestStepProgressSumAggregateOutputType | null
+    _min: QuestStepProgressMinAggregateOutputType | null
+    _max: QuestStepProgressMaxAggregateOutputType | null
+  }
+
+  export type QuestStepProgressAvgAggregateOutputType = {
+    id: number | null
+    stepId: number | null
+    current: number | null
+    progressId: number | null
+  }
+
+  export type QuestStepProgressSumAggregateOutputType = {
+    id: number | null
+    stepId: number | null
+    current: number | null
+    progressId: number | null
+  }
+
+  export type QuestStepProgressMinAggregateOutputType = {
+    id: number | null
+    stepId: number | null
+    current: number | null
+    completed: boolean | null
+    progressId: number | null
+  }
+
+  export type QuestStepProgressMaxAggregateOutputType = {
+    id: number | null
+    stepId: number | null
+    current: number | null
+    completed: boolean | null
+    progressId: number | null
+  }
+
+  export type QuestStepProgressCountAggregateOutputType = {
+    id: number
+    stepId: number
+    current: number
+    completed: number
+    progressId: number
+    _all: number
+  }
+
+
+  export type QuestStepProgressAvgAggregateInputType = {
+    id?: true
+    stepId?: true
+    current?: true
+    progressId?: true
+  }
+
+  export type QuestStepProgressSumAggregateInputType = {
+    id?: true
+    stepId?: true
+    current?: true
+    progressId?: true
+  }
+
+  export type QuestStepProgressMinAggregateInputType = {
+    id?: true
+    stepId?: true
+    current?: true
+    completed?: true
+    progressId?: true
+  }
+
+  export type QuestStepProgressMaxAggregateInputType = {
+    id?: true
+    stepId?: true
+    current?: true
+    completed?: true
+    progressId?: true
+  }
+
+  export type QuestStepProgressCountAggregateInputType = {
+    id?: true
+    stepId?: true
+    current?: true
+    completed?: true
+    progressId?: true
+    _all?: true
+  }
+
+  export type QuestStepProgressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestStepProgress to aggregate.
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestStepProgresses to fetch.
+     */
+    orderBy?: QuestStepProgressOrderByWithRelationInput | QuestStepProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuestStepProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestStepProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestStepProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QuestStepProgresses
+    **/
+    _count?: true | QuestStepProgressCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuestStepProgressAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuestStepProgressSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuestStepProgressMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuestStepProgressMaxAggregateInputType
+  }
+
+  export type GetQuestStepProgressAggregateType<T extends QuestStepProgressAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuestStepProgress]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuestStepProgress[P]>
+      : GetScalarType<T[P], AggregateQuestStepProgress[P]>
+  }
+
+
+
+
+  export type QuestStepProgressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuestStepProgressWhereInput
+    orderBy?: QuestStepProgressOrderByWithAggregationInput | QuestStepProgressOrderByWithAggregationInput[]
+    by: QuestStepProgressScalarFieldEnum[] | QuestStepProgressScalarFieldEnum
+    having?: QuestStepProgressScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuestStepProgressCountAggregateInputType | true
+    _avg?: QuestStepProgressAvgAggregateInputType
+    _sum?: QuestStepProgressSumAggregateInputType
+    _min?: QuestStepProgressMinAggregateInputType
+    _max?: QuestStepProgressMaxAggregateInputType
+  }
+
+  export type QuestStepProgressGroupByOutputType = {
+    id: number
+    stepId: number
+    current: number
+    completed: boolean
+    progressId: number
+    _count: QuestStepProgressCountAggregateOutputType | null
+    _avg: QuestStepProgressAvgAggregateOutputType | null
+    _sum: QuestStepProgressSumAggregateOutputType | null
+    _min: QuestStepProgressMinAggregateOutputType | null
+    _max: QuestStepProgressMaxAggregateOutputType | null
+  }
+
+  type GetQuestStepProgressGroupByPayload<T extends QuestStepProgressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuestStepProgressGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuestStepProgressGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuestStepProgressGroupByOutputType[P]>
+            : GetScalarType<T[P], QuestStepProgressGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuestStepProgressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stepId?: boolean
+    current?: boolean
+    completed?: boolean
+    progressId?: boolean
+    step?: boolean | QuestStepDefaultArgs<ExtArgs>
+    progress?: boolean | QuestProgressDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questStepProgress"]>
+
+  export type QuestStepProgressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stepId?: boolean
+    current?: boolean
+    completed?: boolean
+    progressId?: boolean
+    step?: boolean | QuestStepDefaultArgs<ExtArgs>
+    progress?: boolean | QuestProgressDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questStepProgress"]>
+
+  export type QuestStepProgressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    stepId?: boolean
+    current?: boolean
+    completed?: boolean
+    progressId?: boolean
+    step?: boolean | QuestStepDefaultArgs<ExtArgs>
+    progress?: boolean | QuestProgressDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["questStepProgress"]>
+
+  export type QuestStepProgressSelectScalar = {
+    id?: boolean
+    stepId?: boolean
+    current?: boolean
+    completed?: boolean
+    progressId?: boolean
+  }
+
+  export type QuestStepProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "stepId" | "current" | "completed" | "progressId", ExtArgs["result"]["questStepProgress"]>
+  export type QuestStepProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    step?: boolean | QuestStepDefaultArgs<ExtArgs>
+    progress?: boolean | QuestProgressDefaultArgs<ExtArgs>
+  }
+  export type QuestStepProgressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    step?: boolean | QuestStepDefaultArgs<ExtArgs>
+    progress?: boolean | QuestProgressDefaultArgs<ExtArgs>
+  }
+  export type QuestStepProgressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    step?: boolean | QuestStepDefaultArgs<ExtArgs>
+    progress?: boolean | QuestProgressDefaultArgs<ExtArgs>
+  }
+
+  export type $QuestStepProgressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QuestStepProgress"
+    objects: {
+      step: Prisma.$QuestStepPayload<ExtArgs>
+      progress: Prisma.$QuestProgressPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      stepId: number
+      current: number
+      completed: boolean
+      progressId: number
+    }, ExtArgs["result"]["questStepProgress"]>
+    composites: {}
+  }
+
+  type QuestStepProgressGetPayload<S extends boolean | null | undefined | QuestStepProgressDefaultArgs> = $Result.GetResult<Prisma.$QuestStepProgressPayload, S>
+
+  type QuestStepProgressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuestStepProgressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuestStepProgressCountAggregateInputType | true
+    }
+
+  export interface QuestStepProgressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QuestStepProgress'], meta: { name: 'QuestStepProgress' } }
+    /**
+     * Find zero or one QuestStepProgress that matches the filter.
+     * @param {QuestStepProgressFindUniqueArgs} args - Arguments to find a QuestStepProgress
+     * @example
+     * // Get one QuestStepProgress
+     * const questStepProgress = await prisma.questStepProgress.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuestStepProgressFindUniqueArgs>(args: SelectSubset<T, QuestStepProgressFindUniqueArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QuestStepProgress that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuestStepProgressFindUniqueOrThrowArgs} args - Arguments to find a QuestStepProgress
+     * @example
+     * // Get one QuestStepProgress
+     * const questStepProgress = await prisma.questStepProgress.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuestStepProgressFindUniqueOrThrowArgs>(args: SelectSubset<T, QuestStepProgressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestStepProgress that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressFindFirstArgs} args - Arguments to find a QuestStepProgress
+     * @example
+     * // Get one QuestStepProgress
+     * const questStepProgress = await prisma.questStepProgress.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuestStepProgressFindFirstArgs>(args?: SelectSubset<T, QuestStepProgressFindFirstArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuestStepProgress that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressFindFirstOrThrowArgs} args - Arguments to find a QuestStepProgress
+     * @example
+     * // Get one QuestStepProgress
+     * const questStepProgress = await prisma.questStepProgress.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuestStepProgressFindFirstOrThrowArgs>(args?: SelectSubset<T, QuestStepProgressFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuestStepProgresses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QuestStepProgresses
+     * const questStepProgresses = await prisma.questStepProgress.findMany()
+     * 
+     * // Get first 10 QuestStepProgresses
+     * const questStepProgresses = await prisma.questStepProgress.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const questStepProgressWithIdOnly = await prisma.questStepProgress.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuestStepProgressFindManyArgs>(args?: SelectSubset<T, QuestStepProgressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QuestStepProgress.
+     * @param {QuestStepProgressCreateArgs} args - Arguments to create a QuestStepProgress.
+     * @example
+     * // Create one QuestStepProgress
+     * const QuestStepProgress = await prisma.questStepProgress.create({
+     *   data: {
+     *     // ... data to create a QuestStepProgress
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuestStepProgressCreateArgs>(args: SelectSubset<T, QuestStepProgressCreateArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QuestStepProgresses.
+     * @param {QuestStepProgressCreateManyArgs} args - Arguments to create many QuestStepProgresses.
+     * @example
+     * // Create many QuestStepProgresses
+     * const questStepProgress = await prisma.questStepProgress.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuestStepProgressCreateManyArgs>(args?: SelectSubset<T, QuestStepProgressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many QuestStepProgresses and returns the data saved in the database.
+     * @param {QuestStepProgressCreateManyAndReturnArgs} args - Arguments to create many QuestStepProgresses.
+     * @example
+     * // Create many QuestStepProgresses
+     * const questStepProgress = await prisma.questStepProgress.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many QuestStepProgresses and only return the `id`
+     * const questStepProgressWithIdOnly = await prisma.questStepProgress.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends QuestStepProgressCreateManyAndReturnArgs>(args?: SelectSubset<T, QuestStepProgressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a QuestStepProgress.
+     * @param {QuestStepProgressDeleteArgs} args - Arguments to delete one QuestStepProgress.
+     * @example
+     * // Delete one QuestStepProgress
+     * const QuestStepProgress = await prisma.questStepProgress.delete({
+     *   where: {
+     *     // ... filter to delete one QuestStepProgress
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuestStepProgressDeleteArgs>(args: SelectSubset<T, QuestStepProgressDeleteArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QuestStepProgress.
+     * @param {QuestStepProgressUpdateArgs} args - Arguments to update one QuestStepProgress.
+     * @example
+     * // Update one QuestStepProgress
+     * const questStepProgress = await prisma.questStepProgress.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuestStepProgressUpdateArgs>(args: SelectSubset<T, QuestStepProgressUpdateArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QuestStepProgresses.
+     * @param {QuestStepProgressDeleteManyArgs} args - Arguments to filter QuestStepProgresses to delete.
+     * @example
+     * // Delete a few QuestStepProgresses
+     * const { count } = await prisma.questStepProgress.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuestStepProgressDeleteManyArgs>(args?: SelectSubset<T, QuestStepProgressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestStepProgresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QuestStepProgresses
+     * const questStepProgress = await prisma.questStepProgress.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuestStepProgressUpdateManyArgs>(args: SelectSubset<T, QuestStepProgressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuestStepProgresses and returns the data updated in the database.
+     * @param {QuestStepProgressUpdateManyAndReturnArgs} args - Arguments to update many QuestStepProgresses.
+     * @example
+     * // Update many QuestStepProgresses
+     * const questStepProgress = await prisma.questStepProgress.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more QuestStepProgresses and only return the `id`
+     * const questStepProgressWithIdOnly = await prisma.questStepProgress.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends QuestStepProgressUpdateManyAndReturnArgs>(args: SelectSubset<T, QuestStepProgressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one QuestStepProgress.
+     * @param {QuestStepProgressUpsertArgs} args - Arguments to update or create a QuestStepProgress.
+     * @example
+     * // Update or create a QuestStepProgress
+     * const questStepProgress = await prisma.questStepProgress.upsert({
+     *   create: {
+     *     // ... data to create a QuestStepProgress
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QuestStepProgress we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuestStepProgressUpsertArgs>(args: SelectSubset<T, QuestStepProgressUpsertArgs<ExtArgs>>): Prisma__QuestStepProgressClient<$Result.GetResult<Prisma.$QuestStepProgressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QuestStepProgresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressCountArgs} args - Arguments to filter QuestStepProgresses to count.
+     * @example
+     * // Count the number of QuestStepProgresses
+     * const count = await prisma.questStepProgress.count({
+     *   where: {
+     *     // ... the filter for the QuestStepProgresses we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuestStepProgressCountArgs>(
+      args?: Subset<T, QuestStepProgressCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuestStepProgressCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QuestStepProgress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuestStepProgressAggregateArgs>(args: Subset<T, QuestStepProgressAggregateArgs>): Prisma.PrismaPromise<GetQuestStepProgressAggregateType<T>>
+
+    /**
+     * Group by QuestStepProgress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuestStepProgressGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuestStepProgressGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuestStepProgressGroupByArgs['orderBy'] }
+        : { orderBy?: QuestStepProgressGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuestStepProgressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuestStepProgressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QuestStepProgress model
+   */
+  readonly fields: QuestStepProgressFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QuestStepProgress.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuestStepProgressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    step<T extends QuestStepDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestStepDefaultArgs<ExtArgs>>): Prisma__QuestStepClient<$Result.GetResult<Prisma.$QuestStepPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    progress<T extends QuestProgressDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuestProgressDefaultArgs<ExtArgs>>): Prisma__QuestProgressClient<$Result.GetResult<Prisma.$QuestProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QuestStepProgress model
+   */
+  interface QuestStepProgressFieldRefs {
+    readonly id: FieldRef<"QuestStepProgress", 'Int'>
+    readonly stepId: FieldRef<"QuestStepProgress", 'Int'>
+    readonly current: FieldRef<"QuestStepProgress", 'Int'>
+    readonly completed: FieldRef<"QuestStepProgress", 'Boolean'>
+    readonly progressId: FieldRef<"QuestStepProgress", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QuestStepProgress findUnique
+   */
+  export type QuestStepProgressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStepProgress to fetch.
+     */
+    where: QuestStepProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestStepProgress findUniqueOrThrow
+   */
+  export type QuestStepProgressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStepProgress to fetch.
+     */
+    where: QuestStepProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestStepProgress findFirst
+   */
+  export type QuestStepProgressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStepProgress to fetch.
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestStepProgresses to fetch.
+     */
+    orderBy?: QuestStepProgressOrderByWithRelationInput | QuestStepProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestStepProgresses.
+     */
+    cursor?: QuestStepProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestStepProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestStepProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestStepProgresses.
+     */
+    distinct?: QuestStepProgressScalarFieldEnum | QuestStepProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStepProgress findFirstOrThrow
+   */
+  export type QuestStepProgressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStepProgress to fetch.
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestStepProgresses to fetch.
+     */
+    orderBy?: QuestStepProgressOrderByWithRelationInput | QuestStepProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuestStepProgresses.
+     */
+    cursor?: QuestStepProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestStepProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestStepProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuestStepProgresses.
+     */
+    distinct?: QuestStepProgressScalarFieldEnum | QuestStepProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStepProgress findMany
+   */
+  export type QuestStepProgressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which QuestStepProgresses to fetch.
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuestStepProgresses to fetch.
+     */
+    orderBy?: QuestStepProgressOrderByWithRelationInput | QuestStepProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QuestStepProgresses.
+     */
+    cursor?: QuestStepProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuestStepProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuestStepProgresses.
+     */
+    skip?: number
+    distinct?: QuestStepProgressScalarFieldEnum | QuestStepProgressScalarFieldEnum[]
+  }
+
+  /**
+   * QuestStepProgress create
+   */
+  export type QuestStepProgressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to create a QuestStepProgress.
+     */
+    data: XOR<QuestStepProgressCreateInput, QuestStepProgressUncheckedCreateInput>
+  }
+
+  /**
+   * QuestStepProgress createMany
+   */
+  export type QuestStepProgressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QuestStepProgresses.
+     */
+    data: QuestStepProgressCreateManyInput | QuestStepProgressCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QuestStepProgress createManyAndReturn
+   */
+  export type QuestStepProgressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * The data used to create many QuestStepProgresses.
+     */
+    data: QuestStepProgressCreateManyInput | QuestStepProgressCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestStepProgress update
+   */
+  export type QuestStepProgressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to update a QuestStepProgress.
+     */
+    data: XOR<QuestStepProgressUpdateInput, QuestStepProgressUncheckedUpdateInput>
+    /**
+     * Choose, which QuestStepProgress to update.
+     */
+    where: QuestStepProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestStepProgress updateMany
+   */
+  export type QuestStepProgressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QuestStepProgresses.
+     */
+    data: XOR<QuestStepProgressUpdateManyMutationInput, QuestStepProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestStepProgresses to update
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * Limit how many QuestStepProgresses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestStepProgress updateManyAndReturn
+   */
+  export type QuestStepProgressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * The data used to update QuestStepProgresses.
+     */
+    data: XOR<QuestStepProgressUpdateManyMutationInput, QuestStepProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which QuestStepProgresses to update
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * Limit how many QuestStepProgresses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * QuestStepProgress upsert
+   */
+  export type QuestStepProgressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * The filter to search for the QuestStepProgress to update in case it exists.
+     */
+    where: QuestStepProgressWhereUniqueInput
+    /**
+     * In case the QuestStepProgress found by the `where` argument doesn't exist, create a new QuestStepProgress with this data.
+     */
+    create: XOR<QuestStepProgressCreateInput, QuestStepProgressUncheckedCreateInput>
+    /**
+     * In case the QuestStepProgress was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuestStepProgressUpdateInput, QuestStepProgressUncheckedUpdateInput>
+  }
+
+  /**
+   * QuestStepProgress delete
+   */
+  export type QuestStepProgressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+    /**
+     * Filter which QuestStepProgress to delete.
+     */
+    where: QuestStepProgressWhereUniqueInput
+  }
+
+  /**
+   * QuestStepProgress deleteMany
+   */
+  export type QuestStepProgressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuestStepProgresses to delete
+     */
+    where?: QuestStepProgressWhereInput
+    /**
+     * Limit how many QuestStepProgresses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuestStepProgress without action
+   */
+  export type QuestStepProgressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuestStepProgress
+     */
+    select?: QuestStepProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuestStepProgress
+     */
+    omit?: QuestStepProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuestStepProgressInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -6939,6 +12074,52 @@ export namespace Prisma {
   };
 
   export type PlotScalarFieldEnum = (typeof PlotScalarFieldEnum)[keyof typeof PlotScalarFieldEnum]
+
+
+  export const QuestScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    recommendedLevel: 'recommendedLevel',
+    rewardXP: 'rewardXP',
+    rewardCoins: 'rewardCoins'
+  };
+
+  export type QuestScalarFieldEnum = (typeof QuestScalarFieldEnum)[keyof typeof QuestScalarFieldEnum]
+
+
+  export const QuestStepScalarFieldEnum: {
+    id: 'id',
+    questId: 'questId',
+    type: 'type',
+    targetSeedId: 'targetSeedId',
+    targetAmount: 'targetAmount'
+  };
+
+  export type QuestStepScalarFieldEnum = (typeof QuestStepScalarFieldEnum)[keyof typeof QuestStepScalarFieldEnum]
+
+
+  export const QuestProgressScalarFieldEnum: {
+    id: 'id',
+    characterId: 'characterId',
+    questId: 'questId',
+    completed: 'completed',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type QuestProgressScalarFieldEnum = (typeof QuestProgressScalarFieldEnum)[keyof typeof QuestProgressScalarFieldEnum]
+
+
+  export const QuestStepProgressScalarFieldEnum: {
+    id: 'id',
+    stepId: 'stepId',
+    current: 'current',
+    completed: 'completed',
+    progressId: 'progressId'
+  };
+
+  export type QuestStepProgressScalarFieldEnum = (typeof QuestStepProgressScalarFieldEnum)[keyof typeof QuestStepProgressScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -7034,6 +12215,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'QuestType'
+   */
+  export type EnumQuestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuestType'>
+    
+
+
+  /**
+   * Reference to a field of type 'QuestType[]'
+   */
+  export type ListEnumQuestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuestType[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -7116,6 +12311,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Character"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plots?: PlotListRelationFilter
+    questProgresses?: QuestProgressListRelationFilter
   }
 
   export type CharacterOrderByWithRelationInput = {
@@ -7129,6 +12325,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     user?: UserOrderByWithRelationInput
     plots?: PlotOrderByRelationAggregateInput
+    questProgresses?: QuestProgressOrderByRelationAggregateInput
   }
 
   export type CharacterWhereUniqueInput = Prisma.AtLeast<{
@@ -7145,6 +12342,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Character"> | Date | string
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
     plots?: PlotListRelationFilter
+    questProgresses?: QuestProgressListRelationFilter
   }, "id" | "userId">
 
   export type CharacterOrderByWithAggregationInput = {
@@ -7234,6 +12432,7 @@ export namespace Prisma {
     buyPrice?: IntFilter<"Seed"> | number
     sellPrice?: IntFilter<"Seed"> | number
     Plot?: PlotListRelationFilter
+    questSteps?: QuestStepListRelationFilter
   }
 
   export type SeedOrderByWithRelationInput = {
@@ -7246,6 +12445,7 @@ export namespace Prisma {
     buyPrice?: SortOrder
     sellPrice?: SortOrder
     Plot?: PlotOrderByRelationAggregateInput
+    questSteps?: QuestStepOrderByRelationAggregateInput
   }
 
   export type SeedWhereUniqueInput = Prisma.AtLeast<{
@@ -7261,6 +12461,7 @@ export namespace Prisma {
     buyPrice?: IntFilter<"Seed"> | number
     sellPrice?: IntFilter<"Seed"> | number
     Plot?: PlotListRelationFilter
+    questSteps?: QuestStepListRelationFilter
   }, "id" | "key">
 
   export type SeedOrderByWithAggregationInput = {
@@ -7353,6 +12554,264 @@ export namespace Prisma {
     isReady?: BoolWithAggregatesFilter<"Plot"> | boolean
   }
 
+  export type QuestWhereInput = {
+    AND?: QuestWhereInput | QuestWhereInput[]
+    OR?: QuestWhereInput[]
+    NOT?: QuestWhereInput | QuestWhereInput[]
+    id?: IntFilter<"Quest"> | number
+    title?: StringFilter<"Quest"> | string
+    description?: StringFilter<"Quest"> | string
+    recommendedLevel?: IntFilter<"Quest"> | number
+    rewardXP?: IntFilter<"Quest"> | number
+    rewardCoins?: IntFilter<"Quest"> | number
+    steps?: QuestStepListRelationFilter
+    progresses?: QuestProgressListRelationFilter
+  }
+
+  export type QuestOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+    steps?: QuestStepOrderByRelationAggregateInput
+    progresses?: QuestProgressOrderByRelationAggregateInput
+  }
+
+  export type QuestWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: QuestWhereInput | QuestWhereInput[]
+    OR?: QuestWhereInput[]
+    NOT?: QuestWhereInput | QuestWhereInput[]
+    title?: StringFilter<"Quest"> | string
+    description?: StringFilter<"Quest"> | string
+    recommendedLevel?: IntFilter<"Quest"> | number
+    rewardXP?: IntFilter<"Quest"> | number
+    rewardCoins?: IntFilter<"Quest"> | number
+    steps?: QuestStepListRelationFilter
+    progresses?: QuestProgressListRelationFilter
+  }, "id">
+
+  export type QuestOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+    _count?: QuestCountOrderByAggregateInput
+    _avg?: QuestAvgOrderByAggregateInput
+    _max?: QuestMaxOrderByAggregateInput
+    _min?: QuestMinOrderByAggregateInput
+    _sum?: QuestSumOrderByAggregateInput
+  }
+
+  export type QuestScalarWhereWithAggregatesInput = {
+    AND?: QuestScalarWhereWithAggregatesInput | QuestScalarWhereWithAggregatesInput[]
+    OR?: QuestScalarWhereWithAggregatesInput[]
+    NOT?: QuestScalarWhereWithAggregatesInput | QuestScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Quest"> | number
+    title?: StringWithAggregatesFilter<"Quest"> | string
+    description?: StringWithAggregatesFilter<"Quest"> | string
+    recommendedLevel?: IntWithAggregatesFilter<"Quest"> | number
+    rewardXP?: IntWithAggregatesFilter<"Quest"> | number
+    rewardCoins?: IntWithAggregatesFilter<"Quest"> | number
+  }
+
+  export type QuestStepWhereInput = {
+    AND?: QuestStepWhereInput | QuestStepWhereInput[]
+    OR?: QuestStepWhereInput[]
+    NOT?: QuestStepWhereInput | QuestStepWhereInput[]
+    id?: IntFilter<"QuestStep"> | number
+    questId?: IntFilter<"QuestStep"> | number
+    type?: EnumQuestTypeFilter<"QuestStep"> | $Enums.QuestType
+    targetSeedId?: IntNullableFilter<"QuestStep"> | number | null
+    targetAmount?: IntFilter<"QuestStep"> | number
+    quest?: XOR<QuestScalarRelationFilter, QuestWhereInput>
+    targetSeed?: XOR<SeedNullableScalarRelationFilter, SeedWhereInput> | null
+    progress?: QuestStepProgressListRelationFilter
+  }
+
+  export type QuestStepOrderByWithRelationInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    type?: SortOrder
+    targetSeedId?: SortOrderInput | SortOrder
+    targetAmount?: SortOrder
+    quest?: QuestOrderByWithRelationInput
+    targetSeed?: SeedOrderByWithRelationInput
+    progress?: QuestStepProgressOrderByRelationAggregateInput
+  }
+
+  export type QuestStepWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: QuestStepWhereInput | QuestStepWhereInput[]
+    OR?: QuestStepWhereInput[]
+    NOT?: QuestStepWhereInput | QuestStepWhereInput[]
+    questId?: IntFilter<"QuestStep"> | number
+    type?: EnumQuestTypeFilter<"QuestStep"> | $Enums.QuestType
+    targetSeedId?: IntNullableFilter<"QuestStep"> | number | null
+    targetAmount?: IntFilter<"QuestStep"> | number
+    quest?: XOR<QuestScalarRelationFilter, QuestWhereInput>
+    targetSeed?: XOR<SeedNullableScalarRelationFilter, SeedWhereInput> | null
+    progress?: QuestStepProgressListRelationFilter
+  }, "id">
+
+  export type QuestStepOrderByWithAggregationInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    type?: SortOrder
+    targetSeedId?: SortOrderInput | SortOrder
+    targetAmount?: SortOrder
+    _count?: QuestStepCountOrderByAggregateInput
+    _avg?: QuestStepAvgOrderByAggregateInput
+    _max?: QuestStepMaxOrderByAggregateInput
+    _min?: QuestStepMinOrderByAggregateInput
+    _sum?: QuestStepSumOrderByAggregateInput
+  }
+
+  export type QuestStepScalarWhereWithAggregatesInput = {
+    AND?: QuestStepScalarWhereWithAggregatesInput | QuestStepScalarWhereWithAggregatesInput[]
+    OR?: QuestStepScalarWhereWithAggregatesInput[]
+    NOT?: QuestStepScalarWhereWithAggregatesInput | QuestStepScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"QuestStep"> | number
+    questId?: IntWithAggregatesFilter<"QuestStep"> | number
+    type?: EnumQuestTypeWithAggregatesFilter<"QuestStep"> | $Enums.QuestType
+    targetSeedId?: IntNullableWithAggregatesFilter<"QuestStep"> | number | null
+    targetAmount?: IntWithAggregatesFilter<"QuestStep"> | number
+  }
+
+  export type QuestProgressWhereInput = {
+    AND?: QuestProgressWhereInput | QuestProgressWhereInput[]
+    OR?: QuestProgressWhereInput[]
+    NOT?: QuestProgressWhereInput | QuestProgressWhereInput[]
+    id?: IntFilter<"QuestProgress"> | number
+    characterId?: IntFilter<"QuestProgress"> | number
+    questId?: IntFilter<"QuestProgress"> | number
+    completed?: BoolFilter<"QuestProgress"> | boolean
+    createdAt?: DateTimeFilter<"QuestProgress"> | Date | string
+    updatedAt?: DateTimeFilter<"QuestProgress"> | Date | string
+    character?: XOR<CharacterScalarRelationFilter, CharacterWhereInput>
+    quest?: XOR<QuestScalarRelationFilter, QuestWhereInput>
+    steps?: QuestStepProgressListRelationFilter
+  }
+
+  export type QuestProgressOrderByWithRelationInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+    completed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    character?: CharacterOrderByWithRelationInput
+    quest?: QuestOrderByWithRelationInput
+    steps?: QuestStepProgressOrderByRelationAggregateInput
+  }
+
+  export type QuestProgressWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    characterId_questId?: QuestProgressCharacterIdQuestIdCompoundUniqueInput
+    AND?: QuestProgressWhereInput | QuestProgressWhereInput[]
+    OR?: QuestProgressWhereInput[]
+    NOT?: QuestProgressWhereInput | QuestProgressWhereInput[]
+    characterId?: IntFilter<"QuestProgress"> | number
+    questId?: IntFilter<"QuestProgress"> | number
+    completed?: BoolFilter<"QuestProgress"> | boolean
+    createdAt?: DateTimeFilter<"QuestProgress"> | Date | string
+    updatedAt?: DateTimeFilter<"QuestProgress"> | Date | string
+    character?: XOR<CharacterScalarRelationFilter, CharacterWhereInput>
+    quest?: XOR<QuestScalarRelationFilter, QuestWhereInput>
+    steps?: QuestStepProgressListRelationFilter
+  }, "id" | "characterId_questId">
+
+  export type QuestProgressOrderByWithAggregationInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+    completed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: QuestProgressCountOrderByAggregateInput
+    _avg?: QuestProgressAvgOrderByAggregateInput
+    _max?: QuestProgressMaxOrderByAggregateInput
+    _min?: QuestProgressMinOrderByAggregateInput
+    _sum?: QuestProgressSumOrderByAggregateInput
+  }
+
+  export type QuestProgressScalarWhereWithAggregatesInput = {
+    AND?: QuestProgressScalarWhereWithAggregatesInput | QuestProgressScalarWhereWithAggregatesInput[]
+    OR?: QuestProgressScalarWhereWithAggregatesInput[]
+    NOT?: QuestProgressScalarWhereWithAggregatesInput | QuestProgressScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"QuestProgress"> | number
+    characterId?: IntWithAggregatesFilter<"QuestProgress"> | number
+    questId?: IntWithAggregatesFilter<"QuestProgress"> | number
+    completed?: BoolWithAggregatesFilter<"QuestProgress"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"QuestProgress"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"QuestProgress"> | Date | string
+  }
+
+  export type QuestStepProgressWhereInput = {
+    AND?: QuestStepProgressWhereInput | QuestStepProgressWhereInput[]
+    OR?: QuestStepProgressWhereInput[]
+    NOT?: QuestStepProgressWhereInput | QuestStepProgressWhereInput[]
+    id?: IntFilter<"QuestStepProgress"> | number
+    stepId?: IntFilter<"QuestStepProgress"> | number
+    current?: IntFilter<"QuestStepProgress"> | number
+    completed?: BoolFilter<"QuestStepProgress"> | boolean
+    progressId?: IntFilter<"QuestStepProgress"> | number
+    step?: XOR<QuestStepScalarRelationFilter, QuestStepWhereInput>
+    progress?: XOR<QuestProgressScalarRelationFilter, QuestProgressWhereInput>
+  }
+
+  export type QuestStepProgressOrderByWithRelationInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    completed?: SortOrder
+    progressId?: SortOrder
+    step?: QuestStepOrderByWithRelationInput
+    progress?: QuestProgressOrderByWithRelationInput
+  }
+
+  export type QuestStepProgressWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    progressId_stepId?: QuestStepProgressProgressIdStepIdCompoundUniqueInput
+    AND?: QuestStepProgressWhereInput | QuestStepProgressWhereInput[]
+    OR?: QuestStepProgressWhereInput[]
+    NOT?: QuestStepProgressWhereInput | QuestStepProgressWhereInput[]
+    stepId?: IntFilter<"QuestStepProgress"> | number
+    current?: IntFilter<"QuestStepProgress"> | number
+    completed?: BoolFilter<"QuestStepProgress"> | boolean
+    progressId?: IntFilter<"QuestStepProgress"> | number
+    step?: XOR<QuestStepScalarRelationFilter, QuestStepWhereInput>
+    progress?: XOR<QuestProgressScalarRelationFilter, QuestProgressWhereInput>
+  }, "id" | "progressId_stepId">
+
+  export type QuestStepProgressOrderByWithAggregationInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    completed?: SortOrder
+    progressId?: SortOrder
+    _count?: QuestStepProgressCountOrderByAggregateInput
+    _avg?: QuestStepProgressAvgOrderByAggregateInput
+    _max?: QuestStepProgressMaxOrderByAggregateInput
+    _min?: QuestStepProgressMinOrderByAggregateInput
+    _sum?: QuestStepProgressSumOrderByAggregateInput
+  }
+
+  export type QuestStepProgressScalarWhereWithAggregatesInput = {
+    AND?: QuestStepProgressScalarWhereWithAggregatesInput | QuestStepProgressScalarWhereWithAggregatesInput[]
+    OR?: QuestStepProgressScalarWhereWithAggregatesInput[]
+    NOT?: QuestStepProgressScalarWhereWithAggregatesInput | QuestStepProgressScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"QuestStepProgress"> | number
+    stepId?: IntWithAggregatesFilter<"QuestStepProgress"> | number
+    current?: IntWithAggregatesFilter<"QuestStepProgress"> | number
+    completed?: BoolWithAggregatesFilter<"QuestStepProgress"> | boolean
+    progressId?: IntWithAggregatesFilter<"QuestStepProgress"> | number
+  }
+
   export type UserCreateInput = {
     username: string
     password: string
@@ -7412,6 +12871,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCharacterInput
     plots?: PlotCreateNestedManyWithoutCharacterInput
+    questProgresses?: QuestProgressCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUncheckedCreateInput = {
@@ -7424,6 +12884,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutCharacterInput
+    questProgresses?: QuestProgressUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUpdateInput = {
@@ -7435,6 +12896,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCharacterNestedInput
     plots?: PlotUpdateManyWithoutCharacterNestedInput
+    questProgresses?: QuestProgressUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterUncheckedUpdateInput = {
@@ -7447,6 +12909,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutCharacterNestedInput
+    questProgresses?: QuestProgressUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterCreateManyInput = {
@@ -7528,6 +12991,7 @@ export namespace Prisma {
     buyPrice?: number
     sellPrice?: number
     Plot?: PlotCreateNestedManyWithoutSeedInput
+    questSteps?: QuestStepCreateNestedManyWithoutTargetSeedInput
   }
 
   export type SeedUncheckedCreateInput = {
@@ -7540,6 +13004,7 @@ export namespace Prisma {
     buyPrice?: number
     sellPrice?: number
     Plot?: PlotUncheckedCreateNestedManyWithoutSeedInput
+    questSteps?: QuestStepUncheckedCreateNestedManyWithoutTargetSeedInput
   }
 
   export type SeedUpdateInput = {
@@ -7551,6 +13016,7 @@ export namespace Prisma {
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
     Plot?: PlotUpdateManyWithoutSeedNestedInput
+    questSteps?: QuestStepUpdateManyWithoutTargetSeedNestedInput
   }
 
   export type SeedUncheckedUpdateInput = {
@@ -7563,6 +13029,7 @@ export namespace Prisma {
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
     Plot?: PlotUncheckedUpdateManyWithoutSeedNestedInput
+    questSteps?: QuestStepUncheckedUpdateManyWithoutTargetSeedNestedInput
   }
 
   export type SeedCreateManyInput = {
@@ -7646,6 +13113,242 @@ export namespace Prisma {
     seedId?: NullableIntFieldUpdateOperationsInput | number | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type QuestCreateInput = {
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+    steps?: QuestStepCreateNestedManyWithoutQuestInput
+    progresses?: QuestProgressCreateNestedManyWithoutQuestInput
+  }
+
+  export type QuestUncheckedCreateInput = {
+    id?: number
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+    steps?: QuestStepUncheckedCreateNestedManyWithoutQuestInput
+    progresses?: QuestProgressUncheckedCreateNestedManyWithoutQuestInput
+  }
+
+  export type QuestUpdateInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+    steps?: QuestStepUpdateManyWithoutQuestNestedInput
+    progresses?: QuestProgressUpdateManyWithoutQuestNestedInput
+  }
+
+  export type QuestUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+    steps?: QuestStepUncheckedUpdateManyWithoutQuestNestedInput
+    progresses?: QuestProgressUncheckedUpdateManyWithoutQuestNestedInput
+  }
+
+  export type QuestCreateManyInput = {
+    id?: number
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+  }
+
+  export type QuestUpdateManyMutationInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestStepCreateInput = {
+    type: $Enums.QuestType
+    targetAmount: number
+    quest: QuestCreateNestedOneWithoutStepsInput
+    targetSeed?: SeedCreateNestedOneWithoutQuestStepsInput
+    progress?: QuestStepProgressCreateNestedManyWithoutStepInput
+  }
+
+  export type QuestStepUncheckedCreateInput = {
+    id?: number
+    questId: number
+    type: $Enums.QuestType
+    targetSeedId?: number | null
+    targetAmount: number
+    progress?: QuestStepProgressUncheckedCreateNestedManyWithoutStepInput
+  }
+
+  export type QuestStepUpdateInput = {
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    quest?: QuestUpdateOneRequiredWithoutStepsNestedInput
+    targetSeed?: SeedUpdateOneWithoutQuestStepsNestedInput
+    progress?: QuestStepProgressUpdateManyWithoutStepNestedInput
+  }
+
+  export type QuestStepUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetSeedId?: NullableIntFieldUpdateOperationsInput | number | null
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    progress?: QuestStepProgressUncheckedUpdateManyWithoutStepNestedInput
+  }
+
+  export type QuestStepCreateManyInput = {
+    id?: number
+    questId: number
+    type: $Enums.QuestType
+    targetSeedId?: number | null
+    targetAmount: number
+  }
+
+  export type QuestStepUpdateManyMutationInput = {
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestStepUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetSeedId?: NullableIntFieldUpdateOperationsInput | number | null
+    targetAmount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestProgressCreateInput = {
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    character: CharacterCreateNestedOneWithoutQuestProgressesInput
+    quest: QuestCreateNestedOneWithoutProgressesInput
+    steps?: QuestStepProgressCreateNestedManyWithoutProgressInput
+  }
+
+  export type QuestProgressUncheckedCreateInput = {
+    id?: number
+    characterId: number
+    questId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: QuestStepProgressUncheckedCreateNestedManyWithoutProgressInput
+  }
+
+  export type QuestProgressUpdateInput = {
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    character?: CharacterUpdateOneRequiredWithoutQuestProgressesNestedInput
+    quest?: QuestUpdateOneRequiredWithoutProgressesNestedInput
+    steps?: QuestStepProgressUpdateManyWithoutProgressNestedInput
+  }
+
+  export type QuestProgressUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: QuestStepProgressUncheckedUpdateManyWithoutProgressNestedInput
+  }
+
+  export type QuestProgressCreateManyInput = {
+    id?: number
+    characterId: number
+    questId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuestProgressUpdateManyMutationInput = {
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestProgressUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestStepProgressCreateInput = {
+    current?: number
+    completed?: boolean
+    step: QuestStepCreateNestedOneWithoutProgressInput
+    progress: QuestProgressCreateNestedOneWithoutStepsInput
+  }
+
+  export type QuestStepProgressUncheckedCreateInput = {
+    id?: number
+    stepId: number
+    current?: number
+    completed?: boolean
+    progressId: number
+  }
+
+  export type QuestStepProgressUpdateInput = {
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    step?: QuestStepUpdateOneRequiredWithoutProgressNestedInput
+    progress?: QuestProgressUpdateOneRequiredWithoutStepsNestedInput
+  }
+
+  export type QuestStepProgressUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    stepId?: IntFieldUpdateOperationsInput | number
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    progressId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestStepProgressCreateManyInput = {
+    id?: number
+    stepId: number
+    current?: number
+    completed?: boolean
+    progressId: number
+  }
+
+  export type QuestStepProgressUpdateManyMutationInput = {
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type QuestStepProgressUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    stepId?: IntFieldUpdateOperationsInput | number
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    progressId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7785,12 +13488,22 @@ export namespace Prisma {
     none?: PlotWhereInput
   }
 
+  export type QuestProgressListRelationFilter = {
+    every?: QuestProgressWhereInput
+    some?: QuestProgressWhereInput
+    none?: QuestProgressWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
   }
 
   export type PlotOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QuestProgressOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -7881,6 +13594,16 @@ export namespace Prisma {
     id?: SortOrder
     level?: SortOrder
     xpRequired?: SortOrder
+  }
+
+  export type QuestStepListRelationFilter = {
+    every?: QuestStepWhereInput
+    some?: QuestStepWhereInput
+    none?: QuestStepWhereInput
+  }
+
+  export type QuestStepOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type SeedCountOrderByAggregateInput = {
@@ -8043,6 +13766,214 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type QuestCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+  }
+
+  export type QuestAvgOrderByAggregateInput = {
+    id?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+  }
+
+  export type QuestMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+  }
+
+  export type QuestMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+  }
+
+  export type QuestSumOrderByAggregateInput = {
+    id?: SortOrder
+    recommendedLevel?: SortOrder
+    rewardXP?: SortOrder
+    rewardCoins?: SortOrder
+  }
+
+  export type EnumQuestTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuestType | EnumQuestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQuestTypeFilter<$PrismaModel> | $Enums.QuestType
+  }
+
+  export type QuestScalarRelationFilter = {
+    is?: QuestWhereInput
+    isNot?: QuestWhereInput
+  }
+
+  export type QuestStepProgressListRelationFilter = {
+    every?: QuestStepProgressWhereInput
+    some?: QuestStepProgressWhereInput
+    none?: QuestStepProgressWhereInput
+  }
+
+  export type QuestStepProgressOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QuestStepCountOrderByAggregateInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    type?: SortOrder
+    targetSeedId?: SortOrder
+    targetAmount?: SortOrder
+  }
+
+  export type QuestStepAvgOrderByAggregateInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    targetSeedId?: SortOrder
+    targetAmount?: SortOrder
+  }
+
+  export type QuestStepMaxOrderByAggregateInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    type?: SortOrder
+    targetSeedId?: SortOrder
+    targetAmount?: SortOrder
+  }
+
+  export type QuestStepMinOrderByAggregateInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    type?: SortOrder
+    targetSeedId?: SortOrder
+    targetAmount?: SortOrder
+  }
+
+  export type QuestStepSumOrderByAggregateInput = {
+    id?: SortOrder
+    questId?: SortOrder
+    targetSeedId?: SortOrder
+    targetAmount?: SortOrder
+  }
+
+  export type EnumQuestTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuestType | EnumQuestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQuestTypeWithAggregatesFilter<$PrismaModel> | $Enums.QuestType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQuestTypeFilter<$PrismaModel>
+    _max?: NestedEnumQuestTypeFilter<$PrismaModel>
+  }
+
+  export type QuestProgressCharacterIdQuestIdCompoundUniqueInput = {
+    characterId: number
+    questId: number
+  }
+
+  export type QuestProgressCountOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+    completed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuestProgressAvgOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+  }
+
+  export type QuestProgressMaxOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+    completed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuestProgressMinOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+    completed?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuestProgressSumOrderByAggregateInput = {
+    id?: SortOrder
+    characterId?: SortOrder
+    questId?: SortOrder
+  }
+
+  export type QuestStepScalarRelationFilter = {
+    is?: QuestStepWhereInput
+    isNot?: QuestStepWhereInput
+  }
+
+  export type QuestProgressScalarRelationFilter = {
+    is?: QuestProgressWhereInput
+    isNot?: QuestProgressWhereInput
+  }
+
+  export type QuestStepProgressProgressIdStepIdCompoundUniqueInput = {
+    progressId: number
+    stepId: number
+  }
+
+  export type QuestStepProgressCountOrderByAggregateInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    completed?: SortOrder
+    progressId?: SortOrder
+  }
+
+  export type QuestStepProgressAvgOrderByAggregateInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    progressId?: SortOrder
+  }
+
+  export type QuestStepProgressMaxOrderByAggregateInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    completed?: SortOrder
+    progressId?: SortOrder
+  }
+
+  export type QuestStepProgressMinOrderByAggregateInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    completed?: SortOrder
+    progressId?: SortOrder
+  }
+
+  export type QuestStepProgressSumOrderByAggregateInput = {
+    id?: SortOrder
+    stepId?: SortOrder
+    current?: SortOrder
+    progressId?: SortOrder
+  }
+
   export type CharacterCreateNestedOneWithoutUserInput = {
     create?: XOR<CharacterCreateWithoutUserInput, CharacterUncheckedCreateWithoutUserInput>
     connectOrCreate?: CharacterCreateOrConnectWithoutUserInput
@@ -8104,11 +14035,25 @@ export namespace Prisma {
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
   }
 
+  export type QuestProgressCreateNestedManyWithoutCharacterInput = {
+    create?: XOR<QuestProgressCreateWithoutCharacterInput, QuestProgressUncheckedCreateWithoutCharacterInput> | QuestProgressCreateWithoutCharacterInput[] | QuestProgressUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutCharacterInput | QuestProgressCreateOrConnectWithoutCharacterInput[]
+    createMany?: QuestProgressCreateManyCharacterInputEnvelope
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+  }
+
   export type PlotUncheckedCreateNestedManyWithoutCharacterInput = {
     create?: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput> | PlotCreateWithoutCharacterInput[] | PlotUncheckedCreateWithoutCharacterInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutCharacterInput | PlotCreateOrConnectWithoutCharacterInput[]
     createMany?: PlotCreateManyCharacterInputEnvelope
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type QuestProgressUncheckedCreateNestedManyWithoutCharacterInput = {
+    create?: XOR<QuestProgressCreateWithoutCharacterInput, QuestProgressUncheckedCreateWithoutCharacterInput> | QuestProgressCreateWithoutCharacterInput[] | QuestProgressUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutCharacterInput | QuestProgressCreateOrConnectWithoutCharacterInput[]
+    createMany?: QuestProgressCreateManyCharacterInputEnvelope
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
   }
 
   export type NullableEnumGenderFieldUpdateOperationsInput = {
@@ -8137,6 +14082,20 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type QuestProgressUpdateManyWithoutCharacterNestedInput = {
+    create?: XOR<QuestProgressCreateWithoutCharacterInput, QuestProgressUncheckedCreateWithoutCharacterInput> | QuestProgressCreateWithoutCharacterInput[] | QuestProgressUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutCharacterInput | QuestProgressCreateOrConnectWithoutCharacterInput[]
+    upsert?: QuestProgressUpsertWithWhereUniqueWithoutCharacterInput | QuestProgressUpsertWithWhereUniqueWithoutCharacterInput[]
+    createMany?: QuestProgressCreateManyCharacterInputEnvelope
+    set?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    disconnect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    delete?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    update?: QuestProgressUpdateWithWhereUniqueWithoutCharacterInput | QuestProgressUpdateWithWhereUniqueWithoutCharacterInput[]
+    updateMany?: QuestProgressUpdateManyWithWhereWithoutCharacterInput | QuestProgressUpdateManyWithWhereWithoutCharacterInput[]
+    deleteMany?: QuestProgressScalarWhereInput | QuestProgressScalarWhereInput[]
+  }
+
   export type PlotUncheckedUpdateManyWithoutCharacterNestedInput = {
     create?: XOR<PlotCreateWithoutCharacterInput, PlotUncheckedCreateWithoutCharacterInput> | PlotCreateWithoutCharacterInput[] | PlotUncheckedCreateWithoutCharacterInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutCharacterInput | PlotCreateOrConnectWithoutCharacterInput[]
@@ -8151,6 +14110,20 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type QuestProgressUncheckedUpdateManyWithoutCharacterNestedInput = {
+    create?: XOR<QuestProgressCreateWithoutCharacterInput, QuestProgressUncheckedCreateWithoutCharacterInput> | QuestProgressCreateWithoutCharacterInput[] | QuestProgressUncheckedCreateWithoutCharacterInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutCharacterInput | QuestProgressCreateOrConnectWithoutCharacterInput[]
+    upsert?: QuestProgressUpsertWithWhereUniqueWithoutCharacterInput | QuestProgressUpsertWithWhereUniqueWithoutCharacterInput[]
+    createMany?: QuestProgressCreateManyCharacterInputEnvelope
+    set?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    disconnect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    delete?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    update?: QuestProgressUpdateWithWhereUniqueWithoutCharacterInput | QuestProgressUpdateWithWhereUniqueWithoutCharacterInput[]
+    updateMany?: QuestProgressUpdateManyWithWhereWithoutCharacterInput | QuestProgressUpdateManyWithWhereWithoutCharacterInput[]
+    deleteMany?: QuestProgressScalarWhereInput | QuestProgressScalarWhereInput[]
+  }
+
   export type PlotCreateNestedManyWithoutSeedInput = {
     create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
@@ -8158,11 +14131,25 @@ export namespace Prisma {
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
   }
 
+  export type QuestStepCreateNestedManyWithoutTargetSeedInput = {
+    create?: XOR<QuestStepCreateWithoutTargetSeedInput, QuestStepUncheckedCreateWithoutTargetSeedInput> | QuestStepCreateWithoutTargetSeedInput[] | QuestStepUncheckedCreateWithoutTargetSeedInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutTargetSeedInput | QuestStepCreateOrConnectWithoutTargetSeedInput[]
+    createMany?: QuestStepCreateManyTargetSeedInputEnvelope
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+  }
+
   export type PlotUncheckedCreateNestedManyWithoutSeedInput = {
     create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
     createMany?: PlotCreateManySeedInputEnvelope
     connect?: PlotWhereUniqueInput | PlotWhereUniqueInput[]
+  }
+
+  export type QuestStepUncheckedCreateNestedManyWithoutTargetSeedInput = {
+    create?: XOR<QuestStepCreateWithoutTargetSeedInput, QuestStepUncheckedCreateWithoutTargetSeedInput> | QuestStepCreateWithoutTargetSeedInput[] | QuestStepUncheckedCreateWithoutTargetSeedInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutTargetSeedInput | QuestStepCreateOrConnectWithoutTargetSeedInput[]
+    createMany?: QuestStepCreateManyTargetSeedInputEnvelope
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
   }
 
   export type PlotUpdateManyWithoutSeedNestedInput = {
@@ -8179,6 +14166,20 @@ export namespace Prisma {
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
   }
 
+  export type QuestStepUpdateManyWithoutTargetSeedNestedInput = {
+    create?: XOR<QuestStepCreateWithoutTargetSeedInput, QuestStepUncheckedCreateWithoutTargetSeedInput> | QuestStepCreateWithoutTargetSeedInput[] | QuestStepUncheckedCreateWithoutTargetSeedInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutTargetSeedInput | QuestStepCreateOrConnectWithoutTargetSeedInput[]
+    upsert?: QuestStepUpsertWithWhereUniqueWithoutTargetSeedInput | QuestStepUpsertWithWhereUniqueWithoutTargetSeedInput[]
+    createMany?: QuestStepCreateManyTargetSeedInputEnvelope
+    set?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    disconnect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    delete?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    update?: QuestStepUpdateWithWhereUniqueWithoutTargetSeedInput | QuestStepUpdateWithWhereUniqueWithoutTargetSeedInput[]
+    updateMany?: QuestStepUpdateManyWithWhereWithoutTargetSeedInput | QuestStepUpdateManyWithWhereWithoutTargetSeedInput[]
+    deleteMany?: QuestStepScalarWhereInput | QuestStepScalarWhereInput[]
+  }
+
   export type PlotUncheckedUpdateManyWithoutSeedNestedInput = {
     create?: XOR<PlotCreateWithoutSeedInput, PlotUncheckedCreateWithoutSeedInput> | PlotCreateWithoutSeedInput[] | PlotUncheckedCreateWithoutSeedInput[]
     connectOrCreate?: PlotCreateOrConnectWithoutSeedInput | PlotCreateOrConnectWithoutSeedInput[]
@@ -8191,6 +14192,20 @@ export namespace Prisma {
     update?: PlotUpdateWithWhereUniqueWithoutSeedInput | PlotUpdateWithWhereUniqueWithoutSeedInput[]
     updateMany?: PlotUpdateManyWithWhereWithoutSeedInput | PlotUpdateManyWithWhereWithoutSeedInput[]
     deleteMany?: PlotScalarWhereInput | PlotScalarWhereInput[]
+  }
+
+  export type QuestStepUncheckedUpdateManyWithoutTargetSeedNestedInput = {
+    create?: XOR<QuestStepCreateWithoutTargetSeedInput, QuestStepUncheckedCreateWithoutTargetSeedInput> | QuestStepCreateWithoutTargetSeedInput[] | QuestStepUncheckedCreateWithoutTargetSeedInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutTargetSeedInput | QuestStepCreateOrConnectWithoutTargetSeedInput[]
+    upsert?: QuestStepUpsertWithWhereUniqueWithoutTargetSeedInput | QuestStepUpsertWithWhereUniqueWithoutTargetSeedInput[]
+    createMany?: QuestStepCreateManyTargetSeedInputEnvelope
+    set?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    disconnect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    delete?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    update?: QuestStepUpdateWithWhereUniqueWithoutTargetSeedInput | QuestStepUpdateWithWhereUniqueWithoutTargetSeedInput[]
+    updateMany?: QuestStepUpdateManyWithWhereWithoutTargetSeedInput | QuestStepUpdateManyWithWhereWithoutTargetSeedInput[]
+    deleteMany?: QuestStepScalarWhereInput | QuestStepScalarWhereInput[]
   }
 
   export type CharacterCreateNestedOneWithoutPlotsInput = {
@@ -8237,6 +14252,264 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type QuestStepCreateNestedManyWithoutQuestInput = {
+    create?: XOR<QuestStepCreateWithoutQuestInput, QuestStepUncheckedCreateWithoutQuestInput> | QuestStepCreateWithoutQuestInput[] | QuestStepUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutQuestInput | QuestStepCreateOrConnectWithoutQuestInput[]
+    createMany?: QuestStepCreateManyQuestInputEnvelope
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+  }
+
+  export type QuestProgressCreateNestedManyWithoutQuestInput = {
+    create?: XOR<QuestProgressCreateWithoutQuestInput, QuestProgressUncheckedCreateWithoutQuestInput> | QuestProgressCreateWithoutQuestInput[] | QuestProgressUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutQuestInput | QuestProgressCreateOrConnectWithoutQuestInput[]
+    createMany?: QuestProgressCreateManyQuestInputEnvelope
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+  }
+
+  export type QuestStepUncheckedCreateNestedManyWithoutQuestInput = {
+    create?: XOR<QuestStepCreateWithoutQuestInput, QuestStepUncheckedCreateWithoutQuestInput> | QuestStepCreateWithoutQuestInput[] | QuestStepUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutQuestInput | QuestStepCreateOrConnectWithoutQuestInput[]
+    createMany?: QuestStepCreateManyQuestInputEnvelope
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+  }
+
+  export type QuestProgressUncheckedCreateNestedManyWithoutQuestInput = {
+    create?: XOR<QuestProgressCreateWithoutQuestInput, QuestProgressUncheckedCreateWithoutQuestInput> | QuestProgressCreateWithoutQuestInput[] | QuestProgressUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutQuestInput | QuestProgressCreateOrConnectWithoutQuestInput[]
+    createMany?: QuestProgressCreateManyQuestInputEnvelope
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+  }
+
+  export type QuestStepUpdateManyWithoutQuestNestedInput = {
+    create?: XOR<QuestStepCreateWithoutQuestInput, QuestStepUncheckedCreateWithoutQuestInput> | QuestStepCreateWithoutQuestInput[] | QuestStepUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutQuestInput | QuestStepCreateOrConnectWithoutQuestInput[]
+    upsert?: QuestStepUpsertWithWhereUniqueWithoutQuestInput | QuestStepUpsertWithWhereUniqueWithoutQuestInput[]
+    createMany?: QuestStepCreateManyQuestInputEnvelope
+    set?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    disconnect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    delete?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    update?: QuestStepUpdateWithWhereUniqueWithoutQuestInput | QuestStepUpdateWithWhereUniqueWithoutQuestInput[]
+    updateMany?: QuestStepUpdateManyWithWhereWithoutQuestInput | QuestStepUpdateManyWithWhereWithoutQuestInput[]
+    deleteMany?: QuestStepScalarWhereInput | QuestStepScalarWhereInput[]
+  }
+
+  export type QuestProgressUpdateManyWithoutQuestNestedInput = {
+    create?: XOR<QuestProgressCreateWithoutQuestInput, QuestProgressUncheckedCreateWithoutQuestInput> | QuestProgressCreateWithoutQuestInput[] | QuestProgressUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutQuestInput | QuestProgressCreateOrConnectWithoutQuestInput[]
+    upsert?: QuestProgressUpsertWithWhereUniqueWithoutQuestInput | QuestProgressUpsertWithWhereUniqueWithoutQuestInput[]
+    createMany?: QuestProgressCreateManyQuestInputEnvelope
+    set?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    disconnect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    delete?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    update?: QuestProgressUpdateWithWhereUniqueWithoutQuestInput | QuestProgressUpdateWithWhereUniqueWithoutQuestInput[]
+    updateMany?: QuestProgressUpdateManyWithWhereWithoutQuestInput | QuestProgressUpdateManyWithWhereWithoutQuestInput[]
+    deleteMany?: QuestProgressScalarWhereInput | QuestProgressScalarWhereInput[]
+  }
+
+  export type QuestStepUncheckedUpdateManyWithoutQuestNestedInput = {
+    create?: XOR<QuestStepCreateWithoutQuestInput, QuestStepUncheckedCreateWithoutQuestInput> | QuestStepCreateWithoutQuestInput[] | QuestStepUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestStepCreateOrConnectWithoutQuestInput | QuestStepCreateOrConnectWithoutQuestInput[]
+    upsert?: QuestStepUpsertWithWhereUniqueWithoutQuestInput | QuestStepUpsertWithWhereUniqueWithoutQuestInput[]
+    createMany?: QuestStepCreateManyQuestInputEnvelope
+    set?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    disconnect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    delete?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    connect?: QuestStepWhereUniqueInput | QuestStepWhereUniqueInput[]
+    update?: QuestStepUpdateWithWhereUniqueWithoutQuestInput | QuestStepUpdateWithWhereUniqueWithoutQuestInput[]
+    updateMany?: QuestStepUpdateManyWithWhereWithoutQuestInput | QuestStepUpdateManyWithWhereWithoutQuestInput[]
+    deleteMany?: QuestStepScalarWhereInput | QuestStepScalarWhereInput[]
+  }
+
+  export type QuestProgressUncheckedUpdateManyWithoutQuestNestedInput = {
+    create?: XOR<QuestProgressCreateWithoutQuestInput, QuestProgressUncheckedCreateWithoutQuestInput> | QuestProgressCreateWithoutQuestInput[] | QuestProgressUncheckedCreateWithoutQuestInput[]
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutQuestInput | QuestProgressCreateOrConnectWithoutQuestInput[]
+    upsert?: QuestProgressUpsertWithWhereUniqueWithoutQuestInput | QuestProgressUpsertWithWhereUniqueWithoutQuestInput[]
+    createMany?: QuestProgressCreateManyQuestInputEnvelope
+    set?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    disconnect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    delete?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    connect?: QuestProgressWhereUniqueInput | QuestProgressWhereUniqueInput[]
+    update?: QuestProgressUpdateWithWhereUniqueWithoutQuestInput | QuestProgressUpdateWithWhereUniqueWithoutQuestInput[]
+    updateMany?: QuestProgressUpdateManyWithWhereWithoutQuestInput | QuestProgressUpdateManyWithWhereWithoutQuestInput[]
+    deleteMany?: QuestProgressScalarWhereInput | QuestProgressScalarWhereInput[]
+  }
+
+  export type QuestCreateNestedOneWithoutStepsInput = {
+    create?: XOR<QuestCreateWithoutStepsInput, QuestUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: QuestCreateOrConnectWithoutStepsInput
+    connect?: QuestWhereUniqueInput
+  }
+
+  export type SeedCreateNestedOneWithoutQuestStepsInput = {
+    create?: XOR<SeedCreateWithoutQuestStepsInput, SeedUncheckedCreateWithoutQuestStepsInput>
+    connectOrCreate?: SeedCreateOrConnectWithoutQuestStepsInput
+    connect?: SeedWhereUniqueInput
+  }
+
+  export type QuestStepProgressCreateNestedManyWithoutStepInput = {
+    create?: XOR<QuestStepProgressCreateWithoutStepInput, QuestStepProgressUncheckedCreateWithoutStepInput> | QuestStepProgressCreateWithoutStepInput[] | QuestStepProgressUncheckedCreateWithoutStepInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutStepInput | QuestStepProgressCreateOrConnectWithoutStepInput[]
+    createMany?: QuestStepProgressCreateManyStepInputEnvelope
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+  }
+
+  export type QuestStepProgressUncheckedCreateNestedManyWithoutStepInput = {
+    create?: XOR<QuestStepProgressCreateWithoutStepInput, QuestStepProgressUncheckedCreateWithoutStepInput> | QuestStepProgressCreateWithoutStepInput[] | QuestStepProgressUncheckedCreateWithoutStepInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutStepInput | QuestStepProgressCreateOrConnectWithoutStepInput[]
+    createMany?: QuestStepProgressCreateManyStepInputEnvelope
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+  }
+
+  export type EnumQuestTypeFieldUpdateOperationsInput = {
+    set?: $Enums.QuestType
+  }
+
+  export type QuestUpdateOneRequiredWithoutStepsNestedInput = {
+    create?: XOR<QuestCreateWithoutStepsInput, QuestUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: QuestCreateOrConnectWithoutStepsInput
+    upsert?: QuestUpsertWithoutStepsInput
+    connect?: QuestWhereUniqueInput
+    update?: XOR<XOR<QuestUpdateToOneWithWhereWithoutStepsInput, QuestUpdateWithoutStepsInput>, QuestUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type SeedUpdateOneWithoutQuestStepsNestedInput = {
+    create?: XOR<SeedCreateWithoutQuestStepsInput, SeedUncheckedCreateWithoutQuestStepsInput>
+    connectOrCreate?: SeedCreateOrConnectWithoutQuestStepsInput
+    upsert?: SeedUpsertWithoutQuestStepsInput
+    disconnect?: SeedWhereInput | boolean
+    delete?: SeedWhereInput | boolean
+    connect?: SeedWhereUniqueInput
+    update?: XOR<XOR<SeedUpdateToOneWithWhereWithoutQuestStepsInput, SeedUpdateWithoutQuestStepsInput>, SeedUncheckedUpdateWithoutQuestStepsInput>
+  }
+
+  export type QuestStepProgressUpdateManyWithoutStepNestedInput = {
+    create?: XOR<QuestStepProgressCreateWithoutStepInput, QuestStepProgressUncheckedCreateWithoutStepInput> | QuestStepProgressCreateWithoutStepInput[] | QuestStepProgressUncheckedCreateWithoutStepInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutStepInput | QuestStepProgressCreateOrConnectWithoutStepInput[]
+    upsert?: QuestStepProgressUpsertWithWhereUniqueWithoutStepInput | QuestStepProgressUpsertWithWhereUniqueWithoutStepInput[]
+    createMany?: QuestStepProgressCreateManyStepInputEnvelope
+    set?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    disconnect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    delete?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    update?: QuestStepProgressUpdateWithWhereUniqueWithoutStepInput | QuestStepProgressUpdateWithWhereUniqueWithoutStepInput[]
+    updateMany?: QuestStepProgressUpdateManyWithWhereWithoutStepInput | QuestStepProgressUpdateManyWithWhereWithoutStepInput[]
+    deleteMany?: QuestStepProgressScalarWhereInput | QuestStepProgressScalarWhereInput[]
+  }
+
+  export type QuestStepProgressUncheckedUpdateManyWithoutStepNestedInput = {
+    create?: XOR<QuestStepProgressCreateWithoutStepInput, QuestStepProgressUncheckedCreateWithoutStepInput> | QuestStepProgressCreateWithoutStepInput[] | QuestStepProgressUncheckedCreateWithoutStepInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutStepInput | QuestStepProgressCreateOrConnectWithoutStepInput[]
+    upsert?: QuestStepProgressUpsertWithWhereUniqueWithoutStepInput | QuestStepProgressUpsertWithWhereUniqueWithoutStepInput[]
+    createMany?: QuestStepProgressCreateManyStepInputEnvelope
+    set?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    disconnect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    delete?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    update?: QuestStepProgressUpdateWithWhereUniqueWithoutStepInput | QuestStepProgressUpdateWithWhereUniqueWithoutStepInput[]
+    updateMany?: QuestStepProgressUpdateManyWithWhereWithoutStepInput | QuestStepProgressUpdateManyWithWhereWithoutStepInput[]
+    deleteMany?: QuestStepProgressScalarWhereInput | QuestStepProgressScalarWhereInput[]
+  }
+
+  export type CharacterCreateNestedOneWithoutQuestProgressesInput = {
+    create?: XOR<CharacterCreateWithoutQuestProgressesInput, CharacterUncheckedCreateWithoutQuestProgressesInput>
+    connectOrCreate?: CharacterCreateOrConnectWithoutQuestProgressesInput
+    connect?: CharacterWhereUniqueInput
+  }
+
+  export type QuestCreateNestedOneWithoutProgressesInput = {
+    create?: XOR<QuestCreateWithoutProgressesInput, QuestUncheckedCreateWithoutProgressesInput>
+    connectOrCreate?: QuestCreateOrConnectWithoutProgressesInput
+    connect?: QuestWhereUniqueInput
+  }
+
+  export type QuestStepProgressCreateNestedManyWithoutProgressInput = {
+    create?: XOR<QuestStepProgressCreateWithoutProgressInput, QuestStepProgressUncheckedCreateWithoutProgressInput> | QuestStepProgressCreateWithoutProgressInput[] | QuestStepProgressUncheckedCreateWithoutProgressInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutProgressInput | QuestStepProgressCreateOrConnectWithoutProgressInput[]
+    createMany?: QuestStepProgressCreateManyProgressInputEnvelope
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+  }
+
+  export type QuestStepProgressUncheckedCreateNestedManyWithoutProgressInput = {
+    create?: XOR<QuestStepProgressCreateWithoutProgressInput, QuestStepProgressUncheckedCreateWithoutProgressInput> | QuestStepProgressCreateWithoutProgressInput[] | QuestStepProgressUncheckedCreateWithoutProgressInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutProgressInput | QuestStepProgressCreateOrConnectWithoutProgressInput[]
+    createMany?: QuestStepProgressCreateManyProgressInputEnvelope
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+  }
+
+  export type CharacterUpdateOneRequiredWithoutQuestProgressesNestedInput = {
+    create?: XOR<CharacterCreateWithoutQuestProgressesInput, CharacterUncheckedCreateWithoutQuestProgressesInput>
+    connectOrCreate?: CharacterCreateOrConnectWithoutQuestProgressesInput
+    upsert?: CharacterUpsertWithoutQuestProgressesInput
+    connect?: CharacterWhereUniqueInput
+    update?: XOR<XOR<CharacterUpdateToOneWithWhereWithoutQuestProgressesInput, CharacterUpdateWithoutQuestProgressesInput>, CharacterUncheckedUpdateWithoutQuestProgressesInput>
+  }
+
+  export type QuestUpdateOneRequiredWithoutProgressesNestedInput = {
+    create?: XOR<QuestCreateWithoutProgressesInput, QuestUncheckedCreateWithoutProgressesInput>
+    connectOrCreate?: QuestCreateOrConnectWithoutProgressesInput
+    upsert?: QuestUpsertWithoutProgressesInput
+    connect?: QuestWhereUniqueInput
+    update?: XOR<XOR<QuestUpdateToOneWithWhereWithoutProgressesInput, QuestUpdateWithoutProgressesInput>, QuestUncheckedUpdateWithoutProgressesInput>
+  }
+
+  export type QuestStepProgressUpdateManyWithoutProgressNestedInput = {
+    create?: XOR<QuestStepProgressCreateWithoutProgressInput, QuestStepProgressUncheckedCreateWithoutProgressInput> | QuestStepProgressCreateWithoutProgressInput[] | QuestStepProgressUncheckedCreateWithoutProgressInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutProgressInput | QuestStepProgressCreateOrConnectWithoutProgressInput[]
+    upsert?: QuestStepProgressUpsertWithWhereUniqueWithoutProgressInput | QuestStepProgressUpsertWithWhereUniqueWithoutProgressInput[]
+    createMany?: QuestStepProgressCreateManyProgressInputEnvelope
+    set?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    disconnect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    delete?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    update?: QuestStepProgressUpdateWithWhereUniqueWithoutProgressInput | QuestStepProgressUpdateWithWhereUniqueWithoutProgressInput[]
+    updateMany?: QuestStepProgressUpdateManyWithWhereWithoutProgressInput | QuestStepProgressUpdateManyWithWhereWithoutProgressInput[]
+    deleteMany?: QuestStepProgressScalarWhereInput | QuestStepProgressScalarWhereInput[]
+  }
+
+  export type QuestStepProgressUncheckedUpdateManyWithoutProgressNestedInput = {
+    create?: XOR<QuestStepProgressCreateWithoutProgressInput, QuestStepProgressUncheckedCreateWithoutProgressInput> | QuestStepProgressCreateWithoutProgressInput[] | QuestStepProgressUncheckedCreateWithoutProgressInput[]
+    connectOrCreate?: QuestStepProgressCreateOrConnectWithoutProgressInput | QuestStepProgressCreateOrConnectWithoutProgressInput[]
+    upsert?: QuestStepProgressUpsertWithWhereUniqueWithoutProgressInput | QuestStepProgressUpsertWithWhereUniqueWithoutProgressInput[]
+    createMany?: QuestStepProgressCreateManyProgressInputEnvelope
+    set?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    disconnect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    delete?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
+    update?: QuestStepProgressUpdateWithWhereUniqueWithoutProgressInput | QuestStepProgressUpdateWithWhereUniqueWithoutProgressInput[]
+    updateMany?: QuestStepProgressUpdateManyWithWhereWithoutProgressInput | QuestStepProgressUpdateManyWithWhereWithoutProgressInput[]
+    deleteMany?: QuestStepProgressScalarWhereInput | QuestStepProgressScalarWhereInput[]
+  }
+
+  export type QuestStepCreateNestedOneWithoutProgressInput = {
+    create?: XOR<QuestStepCreateWithoutProgressInput, QuestStepUncheckedCreateWithoutProgressInput>
+    connectOrCreate?: QuestStepCreateOrConnectWithoutProgressInput
+    connect?: QuestStepWhereUniqueInput
+  }
+
+  export type QuestProgressCreateNestedOneWithoutStepsInput = {
+    create?: XOR<QuestProgressCreateWithoutStepsInput, QuestProgressUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutStepsInput
+    connect?: QuestProgressWhereUniqueInput
+  }
+
+  export type QuestStepUpdateOneRequiredWithoutProgressNestedInput = {
+    create?: XOR<QuestStepCreateWithoutProgressInput, QuestStepUncheckedCreateWithoutProgressInput>
+    connectOrCreate?: QuestStepCreateOrConnectWithoutProgressInput
+    upsert?: QuestStepUpsertWithoutProgressInput
+    connect?: QuestStepWhereUniqueInput
+    update?: XOR<XOR<QuestStepUpdateToOneWithWhereWithoutProgressInput, QuestStepUpdateWithoutProgressInput>, QuestStepUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type QuestProgressUpdateOneRequiredWithoutStepsNestedInput = {
+    create?: XOR<QuestProgressCreateWithoutStepsInput, QuestProgressUncheckedCreateWithoutStepsInput>
+    connectOrCreate?: QuestProgressCreateOrConnectWithoutStepsInput
+    upsert?: QuestProgressUpsertWithoutStepsInput
+    connect?: QuestProgressWhereUniqueInput
+    update?: XOR<XOR<QuestProgressUpdateToOneWithWhereWithoutStepsInput, QuestProgressUpdateWithoutStepsInput>, QuestProgressUncheckedUpdateWithoutStepsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -8426,6 +14699,23 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type NestedEnumQuestTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuestType | EnumQuestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQuestTypeFilter<$PrismaModel> | $Enums.QuestType
+  }
+
+  export type NestedEnumQuestTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuestType | EnumQuestTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    notIn?: $Enums.QuestType[] | ListEnumQuestTypeFieldRefInput<$PrismaModel>
+    not?: NestedEnumQuestTypeWithAggregatesFilter<$PrismaModel> | $Enums.QuestType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQuestTypeFilter<$PrismaModel>
+    _max?: NestedEnumQuestTypeFilter<$PrismaModel>
+  }
+
   export type CharacterCreateWithoutUserInput = {
     gender?: $Enums.Gender | null
     level?: number
@@ -8434,6 +14724,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     plots?: PlotCreateNestedManyWithoutCharacterInput
+    questProgresses?: QuestProgressCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUncheckedCreateWithoutUserInput = {
@@ -8445,6 +14736,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     plots?: PlotUncheckedCreateNestedManyWithoutCharacterInput
+    questProgresses?: QuestProgressUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterCreateOrConnectWithoutUserInput = {
@@ -8471,6 +14763,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUpdateManyWithoutCharacterNestedInput
+    questProgresses?: QuestProgressUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterUncheckedUpdateWithoutUserInput = {
@@ -8482,6 +14775,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     plots?: PlotUncheckedUpdateManyWithoutCharacterNestedInput
+    questProgresses?: QuestProgressUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type UserCreateWithoutCharacterInput = {
@@ -8522,6 +14816,33 @@ export namespace Prisma {
 
   export type PlotCreateManyCharacterInputEnvelope = {
     data: PlotCreateManyCharacterInput | PlotCreateManyCharacterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuestProgressCreateWithoutCharacterInput = {
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    quest: QuestCreateNestedOneWithoutProgressesInput
+    steps?: QuestStepProgressCreateNestedManyWithoutProgressInput
+  }
+
+  export type QuestProgressUncheckedCreateWithoutCharacterInput = {
+    id?: number
+    questId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: QuestStepProgressUncheckedCreateNestedManyWithoutProgressInput
+  }
+
+  export type QuestProgressCreateOrConnectWithoutCharacterInput = {
+    where: QuestProgressWhereUniqueInput
+    create: XOR<QuestProgressCreateWithoutCharacterInput, QuestProgressUncheckedCreateWithoutCharacterInput>
+  }
+
+  export type QuestProgressCreateManyCharacterInputEnvelope = {
+    data: QuestProgressCreateManyCharacterInput | QuestProgressCreateManyCharacterInput[]
     skipDuplicates?: boolean
   }
 
@@ -8576,6 +14897,34 @@ export namespace Prisma {
     isReady?: BoolFilter<"Plot"> | boolean
   }
 
+  export type QuestProgressUpsertWithWhereUniqueWithoutCharacterInput = {
+    where: QuestProgressWhereUniqueInput
+    update: XOR<QuestProgressUpdateWithoutCharacterInput, QuestProgressUncheckedUpdateWithoutCharacterInput>
+    create: XOR<QuestProgressCreateWithoutCharacterInput, QuestProgressUncheckedCreateWithoutCharacterInput>
+  }
+
+  export type QuestProgressUpdateWithWhereUniqueWithoutCharacterInput = {
+    where: QuestProgressWhereUniqueInput
+    data: XOR<QuestProgressUpdateWithoutCharacterInput, QuestProgressUncheckedUpdateWithoutCharacterInput>
+  }
+
+  export type QuestProgressUpdateManyWithWhereWithoutCharacterInput = {
+    where: QuestProgressScalarWhereInput
+    data: XOR<QuestProgressUpdateManyMutationInput, QuestProgressUncheckedUpdateManyWithoutCharacterInput>
+  }
+
+  export type QuestProgressScalarWhereInput = {
+    AND?: QuestProgressScalarWhereInput | QuestProgressScalarWhereInput[]
+    OR?: QuestProgressScalarWhereInput[]
+    NOT?: QuestProgressScalarWhereInput | QuestProgressScalarWhereInput[]
+    id?: IntFilter<"QuestProgress"> | number
+    characterId?: IntFilter<"QuestProgress"> | number
+    questId?: IntFilter<"QuestProgress"> | number
+    completed?: BoolFilter<"QuestProgress"> | boolean
+    createdAt?: DateTimeFilter<"QuestProgress"> | Date | string
+    updatedAt?: DateTimeFilter<"QuestProgress"> | Date | string
+  }
+
   export type PlotCreateWithoutSeedInput = {
     plantedAt?: Date | string | null
     isReady?: boolean
@@ -8599,6 +14948,31 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type QuestStepCreateWithoutTargetSeedInput = {
+    type: $Enums.QuestType
+    targetAmount: number
+    quest: QuestCreateNestedOneWithoutStepsInput
+    progress?: QuestStepProgressCreateNestedManyWithoutStepInput
+  }
+
+  export type QuestStepUncheckedCreateWithoutTargetSeedInput = {
+    id?: number
+    questId: number
+    type: $Enums.QuestType
+    targetAmount: number
+    progress?: QuestStepProgressUncheckedCreateNestedManyWithoutStepInput
+  }
+
+  export type QuestStepCreateOrConnectWithoutTargetSeedInput = {
+    where: QuestStepWhereUniqueInput
+    create: XOR<QuestStepCreateWithoutTargetSeedInput, QuestStepUncheckedCreateWithoutTargetSeedInput>
+  }
+
+  export type QuestStepCreateManyTargetSeedInputEnvelope = {
+    data: QuestStepCreateManyTargetSeedInput | QuestStepCreateManyTargetSeedInput[]
+    skipDuplicates?: boolean
+  }
+
   export type PlotUpsertWithWhereUniqueWithoutSeedInput = {
     where: PlotWhereUniqueInput
     update: XOR<PlotUpdateWithoutSeedInput, PlotUncheckedUpdateWithoutSeedInput>
@@ -8615,6 +14989,33 @@ export namespace Prisma {
     data: XOR<PlotUpdateManyMutationInput, PlotUncheckedUpdateManyWithoutSeedInput>
   }
 
+  export type QuestStepUpsertWithWhereUniqueWithoutTargetSeedInput = {
+    where: QuestStepWhereUniqueInput
+    update: XOR<QuestStepUpdateWithoutTargetSeedInput, QuestStepUncheckedUpdateWithoutTargetSeedInput>
+    create: XOR<QuestStepCreateWithoutTargetSeedInput, QuestStepUncheckedCreateWithoutTargetSeedInput>
+  }
+
+  export type QuestStepUpdateWithWhereUniqueWithoutTargetSeedInput = {
+    where: QuestStepWhereUniqueInput
+    data: XOR<QuestStepUpdateWithoutTargetSeedInput, QuestStepUncheckedUpdateWithoutTargetSeedInput>
+  }
+
+  export type QuestStepUpdateManyWithWhereWithoutTargetSeedInput = {
+    where: QuestStepScalarWhereInput
+    data: XOR<QuestStepUpdateManyMutationInput, QuestStepUncheckedUpdateManyWithoutTargetSeedInput>
+  }
+
+  export type QuestStepScalarWhereInput = {
+    AND?: QuestStepScalarWhereInput | QuestStepScalarWhereInput[]
+    OR?: QuestStepScalarWhereInput[]
+    NOT?: QuestStepScalarWhereInput | QuestStepScalarWhereInput[]
+    id?: IntFilter<"QuestStep"> | number
+    questId?: IntFilter<"QuestStep"> | number
+    type?: EnumQuestTypeFilter<"QuestStep"> | $Enums.QuestType
+    targetSeedId?: IntNullableFilter<"QuestStep"> | number | null
+    targetAmount?: IntFilter<"QuestStep"> | number
+  }
+
   export type CharacterCreateWithoutPlotsInput = {
     gender?: $Enums.Gender | null
     level?: number
@@ -8623,6 +15024,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     user: UserCreateNestedOneWithoutCharacterInput
+    questProgresses?: QuestProgressCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterUncheckedCreateWithoutPlotsInput = {
@@ -8634,6 +15036,7 @@ export namespace Prisma {
     coins?: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    questProgresses?: QuestProgressUncheckedCreateNestedManyWithoutCharacterInput
   }
 
   export type CharacterCreateOrConnectWithoutPlotsInput = {
@@ -8649,6 +15052,7 @@ export namespace Prisma {
     xp: number
     buyPrice?: number
     sellPrice?: number
+    questSteps?: QuestStepCreateNestedManyWithoutTargetSeedInput
   }
 
   export type SeedUncheckedCreateWithoutPlotInput = {
@@ -8660,6 +15064,7 @@ export namespace Prisma {
     xp: number
     buyPrice?: number
     sellPrice?: number
+    questSteps?: QuestStepUncheckedCreateNestedManyWithoutTargetSeedInput
   }
 
   export type SeedCreateOrConnectWithoutPlotInput = {
@@ -8686,6 +15091,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutCharacterNestedInput
+    questProgresses?: QuestProgressUpdateManyWithoutCharacterNestedInput
   }
 
   export type CharacterUncheckedUpdateWithoutPlotsInput = {
@@ -8697,6 +15103,7 @@ export namespace Prisma {
     coins?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questProgresses?: QuestProgressUncheckedUpdateManyWithoutCharacterNestedInput
   }
 
   export type SeedUpsertWithoutPlotInput = {
@@ -8718,6 +15125,7 @@ export namespace Prisma {
     xp?: IntFieldUpdateOperationsInput | number
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
+    questSteps?: QuestStepUpdateManyWithoutTargetSeedNestedInput
   }
 
   export type SeedUncheckedUpdateWithoutPlotInput = {
@@ -8729,6 +15137,508 @@ export namespace Prisma {
     xp?: IntFieldUpdateOperationsInput | number
     buyPrice?: IntFieldUpdateOperationsInput | number
     sellPrice?: IntFieldUpdateOperationsInput | number
+    questSteps?: QuestStepUncheckedUpdateManyWithoutTargetSeedNestedInput
+  }
+
+  export type QuestStepCreateWithoutQuestInput = {
+    type: $Enums.QuestType
+    targetAmount: number
+    targetSeed?: SeedCreateNestedOneWithoutQuestStepsInput
+    progress?: QuestStepProgressCreateNestedManyWithoutStepInput
+  }
+
+  export type QuestStepUncheckedCreateWithoutQuestInput = {
+    id?: number
+    type: $Enums.QuestType
+    targetSeedId?: number | null
+    targetAmount: number
+    progress?: QuestStepProgressUncheckedCreateNestedManyWithoutStepInput
+  }
+
+  export type QuestStepCreateOrConnectWithoutQuestInput = {
+    where: QuestStepWhereUniqueInput
+    create: XOR<QuestStepCreateWithoutQuestInput, QuestStepUncheckedCreateWithoutQuestInput>
+  }
+
+  export type QuestStepCreateManyQuestInputEnvelope = {
+    data: QuestStepCreateManyQuestInput | QuestStepCreateManyQuestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuestProgressCreateWithoutQuestInput = {
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    character: CharacterCreateNestedOneWithoutQuestProgressesInput
+    steps?: QuestStepProgressCreateNestedManyWithoutProgressInput
+  }
+
+  export type QuestProgressUncheckedCreateWithoutQuestInput = {
+    id?: number
+    characterId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    steps?: QuestStepProgressUncheckedCreateNestedManyWithoutProgressInput
+  }
+
+  export type QuestProgressCreateOrConnectWithoutQuestInput = {
+    where: QuestProgressWhereUniqueInput
+    create: XOR<QuestProgressCreateWithoutQuestInput, QuestProgressUncheckedCreateWithoutQuestInput>
+  }
+
+  export type QuestProgressCreateManyQuestInputEnvelope = {
+    data: QuestProgressCreateManyQuestInput | QuestProgressCreateManyQuestInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuestStepUpsertWithWhereUniqueWithoutQuestInput = {
+    where: QuestStepWhereUniqueInput
+    update: XOR<QuestStepUpdateWithoutQuestInput, QuestStepUncheckedUpdateWithoutQuestInput>
+    create: XOR<QuestStepCreateWithoutQuestInput, QuestStepUncheckedCreateWithoutQuestInput>
+  }
+
+  export type QuestStepUpdateWithWhereUniqueWithoutQuestInput = {
+    where: QuestStepWhereUniqueInput
+    data: XOR<QuestStepUpdateWithoutQuestInput, QuestStepUncheckedUpdateWithoutQuestInput>
+  }
+
+  export type QuestStepUpdateManyWithWhereWithoutQuestInput = {
+    where: QuestStepScalarWhereInput
+    data: XOR<QuestStepUpdateManyMutationInput, QuestStepUncheckedUpdateManyWithoutQuestInput>
+  }
+
+  export type QuestProgressUpsertWithWhereUniqueWithoutQuestInput = {
+    where: QuestProgressWhereUniqueInput
+    update: XOR<QuestProgressUpdateWithoutQuestInput, QuestProgressUncheckedUpdateWithoutQuestInput>
+    create: XOR<QuestProgressCreateWithoutQuestInput, QuestProgressUncheckedCreateWithoutQuestInput>
+  }
+
+  export type QuestProgressUpdateWithWhereUniqueWithoutQuestInput = {
+    where: QuestProgressWhereUniqueInput
+    data: XOR<QuestProgressUpdateWithoutQuestInput, QuestProgressUncheckedUpdateWithoutQuestInput>
+  }
+
+  export type QuestProgressUpdateManyWithWhereWithoutQuestInput = {
+    where: QuestProgressScalarWhereInput
+    data: XOR<QuestProgressUpdateManyMutationInput, QuestProgressUncheckedUpdateManyWithoutQuestInput>
+  }
+
+  export type QuestCreateWithoutStepsInput = {
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+    progresses?: QuestProgressCreateNestedManyWithoutQuestInput
+  }
+
+  export type QuestUncheckedCreateWithoutStepsInput = {
+    id?: number
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+    progresses?: QuestProgressUncheckedCreateNestedManyWithoutQuestInput
+  }
+
+  export type QuestCreateOrConnectWithoutStepsInput = {
+    where: QuestWhereUniqueInput
+    create: XOR<QuestCreateWithoutStepsInput, QuestUncheckedCreateWithoutStepsInput>
+  }
+
+  export type SeedCreateWithoutQuestStepsInput = {
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+    Plot?: PlotCreateNestedManyWithoutSeedInput
+  }
+
+  export type SeedUncheckedCreateWithoutQuestStepsInput = {
+    id?: number
+    key: string
+    name: string
+    texture: string
+    growTime: number
+    xp: number
+    buyPrice?: number
+    sellPrice?: number
+    Plot?: PlotUncheckedCreateNestedManyWithoutSeedInput
+  }
+
+  export type SeedCreateOrConnectWithoutQuestStepsInput = {
+    where: SeedWhereUniqueInput
+    create: XOR<SeedCreateWithoutQuestStepsInput, SeedUncheckedCreateWithoutQuestStepsInput>
+  }
+
+  export type QuestStepProgressCreateWithoutStepInput = {
+    current?: number
+    completed?: boolean
+    progress: QuestProgressCreateNestedOneWithoutStepsInput
+  }
+
+  export type QuestStepProgressUncheckedCreateWithoutStepInput = {
+    id?: number
+    current?: number
+    completed?: boolean
+    progressId: number
+  }
+
+  export type QuestStepProgressCreateOrConnectWithoutStepInput = {
+    where: QuestStepProgressWhereUniqueInput
+    create: XOR<QuestStepProgressCreateWithoutStepInput, QuestStepProgressUncheckedCreateWithoutStepInput>
+  }
+
+  export type QuestStepProgressCreateManyStepInputEnvelope = {
+    data: QuestStepProgressCreateManyStepInput | QuestStepProgressCreateManyStepInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuestUpsertWithoutStepsInput = {
+    update: XOR<QuestUpdateWithoutStepsInput, QuestUncheckedUpdateWithoutStepsInput>
+    create: XOR<QuestCreateWithoutStepsInput, QuestUncheckedCreateWithoutStepsInput>
+    where?: QuestWhereInput
+  }
+
+  export type QuestUpdateToOneWithWhereWithoutStepsInput = {
+    where?: QuestWhereInput
+    data: XOR<QuestUpdateWithoutStepsInput, QuestUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type QuestUpdateWithoutStepsInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+    progresses?: QuestProgressUpdateManyWithoutQuestNestedInput
+  }
+
+  export type QuestUncheckedUpdateWithoutStepsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+    progresses?: QuestProgressUncheckedUpdateManyWithoutQuestNestedInput
+  }
+
+  export type SeedUpsertWithoutQuestStepsInput = {
+    update: XOR<SeedUpdateWithoutQuestStepsInput, SeedUncheckedUpdateWithoutQuestStepsInput>
+    create: XOR<SeedCreateWithoutQuestStepsInput, SeedUncheckedCreateWithoutQuestStepsInput>
+    where?: SeedWhereInput
+  }
+
+  export type SeedUpdateToOneWithWhereWithoutQuestStepsInput = {
+    where?: SeedWhereInput
+    data: XOR<SeedUpdateWithoutQuestStepsInput, SeedUncheckedUpdateWithoutQuestStepsInput>
+  }
+
+  export type SeedUpdateWithoutQuestStepsInput = {
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+    Plot?: PlotUpdateManyWithoutSeedNestedInput
+  }
+
+  export type SeedUncheckedUpdateWithoutQuestStepsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    key?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    texture?: StringFieldUpdateOperationsInput | string
+    growTime?: IntFieldUpdateOperationsInput | number
+    xp?: IntFieldUpdateOperationsInput | number
+    buyPrice?: IntFieldUpdateOperationsInput | number
+    sellPrice?: IntFieldUpdateOperationsInput | number
+    Plot?: PlotUncheckedUpdateManyWithoutSeedNestedInput
+  }
+
+  export type QuestStepProgressUpsertWithWhereUniqueWithoutStepInput = {
+    where: QuestStepProgressWhereUniqueInput
+    update: XOR<QuestStepProgressUpdateWithoutStepInput, QuestStepProgressUncheckedUpdateWithoutStepInput>
+    create: XOR<QuestStepProgressCreateWithoutStepInput, QuestStepProgressUncheckedCreateWithoutStepInput>
+  }
+
+  export type QuestStepProgressUpdateWithWhereUniqueWithoutStepInput = {
+    where: QuestStepProgressWhereUniqueInput
+    data: XOR<QuestStepProgressUpdateWithoutStepInput, QuestStepProgressUncheckedUpdateWithoutStepInput>
+  }
+
+  export type QuestStepProgressUpdateManyWithWhereWithoutStepInput = {
+    where: QuestStepProgressScalarWhereInput
+    data: XOR<QuestStepProgressUpdateManyMutationInput, QuestStepProgressUncheckedUpdateManyWithoutStepInput>
+  }
+
+  export type QuestStepProgressScalarWhereInput = {
+    AND?: QuestStepProgressScalarWhereInput | QuestStepProgressScalarWhereInput[]
+    OR?: QuestStepProgressScalarWhereInput[]
+    NOT?: QuestStepProgressScalarWhereInput | QuestStepProgressScalarWhereInput[]
+    id?: IntFilter<"QuestStepProgress"> | number
+    stepId?: IntFilter<"QuestStepProgress"> | number
+    current?: IntFilter<"QuestStepProgress"> | number
+    completed?: BoolFilter<"QuestStepProgress"> | boolean
+    progressId?: IntFilter<"QuestStepProgress"> | number
+  }
+
+  export type CharacterCreateWithoutQuestProgressesInput = {
+    gender?: $Enums.Gender | null
+    level?: number
+    experience?: number
+    coins?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user: UserCreateNestedOneWithoutCharacterInput
+    plots?: PlotCreateNestedManyWithoutCharacterInput
+  }
+
+  export type CharacterUncheckedCreateWithoutQuestProgressesInput = {
+    id?: number
+    userId: number
+    gender?: $Enums.Gender | null
+    level?: number
+    experience?: number
+    coins?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    plots?: PlotUncheckedCreateNestedManyWithoutCharacterInput
+  }
+
+  export type CharacterCreateOrConnectWithoutQuestProgressesInput = {
+    where: CharacterWhereUniqueInput
+    create: XOR<CharacterCreateWithoutQuestProgressesInput, CharacterUncheckedCreateWithoutQuestProgressesInput>
+  }
+
+  export type QuestCreateWithoutProgressesInput = {
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+    steps?: QuestStepCreateNestedManyWithoutQuestInput
+  }
+
+  export type QuestUncheckedCreateWithoutProgressesInput = {
+    id?: number
+    title: string
+    description: string
+    recommendedLevel?: number
+    rewardXP: number
+    rewardCoins: number
+    steps?: QuestStepUncheckedCreateNestedManyWithoutQuestInput
+  }
+
+  export type QuestCreateOrConnectWithoutProgressesInput = {
+    where: QuestWhereUniqueInput
+    create: XOR<QuestCreateWithoutProgressesInput, QuestUncheckedCreateWithoutProgressesInput>
+  }
+
+  export type QuestStepProgressCreateWithoutProgressInput = {
+    current?: number
+    completed?: boolean
+    step: QuestStepCreateNestedOneWithoutProgressInput
+  }
+
+  export type QuestStepProgressUncheckedCreateWithoutProgressInput = {
+    id?: number
+    stepId: number
+    current?: number
+    completed?: boolean
+  }
+
+  export type QuestStepProgressCreateOrConnectWithoutProgressInput = {
+    where: QuestStepProgressWhereUniqueInput
+    create: XOR<QuestStepProgressCreateWithoutProgressInput, QuestStepProgressUncheckedCreateWithoutProgressInput>
+  }
+
+  export type QuestStepProgressCreateManyProgressInputEnvelope = {
+    data: QuestStepProgressCreateManyProgressInput | QuestStepProgressCreateManyProgressInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CharacterUpsertWithoutQuestProgressesInput = {
+    update: XOR<CharacterUpdateWithoutQuestProgressesInput, CharacterUncheckedUpdateWithoutQuestProgressesInput>
+    create: XOR<CharacterCreateWithoutQuestProgressesInput, CharacterUncheckedCreateWithoutQuestProgressesInput>
+    where?: CharacterWhereInput
+  }
+
+  export type CharacterUpdateToOneWithWhereWithoutQuestProgressesInput = {
+    where?: CharacterWhereInput
+    data: XOR<CharacterUpdateWithoutQuestProgressesInput, CharacterUncheckedUpdateWithoutQuestProgressesInput>
+  }
+
+  export type CharacterUpdateWithoutQuestProgressesInput = {
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutCharacterNestedInput
+    plots?: PlotUpdateManyWithoutCharacterNestedInput
+  }
+
+  export type CharacterUncheckedUpdateWithoutQuestProgressesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    gender?: NullableEnumGenderFieldUpdateOperationsInput | $Enums.Gender | null
+    level?: IntFieldUpdateOperationsInput | number
+    experience?: IntFieldUpdateOperationsInput | number
+    coins?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    plots?: PlotUncheckedUpdateManyWithoutCharacterNestedInput
+  }
+
+  export type QuestUpsertWithoutProgressesInput = {
+    update: XOR<QuestUpdateWithoutProgressesInput, QuestUncheckedUpdateWithoutProgressesInput>
+    create: XOR<QuestCreateWithoutProgressesInput, QuestUncheckedCreateWithoutProgressesInput>
+    where?: QuestWhereInput
+  }
+
+  export type QuestUpdateToOneWithWhereWithoutProgressesInput = {
+    where?: QuestWhereInput
+    data: XOR<QuestUpdateWithoutProgressesInput, QuestUncheckedUpdateWithoutProgressesInput>
+  }
+
+  export type QuestUpdateWithoutProgressesInput = {
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+    steps?: QuestStepUpdateManyWithoutQuestNestedInput
+  }
+
+  export type QuestUncheckedUpdateWithoutProgressesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    recommendedLevel?: IntFieldUpdateOperationsInput | number
+    rewardXP?: IntFieldUpdateOperationsInput | number
+    rewardCoins?: IntFieldUpdateOperationsInput | number
+    steps?: QuestStepUncheckedUpdateManyWithoutQuestNestedInput
+  }
+
+  export type QuestStepProgressUpsertWithWhereUniqueWithoutProgressInput = {
+    where: QuestStepProgressWhereUniqueInput
+    update: XOR<QuestStepProgressUpdateWithoutProgressInput, QuestStepProgressUncheckedUpdateWithoutProgressInput>
+    create: XOR<QuestStepProgressCreateWithoutProgressInput, QuestStepProgressUncheckedCreateWithoutProgressInput>
+  }
+
+  export type QuestStepProgressUpdateWithWhereUniqueWithoutProgressInput = {
+    where: QuestStepProgressWhereUniqueInput
+    data: XOR<QuestStepProgressUpdateWithoutProgressInput, QuestStepProgressUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type QuestStepProgressUpdateManyWithWhereWithoutProgressInput = {
+    where: QuestStepProgressScalarWhereInput
+    data: XOR<QuestStepProgressUpdateManyMutationInput, QuestStepProgressUncheckedUpdateManyWithoutProgressInput>
+  }
+
+  export type QuestStepCreateWithoutProgressInput = {
+    type: $Enums.QuestType
+    targetAmount: number
+    quest: QuestCreateNestedOneWithoutStepsInput
+    targetSeed?: SeedCreateNestedOneWithoutQuestStepsInput
+  }
+
+  export type QuestStepUncheckedCreateWithoutProgressInput = {
+    id?: number
+    questId: number
+    type: $Enums.QuestType
+    targetSeedId?: number | null
+    targetAmount: number
+  }
+
+  export type QuestStepCreateOrConnectWithoutProgressInput = {
+    where: QuestStepWhereUniqueInput
+    create: XOR<QuestStepCreateWithoutProgressInput, QuestStepUncheckedCreateWithoutProgressInput>
+  }
+
+  export type QuestProgressCreateWithoutStepsInput = {
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    character: CharacterCreateNestedOneWithoutQuestProgressesInput
+    quest: QuestCreateNestedOneWithoutProgressesInput
+  }
+
+  export type QuestProgressUncheckedCreateWithoutStepsInput = {
+    id?: number
+    characterId: number
+    questId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuestProgressCreateOrConnectWithoutStepsInput = {
+    where: QuestProgressWhereUniqueInput
+    create: XOR<QuestProgressCreateWithoutStepsInput, QuestProgressUncheckedCreateWithoutStepsInput>
+  }
+
+  export type QuestStepUpsertWithoutProgressInput = {
+    update: XOR<QuestStepUpdateWithoutProgressInput, QuestStepUncheckedUpdateWithoutProgressInput>
+    create: XOR<QuestStepCreateWithoutProgressInput, QuestStepUncheckedCreateWithoutProgressInput>
+    where?: QuestStepWhereInput
+  }
+
+  export type QuestStepUpdateToOneWithWhereWithoutProgressInput = {
+    where?: QuestStepWhereInput
+    data: XOR<QuestStepUpdateWithoutProgressInput, QuestStepUncheckedUpdateWithoutProgressInput>
+  }
+
+  export type QuestStepUpdateWithoutProgressInput = {
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    quest?: QuestUpdateOneRequiredWithoutStepsNestedInput
+    targetSeed?: SeedUpdateOneWithoutQuestStepsNestedInput
+  }
+
+  export type QuestStepUncheckedUpdateWithoutProgressInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetSeedId?: NullableIntFieldUpdateOperationsInput | number | null
+    targetAmount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestProgressUpsertWithoutStepsInput = {
+    update: XOR<QuestProgressUpdateWithoutStepsInput, QuestProgressUncheckedUpdateWithoutStepsInput>
+    create: XOR<QuestProgressCreateWithoutStepsInput, QuestProgressUncheckedCreateWithoutStepsInput>
+    where?: QuestProgressWhereInput
+  }
+
+  export type QuestProgressUpdateToOneWithWhereWithoutStepsInput = {
+    where?: QuestProgressWhereInput
+    data: XOR<QuestProgressUpdateWithoutStepsInput, QuestProgressUncheckedUpdateWithoutStepsInput>
+  }
+
+  export type QuestProgressUpdateWithoutStepsInput = {
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    character?: CharacterUpdateOneRequiredWithoutQuestProgressesNestedInput
+    quest?: QuestUpdateOneRequiredWithoutProgressesNestedInput
+  }
+
+  export type QuestProgressUncheckedUpdateWithoutStepsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type PlotCreateManyCharacterInput = {
@@ -8736,6 +15646,14 @@ export namespace Prisma {
     seedId?: number | null
     plantedAt?: Date | string | null
     isReady?: boolean
+  }
+
+  export type QuestProgressCreateManyCharacterInput = {
+    id?: number
+    questId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type PlotUpdateWithoutCharacterInput = {
@@ -8758,11 +15676,43 @@ export namespace Prisma {
     isReady?: BoolFieldUpdateOperationsInput | boolean
   }
 
+  export type QuestProgressUpdateWithoutCharacterInput = {
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quest?: QuestUpdateOneRequiredWithoutProgressesNestedInput
+    steps?: QuestStepProgressUpdateManyWithoutProgressNestedInput
+  }
+
+  export type QuestProgressUncheckedUpdateWithoutCharacterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: QuestStepProgressUncheckedUpdateManyWithoutProgressNestedInput
+  }
+
+  export type QuestProgressUncheckedUpdateManyWithoutCharacterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type PlotCreateManySeedInput = {
     id?: number
     characterId: number
     plantedAt?: Date | string | null
     isReady?: boolean
+  }
+
+  export type QuestStepCreateManyTargetSeedInput = {
+    id?: number
+    questId: number
+    type: $Enums.QuestType
+    targetAmount: number
   }
 
   export type PlotUpdateWithoutSeedInput = {
@@ -8783,6 +15733,144 @@ export namespace Prisma {
     characterId?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     isReady?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type QuestStepUpdateWithoutTargetSeedInput = {
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    quest?: QuestUpdateOneRequiredWithoutStepsNestedInput
+    progress?: QuestStepProgressUpdateManyWithoutStepNestedInput
+  }
+
+  export type QuestStepUncheckedUpdateWithoutTargetSeedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    progress?: QuestStepProgressUncheckedUpdateManyWithoutStepNestedInput
+  }
+
+  export type QuestStepUncheckedUpdateManyWithoutTargetSeedInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    questId?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestStepCreateManyQuestInput = {
+    id?: number
+    type: $Enums.QuestType
+    targetSeedId?: number | null
+    targetAmount: number
+  }
+
+  export type QuestProgressCreateManyQuestInput = {
+    id?: number
+    characterId: number
+    completed?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuestStepUpdateWithoutQuestInput = {
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    targetSeed?: SeedUpdateOneWithoutQuestStepsNestedInput
+    progress?: QuestStepProgressUpdateManyWithoutStepNestedInput
+  }
+
+  export type QuestStepUncheckedUpdateWithoutQuestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetSeedId?: NullableIntFieldUpdateOperationsInput | number | null
+    targetAmount?: IntFieldUpdateOperationsInput | number
+    progress?: QuestStepProgressUncheckedUpdateManyWithoutStepNestedInput
+  }
+
+  export type QuestStepUncheckedUpdateManyWithoutQuestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    type?: EnumQuestTypeFieldUpdateOperationsInput | $Enums.QuestType
+    targetSeedId?: NullableIntFieldUpdateOperationsInput | number | null
+    targetAmount?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestProgressUpdateWithoutQuestInput = {
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    character?: CharacterUpdateOneRequiredWithoutQuestProgressesNestedInput
+    steps?: QuestStepProgressUpdateManyWithoutProgressNestedInput
+  }
+
+  export type QuestProgressUncheckedUpdateWithoutQuestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    steps?: QuestStepProgressUncheckedUpdateManyWithoutProgressNestedInput
+  }
+
+  export type QuestProgressUncheckedUpdateManyWithoutQuestInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    characterId?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuestStepProgressCreateManyStepInput = {
+    id?: number
+    current?: number
+    completed?: boolean
+    progressId: number
+  }
+
+  export type QuestStepProgressUpdateWithoutStepInput = {
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    progress?: QuestProgressUpdateOneRequiredWithoutStepsNestedInput
+  }
+
+  export type QuestStepProgressUncheckedUpdateWithoutStepInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    progressId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestStepProgressUncheckedUpdateManyWithoutStepInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    progressId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type QuestStepProgressCreateManyProgressInput = {
+    id?: number
+    stepId: number
+    current?: number
+    completed?: boolean
+  }
+
+  export type QuestStepProgressUpdateWithoutProgressInput = {
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+    step?: QuestStepUpdateOneRequiredWithoutProgressNestedInput
+  }
+
+  export type QuestStepProgressUncheckedUpdateWithoutProgressInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    stepId?: IntFieldUpdateOperationsInput | number
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type QuestStepProgressUncheckedUpdateManyWithoutProgressInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    stepId?: IntFieldUpdateOperationsInput | number
+    current?: IntFieldUpdateOperationsInput | number
+    completed?: BoolFieldUpdateOperationsInput | boolean
   }
 
 
