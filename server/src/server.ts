@@ -5,7 +5,8 @@ import userRoutes from './routes/user'
 import characterRoutes from './routes/character'
 import levelRoutes from './routes/level'
 import seedRoutes from './routes/seeds'
-import { initSocket } from './socket';
+import questsRoutes from './routes/quests'
+import {initSocket} from './socket';
 
 import 'tsconfig-paths/register'
 import dotenv from 'dotenv'
@@ -30,6 +31,7 @@ app.use('/api/user', userRoutes)
 app.use('/api/character', characterRoutes)
 app.use('/api/level', levelRoutes)
 app.use('/api/seeds', seedRoutes)
+app.use('/api/quests', questsRoutes)
 app.get('/api/health', (req: Request, res: Response) => {
     console.log(req)
     console.log(res)

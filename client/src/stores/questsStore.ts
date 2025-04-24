@@ -1,33 +1,26 @@
 import {defineStore} from 'pinia'
-import characterService from "../api/characterService.ts";
+import questsService from "../api/questsService.ts";
 
-export const useCharacterStore = defineStore('character', {
+export const useQuestsStore = defineStore('quests', {
     state: () => ({
-        character: {
-            coins: 100,
-            level: 1,
-            experience: 0,
-            minXP: 0,
-            maxXP: 100,
-            plots: []
-        },
+        quests: [],
         timer: null
     }),
     persist: true,
     actions: {
-        async getCharacter() {
-            this.character = await characterService.one()
+        async getQuests() {
+            this.quests = await questsService.getAvailable()
         },
         async startAutoUpdate(interval: number) {
             if (this.timer) {
                 clearInterval(this.timer as number)
             }
-            await this.getCharacter() // Получить данные сразу при запуске
+            await this.getQuests() // Получить данные сразу при запуске
             this.scheduleNextUpdate(interval)
         },
         async autoUpdate() {
             try {
-                this.character = await characterService.one()
+                this.quests = await questsService.getAvailable()
             } catch (error: any) {
                 if (error.status === 404) {
                     window.location.href = '/auth'
@@ -52,10 +45,6 @@ export const useCharacterStore = defineStore('character', {
                 clearInterval(this.timer as number)
             }
             this.timer = null
-        },
-        async changeBalance(amount: number) {
-            await characterService.changeBalance(amount)
-            await this.getCharacter()
         }
     },
     getters: {}

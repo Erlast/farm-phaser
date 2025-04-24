@@ -242,11 +242,12 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://game_user:game_password@postgres:5432/game_db?schema=public"
+        "value": null
       }
     }
   },

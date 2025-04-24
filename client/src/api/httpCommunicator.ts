@@ -34,16 +34,16 @@ httpCommunicator.interceptors.response.use(
         return response
     },
     async (error: AxiosError) => {
-        if (
-            error.response &&
-            error.response.status === 401
-        ) {
-            window.location.href = '/auth'
-        }
-        if (error.response && error.response.status === 403) {
-            // clearStores(true)
-            await router.push({name: 'auth'})
-        }
+        // if (
+        //     error.response &&
+        //     error.response.status === 401
+        // ) {
+        //     window.location.href = '/auth'
+        // }
+        // if (error.response && error.response.status === 403) {
+        //     // clearStores(true)
+        //     await router.push({name: 'auth'})
+        // }
         return Promise.reject(error)
     }
 )
