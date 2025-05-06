@@ -63,7 +63,8 @@ model Plot {
   characterId Int
   seedId      Int? // null если грядка пустая
   plantedAt   DateTime? // null если ничего не посажено
-  isReady     Boolean   @default(false)
+
+  state PlotState @default(DRY)
 
   character Character @relation(fields: [characterId], references: [id])
   seed      Seed?     @relation(fields: [seedId], references: [id])
@@ -128,4 +129,11 @@ model QuestStepProgress {
 enum Gender {
   M
   F
+}
+
+enum PlotState {
+  DRY
+  TILLED
+  GROWING
+  READY
 }

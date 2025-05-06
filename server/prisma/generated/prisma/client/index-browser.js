@@ -157,7 +157,7 @@ exports.Prisma.PlotScalarFieldEnum = {
   characterId: 'characterId',
   seedId: 'seedId',
   plantedAt: 'plantedAt',
-  isReady: 'isReady'
+  state: 'state'
 };
 
 exports.Prisma.QuestScalarFieldEnum = {
@@ -211,6 +211,13 @@ exports.Prisma.NullsOrder = {
 exports.Gender = exports.$Enums.Gender = {
   M: 'M',
   F: 'F'
+};
+
+exports.PlotState = exports.$Enums.PlotState = {
+  DRY: 'DRY',
+  TILLED: 'TILLED',
+  GROWING: 'GROWING',
+  READY: 'READY'
 };
 
 exports.QuestType = exports.$Enums.QuestType = {

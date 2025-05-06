@@ -6,6 +6,7 @@ import characterRoutes from './routes/character'
 import levelRoutes from './routes/level'
 import seedRoutes from './routes/seeds'
 import questsRoutes from './routes/quests'
+import plotRoutes from './routes/plot'
 import {initSocket} from './socket';
 
 import 'tsconfig-paths/register'
@@ -17,12 +18,12 @@ dotenv.config()
 const app = express()
 
 app.use(cors(
-    {
-        origin: 'http://localhost:5173', // адрес твоего фронтенда
-        credentials: true,               // если нужны cookie / сессии
-        methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-        allowedHeaders: ['Content-Type', 'Authorization']
-    }
+  {
+    origin: 'http://localhost:5173', // адрес твоего фронтенда
+    credentials: true,               // если нужны cookie / сессии
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }
 ))
 app.use(express.json())
 
@@ -32,9 +33,10 @@ app.use('/api/character', characterRoutes)
 app.use('/api/level', levelRoutes)
 app.use('/api/seeds', seedRoutes)
 app.use('/api/quests', questsRoutes)
+app.use('/api/plot', plotRoutes)
 app.get('/api/health', (req: Request, res: Response) => {
-    console.log(req)
-    console.log(res)
+  console.log(req)
+  console.log(res)
 })
 
 const PORT = process.env.PORT || 4000

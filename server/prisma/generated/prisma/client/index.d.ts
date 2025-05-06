@@ -80,6 +80,16 @@ export const Gender: {
 
 export type Gender = (typeof Gender)[keyof typeof Gender]
 
+
+export const PlotState: {
+  DRY: 'DRY',
+  TILLED: 'TILLED',
+  GROWING: 'GROWING',
+  READY: 'READY'
+};
+
+export type PlotState = (typeof PlotState)[keyof typeof PlotState]
+
 }
 
 export type QuestType = $Enums.QuestType
@@ -89,6 +99,10 @@ export const QuestType: typeof $Enums.QuestType
 export type Gender = $Enums.Gender
 
 export const Gender: typeof $Enums.Gender
+
+export type PlotState = $Enums.PlotState
+
+export const PlotState: typeof $Enums.PlotState
 
 /**
  * ##  Prisma Client ʲˢ
@@ -6325,7 +6339,7 @@ export namespace Prisma {
     characterId: number | null
     seedId: number | null
     plantedAt: Date | null
-    isReady: boolean | null
+    state: $Enums.PlotState | null
   }
 
   export type PlotMaxAggregateOutputType = {
@@ -6333,7 +6347,7 @@ export namespace Prisma {
     characterId: number | null
     seedId: number | null
     plantedAt: Date | null
-    isReady: boolean | null
+    state: $Enums.PlotState | null
   }
 
   export type PlotCountAggregateOutputType = {
@@ -6341,7 +6355,7 @@ export namespace Prisma {
     characterId: number
     seedId: number
     plantedAt: number
-    isReady: number
+    state: number
     _all: number
   }
 
@@ -6363,7 +6377,7 @@ export namespace Prisma {
     characterId?: true
     seedId?: true
     plantedAt?: true
-    isReady?: true
+    state?: true
   }
 
   export type PlotMaxAggregateInputType = {
@@ -6371,7 +6385,7 @@ export namespace Prisma {
     characterId?: true
     seedId?: true
     plantedAt?: true
-    isReady?: true
+    state?: true
   }
 
   export type PlotCountAggregateInputType = {
@@ -6379,7 +6393,7 @@ export namespace Prisma {
     characterId?: true
     seedId?: true
     plantedAt?: true
-    isReady?: true
+    state?: true
     _all?: true
   }
 
@@ -6474,7 +6488,7 @@ export namespace Prisma {
     characterId: number
     seedId: number | null
     plantedAt: Date | null
-    isReady: boolean
+    state: $Enums.PlotState
     _count: PlotCountAggregateOutputType | null
     _avg: PlotAvgAggregateOutputType | null
     _sum: PlotSumAggregateOutputType | null
@@ -6501,7 +6515,7 @@ export namespace Prisma {
     characterId?: boolean
     seedId?: boolean
     plantedAt?: boolean
-    isReady?: boolean
+    state?: boolean
     character?: boolean | CharacterDefaultArgs<ExtArgs>
     seed?: boolean | Plot$seedArgs<ExtArgs>
   }, ExtArgs["result"]["plot"]>
@@ -6511,7 +6525,7 @@ export namespace Prisma {
     characterId?: boolean
     seedId?: boolean
     plantedAt?: boolean
-    isReady?: boolean
+    state?: boolean
     character?: boolean | CharacterDefaultArgs<ExtArgs>
     seed?: boolean | Plot$seedArgs<ExtArgs>
   }, ExtArgs["result"]["plot"]>
@@ -6521,7 +6535,7 @@ export namespace Prisma {
     characterId?: boolean
     seedId?: boolean
     plantedAt?: boolean
-    isReady?: boolean
+    state?: boolean
     character?: boolean | CharacterDefaultArgs<ExtArgs>
     seed?: boolean | Plot$seedArgs<ExtArgs>
   }, ExtArgs["result"]["plot"]>
@@ -6531,10 +6545,10 @@ export namespace Prisma {
     characterId?: boolean
     seedId?: boolean
     plantedAt?: boolean
-    isReady?: boolean
+    state?: boolean
   }
 
-  export type PlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "characterId" | "seedId" | "plantedAt" | "isReady", ExtArgs["result"]["plot"]>
+  export type PlotOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "characterId" | "seedId" | "plantedAt" | "state", ExtArgs["result"]["plot"]>
   export type PlotInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     character?: boolean | CharacterDefaultArgs<ExtArgs>
     seed?: boolean | Plot$seedArgs<ExtArgs>
@@ -6559,7 +6573,7 @@ export namespace Prisma {
       characterId: number
       seedId: number | null
       plantedAt: Date | null
-      isReady: boolean
+      state: $Enums.PlotState
     }, ExtArgs["result"]["plot"]>
     composites: {}
   }
@@ -6989,7 +7003,7 @@ export namespace Prisma {
     readonly characterId: FieldRef<"Plot", 'Int'>
     readonly seedId: FieldRef<"Plot", 'Int'>
     readonly plantedAt: FieldRef<"Plot", 'DateTime'>
-    readonly isReady: FieldRef<"Plot", 'Boolean'>
+    readonly state: FieldRef<"Plot", 'PlotState'>
   }
     
 
@@ -12070,7 +12084,7 @@ export namespace Prisma {
     characterId: 'characterId',
     seedId: 'seedId',
     plantedAt: 'plantedAt',
-    isReady: 'isReady'
+    state: 'state'
   };
 
   export type PlotScalarFieldEnum = (typeof PlotScalarFieldEnum)[keyof typeof PlotScalarFieldEnum]
@@ -12208,9 +12222,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Boolean'
+   * Reference to a field of type 'PlotState'
    */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+  export type EnumPlotStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlotState'>
+    
+
+
+  /**
+   * Reference to a field of type 'PlotState[]'
+   */
+  export type ListEnumPlotStateFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PlotState[]'>
     
 
 
@@ -12225,6 +12246,13 @@ export namespace Prisma {
    * Reference to a field of type 'QuestType[]'
    */
   export type ListEnumQuestTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuestType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -12502,7 +12530,7 @@ export namespace Prisma {
     characterId?: IntFilter<"Plot"> | number
     seedId?: IntNullableFilter<"Plot"> | number | null
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
-    isReady?: BoolFilter<"Plot"> | boolean
+    state?: EnumPlotStateFilter<"Plot"> | $Enums.PlotState
     character?: XOR<CharacterScalarRelationFilter, CharacterWhereInput>
     seed?: XOR<SeedNullableScalarRelationFilter, SeedWhereInput> | null
   }
@@ -12512,7 +12540,7 @@ export namespace Prisma {
     characterId?: SortOrder
     seedId?: SortOrderInput | SortOrder
     plantedAt?: SortOrderInput | SortOrder
-    isReady?: SortOrder
+    state?: SortOrder
     character?: CharacterOrderByWithRelationInput
     seed?: SeedOrderByWithRelationInput
   }
@@ -12525,7 +12553,7 @@ export namespace Prisma {
     characterId?: IntFilter<"Plot"> | number
     seedId?: IntNullableFilter<"Plot"> | number | null
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
-    isReady?: BoolFilter<"Plot"> | boolean
+    state?: EnumPlotStateFilter<"Plot"> | $Enums.PlotState
     character?: XOR<CharacterScalarRelationFilter, CharacterWhereInput>
     seed?: XOR<SeedNullableScalarRelationFilter, SeedWhereInput> | null
   }, "id">
@@ -12535,7 +12563,7 @@ export namespace Prisma {
     characterId?: SortOrder
     seedId?: SortOrderInput | SortOrder
     plantedAt?: SortOrderInput | SortOrder
-    isReady?: SortOrder
+    state?: SortOrder
     _count?: PlotCountOrderByAggregateInput
     _avg?: PlotAvgOrderByAggregateInput
     _max?: PlotMaxOrderByAggregateInput
@@ -12551,7 +12579,7 @@ export namespace Prisma {
     characterId?: IntWithAggregatesFilter<"Plot"> | number
     seedId?: IntNullableWithAggregatesFilter<"Plot"> | number | null
     plantedAt?: DateTimeNullableWithAggregatesFilter<"Plot"> | Date | string | null
-    isReady?: BoolWithAggregatesFilter<"Plot"> | boolean
+    state?: EnumPlotStateWithAggregatesFilter<"Plot"> | $Enums.PlotState
   }
 
   export type QuestWhereInput = {
@@ -13066,7 +13094,7 @@ export namespace Prisma {
 
   export type PlotCreateInput = {
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
     character: CharacterCreateNestedOneWithoutPlotsInput
     seed?: SeedCreateNestedOneWithoutPlotInput
   }
@@ -13076,12 +13104,12 @@ export namespace Prisma {
     characterId: number
     seedId?: number | null
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
   }
 
   export type PlotUpdateInput = {
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
     character?: CharacterUpdateOneRequiredWithoutPlotsNestedInput
     seed?: SeedUpdateOneWithoutPlotNestedInput
   }
@@ -13091,7 +13119,7 @@ export namespace Prisma {
     characterId?: IntFieldUpdateOperationsInput | number
     seedId?: NullableIntFieldUpdateOperationsInput | number | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type PlotCreateManyInput = {
@@ -13099,12 +13127,12 @@ export namespace Prisma {
     characterId: number
     seedId?: number | null
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
   }
 
   export type PlotUpdateManyMutationInput = {
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type PlotUncheckedUpdateManyInput = {
@@ -13112,7 +13140,7 @@ export namespace Prisma {
     characterId?: IntFieldUpdateOperationsInput | number
     seedId?: NullableIntFieldUpdateOperationsInput | number | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type QuestCreateInput = {
@@ -13677,9 +13705,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type EnumPlotStateFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlotState | EnumPlotStateFieldRefInput<$PrismaModel>
+    in?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlotStateFilter<$PrismaModel> | $Enums.PlotState
   }
 
   export type CharacterScalarRelationFilter = {
@@ -13697,7 +13727,7 @@ export namespace Prisma {
     characterId?: SortOrder
     seedId?: SortOrder
     plantedAt?: SortOrder
-    isReady?: SortOrder
+    state?: SortOrder
   }
 
   export type PlotAvgOrderByAggregateInput = {
@@ -13711,7 +13741,7 @@ export namespace Prisma {
     characterId?: SortOrder
     seedId?: SortOrder
     plantedAt?: SortOrder
-    isReady?: SortOrder
+    state?: SortOrder
   }
 
   export type PlotMinOrderByAggregateInput = {
@@ -13719,7 +13749,7 @@ export namespace Prisma {
     characterId?: SortOrder
     seedId?: SortOrder
     plantedAt?: SortOrder
-    isReady?: SortOrder
+    state?: SortOrder
   }
 
   export type PlotSumOrderByAggregateInput = {
@@ -13758,12 +13788,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type EnumPlotStateWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlotState | EnumPlotStateFieldRefInput<$PrismaModel>
+    in?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlotStateWithAggregatesFilter<$PrismaModel> | $Enums.PlotState
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumPlotStateFilter<$PrismaModel>
+    _max?: NestedEnumPlotStateFilter<$PrismaModel>
   }
 
   export type QuestCountOrderByAggregateInput = {
@@ -13877,6 +13909,11 @@ export namespace Prisma {
     _max?: NestedEnumQuestTypeFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type QuestProgressCharacterIdQuestIdCompoundUniqueInput = {
     characterId: number
     questId: number
@@ -13919,6 +13956,14 @@ export namespace Prisma {
     id?: SortOrder
     characterId?: SortOrder
     questId?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type QuestStepScalarRelationFilter = {
@@ -14224,8 +14269,8 @@ export namespace Prisma {
     set?: Date | string | null
   }
 
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
+  export type EnumPlotStateFieldUpdateOperationsInput = {
+    set?: $Enums.PlotState
   }
 
   export type CharacterUpdateOneRequiredWithoutPlotsNestedInput = {
@@ -14440,6 +14485,10 @@ export namespace Prisma {
     connect?: QuestStepProgressWhereUniqueInput | QuestStepProgressWhereUniqueInput[]
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type CharacterUpdateOneRequiredWithoutQuestProgressesNestedInput = {
     create?: XOR<CharacterCreateWithoutQuestProgressesInput, CharacterUncheckedCreateWithoutQuestProgressesInput>
     connectOrCreate?: CharacterCreateOrConnectWithoutQuestProgressesInput
@@ -14645,9 +14694,11 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedEnumPlotStateFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlotState | EnumPlotStateFieldRefInput<$PrismaModel>
+    in?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlotStateFilter<$PrismaModel> | $Enums.PlotState
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -14691,12 +14742,14 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+  export type NestedEnumPlotStateWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PlotState | EnumPlotStateFieldRefInput<$PrismaModel>
+    in?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    notIn?: $Enums.PlotState[] | ListEnumPlotStateFieldRefInput<$PrismaModel>
+    not?: NestedEnumPlotStateWithAggregatesFilter<$PrismaModel> | $Enums.PlotState
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+    _min?: NestedEnumPlotStateFilter<$PrismaModel>
+    _max?: NestedEnumPlotStateFilter<$PrismaModel>
   }
 
   export type NestedEnumQuestTypeFilter<$PrismaModel = never> = {
@@ -14714,6 +14767,19 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumQuestTypeFilter<$PrismaModel>
     _max?: NestedEnumQuestTypeFilter<$PrismaModel>
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type CharacterCreateWithoutUserInput = {
@@ -14798,7 +14864,7 @@ export namespace Prisma {
 
   export type PlotCreateWithoutCharacterInput = {
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
     seed?: SeedCreateNestedOneWithoutPlotInput
   }
 
@@ -14806,7 +14872,7 @@ export namespace Prisma {
     id?: number
     seedId?: number | null
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
   }
 
   export type PlotCreateOrConnectWithoutCharacterInput = {
@@ -14894,7 +14960,7 @@ export namespace Prisma {
     characterId?: IntFilter<"Plot"> | number
     seedId?: IntNullableFilter<"Plot"> | number | null
     plantedAt?: DateTimeNullableFilter<"Plot"> | Date | string | null
-    isReady?: BoolFilter<"Plot"> | boolean
+    state?: EnumPlotStateFilter<"Plot"> | $Enums.PlotState
   }
 
   export type QuestProgressUpsertWithWhereUniqueWithoutCharacterInput = {
@@ -14927,7 +14993,7 @@ export namespace Prisma {
 
   export type PlotCreateWithoutSeedInput = {
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
     character: CharacterCreateNestedOneWithoutPlotsInput
   }
 
@@ -14935,7 +15001,7 @@ export namespace Prisma {
     id?: number
     characterId: number
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
   }
 
   export type PlotCreateOrConnectWithoutSeedInput = {
@@ -15645,7 +15711,7 @@ export namespace Prisma {
     id?: number
     seedId?: number | null
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
   }
 
   export type QuestProgressCreateManyCharacterInput = {
@@ -15658,7 +15724,7 @@ export namespace Prisma {
 
   export type PlotUpdateWithoutCharacterInput = {
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
     seed?: SeedUpdateOneWithoutPlotNestedInput
   }
 
@@ -15666,14 +15732,14 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     seedId?: NullableIntFieldUpdateOperationsInput | number | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type PlotUncheckedUpdateManyWithoutCharacterInput = {
     id?: IntFieldUpdateOperationsInput | number
     seedId?: NullableIntFieldUpdateOperationsInput | number | null
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type QuestProgressUpdateWithoutCharacterInput = {
@@ -15705,7 +15771,7 @@ export namespace Prisma {
     id?: number
     characterId: number
     plantedAt?: Date | string | null
-    isReady?: boolean
+    state?: $Enums.PlotState
   }
 
   export type QuestStepCreateManyTargetSeedInput = {
@@ -15717,7 +15783,7 @@ export namespace Prisma {
 
   export type PlotUpdateWithoutSeedInput = {
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
     character?: CharacterUpdateOneRequiredWithoutPlotsNestedInput
   }
 
@@ -15725,14 +15791,14 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     characterId?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type PlotUncheckedUpdateManyWithoutSeedInput = {
     id?: IntFieldUpdateOperationsInput | number
     characterId?: IntFieldUpdateOperationsInput | number
     plantedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    isReady?: BoolFieldUpdateOperationsInput | boolean
+    state?: EnumPlotStateFieldUpdateOperationsInput | $Enums.PlotState
   }
 
   export type QuestStepUpdateWithoutTargetSeedInput = {

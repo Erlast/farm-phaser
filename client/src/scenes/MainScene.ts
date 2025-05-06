@@ -4,7 +4,6 @@ import {Plot} from "../entities/Plot.ts";
 import {useCharacterStore} from "../stores/characterStore.ts";
 import {socket} from '../socket'
 import {useQuestsStore} from "../stores/questsStore.ts";
-import questsService from "../api/questsService.ts";
 
 export default class MainScene extends Phaser.Scene {
   private xpBar!: XPBar
@@ -26,12 +25,14 @@ export default class MainScene extends Phaser.Scene {
     try {
       const characterStore = useCharacterStore()
       
+      //await characterStore.startAutoUpdate(10000)
+      
       this.xpBar = new XPBar(this)
       
       this.xpBar.create()
       this.xpBar.setXPRange(characterStore.character.minXP, characterStore.character.maxXP)
       this.xpBar.setXP(characterStore.character.experience)
-      this.createPlotGrid(5, 50, 100)
+      this.createPlotGrid(5, 70, 100)
       
       socket.on('seed-ready', ({plotIndex, seedId}) => {
         const plot = this.plots.find(plot => plot.plotData.id === plotIndex)

@@ -9,8 +9,8 @@ const seedsStore = useSeedsStore()
 const questsStore = useQuestsStore()
 
 onMounted(async () => {
-  await characterStore.startAutoUpdate(5000)
-  await seedsStore.startAutoUpdate(50000)
+  // await characterStore.startAutoUpdate(5000)
+  // await seedsStore.startAutoUpdate(50000)
   // await questsStore.startAutoUpdate(5000)
 })
 
